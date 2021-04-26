@@ -1,54 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title th:text="${title}"></title>
-<link rel="shortcut icon" href="/img/logo.png">
-<link
-	href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="assets/css/login.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title th:text="${title}"></title>
+	<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;400;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/assets/css/bootstrap.css">
+	<link rel="stylesheet" href="/assets/css/login.css">
 </head>
-<body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-		<a class="navbar-brand" href="#"> <img src="/img/unla.jpg" width="40" height="40" alt=""> 
-			<span class="px-3" th:text="${appName}"></span>
+<body style="background-color: #edf1f5;">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm px-lg-5 fixed-top">
+		<a class="navbar-brand" href="#"> <img src="/assets/images/unla.jpg" width="40" height="40" alt=""> 
+			<span class="d-none d-sm-inline px-3" th:text="${appName}"></span>
 		</a>
-
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
 			aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-
 			<ul class="navbar-nav mr-auto ">
 				<li class="nav-item active"></li>
-				<li class="nav-item"></li>
-				<li class="nav-item"></li>
-				<!-- 
-                Links del NavBar Izquierda
-            -->
 			</ul>
-
 			<ul class="navbar-nav mr-2">
 				<li class="nav-item mx-1"><a
-					class="btn btn-dark nav-link text-light" th:href="@{/login}">Ingresar</a>
+					class="btn btn-dark nav-link text-light px-3" th:href="@{/login}">Ingresar</a>
 				</li>
 				<!-- 
                 Links del NavBar Izquierda
             -->
 			</ul>
-
 		</div>
 	</nav>
 	<main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
@@ -56,16 +41,16 @@
 			<div class="card login-card">
 				<div class="row no-gutters">
 					<div class="col-md-5">
-						<img src="assets/images/login.jpg" alt="login"
+						<img src="assets/images/unla-banner.jpg" alt="login"
 							class="login-card-img">
 					</div>
 					<div class="col-md-7">
 						<div class="card-body">
 							<div align="center">
-								<img src="assets/images/unla.jpg" width="150" height="150" alt="logo" class="logo">
+								<img src="assets/images/unla.jpg" width="96" height="96" alt="logo" class="logo">
 							</div>
 							<p class="login-card-description" align="center"></p>
-							<form action="#!">
+							<form action="#!" class="mx-auto">
 								<div>
 									<a> <strong><u>Carrera: </u></strong> Licenciatura en Sistemas </a>
 								</div>
@@ -109,21 +94,16 @@
 								<a th:href="@{/login}"><input name="login" id="login"
 									class="btn btn-block login-btn mb-4" type="button"
 									value="Ingresar"></a>
-							</form>
-							<nav class="login-card-footer-nav">
-								<a href="#!"> </a>&copy; <a>Company 2021, Inc. Todos los derechos de autor reservados . Temino de uso y privacidad</a>
-								<a href="http://www.unla.edu.ar/" target="_blank">, UNLa</a>
-							</nav>
+							</form>							
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</main>
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<script src="/assets/js/jquery.js"></script>
+	<script src="/assets/js/popper.js"></script>
+	<script src="/assets/js/bootstrap.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js"></script>
 </body>
 </html>
