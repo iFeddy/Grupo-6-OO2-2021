@@ -12,9 +12,17 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/")
 public class HomeController {
 
-    @GetMapping("/")
+    @GetMapping({"/","index" , "home"})
     public ModelAndView index() {
         ModelAndView view = new ModelAndView(RouteHelper.INDEX);
+        view.addObject("title", "Inicio - " + ConfigHelper.appName);
+        view.addObject("appName", ConfigHelper.appName);
+        return view;
+    }
+    
+    @GetMapping("/login")
+    public ModelAndView login() {
+        ModelAndView view = new ModelAndView(RouteHelper.LOGIN);
         view.addObject("title", "Inicio - " + ConfigHelper.appName);
         view.addObject("appName", ConfigHelper.appName);
         return view;
