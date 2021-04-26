@@ -18,9 +18,27 @@ Para no tener que andar cambiando las rutas desde los metodos, las propiedades t
 ModelAndView view = new ModelAndView(RouteHelper.INDEX);
 ```
 
+### AdminSideBarHelper
+Para agregar los links del menu lateral en Admin, hay que instanciar un nuevo AdminSideBar con el ID que le corresponda
+
+```
+AdminSideBar[] links = {
+            ....
+            new AdminSideBar(int, "url", "class icon de fontawesome", "texto del link"),
+        };      
+```
+
 ## Actualizar Dependencias Front-end
 No creo que sea necesario usar esto pero si hay que actualizar jQuery/Bootstrap etc... hay que usar npm y copiar el dist dentro de static (esta mal pero funciona)
 
 ```
 npm update
 ```
+
+## Panel de Administración
+
+No creo que tengamos la necesidad de usar charts pero igual dejo el link del template por si necesitamos agregar algo de ahi:
+
+Template: https://wrappixel.com/demos/admin-templates/ampleadmin/ample-admin-lite/dashboard.html
+
+Si llegamos a necesitar Tablas podemos usar DataTables.js que funciona con jQuery
