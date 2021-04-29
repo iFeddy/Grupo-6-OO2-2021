@@ -55,3 +55,10 @@ No creo que tengamos la necesidad de usar charts pero igual dejo el link del tem
 Template: https://wrappixel.com/demos/admin-templates/ampleadmin/ample-admin-lite/dashboard.html
 
 Si llegamos a necesitar Tablas podemos usar DataTables.js que funciona con jQuery
+
+
+## Dependencias Front-end
+
+- Para iconos: https://fontawesome.com/
+- Para Bootstrap: https://getbootstrap.com/docs/4.4/getting-started/introduction/
+- Para jQuery: https://api.jquery.com/
