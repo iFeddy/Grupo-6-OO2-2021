@@ -6,6 +6,19 @@
 git clone https://github.com/iFeddy/Grupo-6-OO2-2021.git
 ```
 
+### Instalar la base de datos
+
+Crear una base de datos que se llame:
+```
+oo2tpc
+```
+Crear un usuario de MySQL con privilegios globales con los siguientes datos:
+
+```
+Usuario: oo2tpc
+Contraseña: oo2tpc
+```
+
 ## Helpers
 
 ### ConfigHelper
