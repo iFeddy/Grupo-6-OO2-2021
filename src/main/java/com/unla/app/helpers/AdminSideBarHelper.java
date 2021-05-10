@@ -14,7 +14,8 @@ public class AdminSideBarHelper {
         //Agregar Links NavBar aca
         AdminSideBar[] links = {
             new AdminSideBar(1, "/admin/dashboard", "fas fa-table", "Panel de Administración"),
-            new AdminSideBar(2, "/admin/users", "fas fa-user", "Usuarios")  
+            new AdminSideBar(2, "/admin/users", "fas fa-user", "Usuarios"),
+            new AdminSideBar(3, "/admin/roles", "fas fa-users", "Roles") 
         };           
        this.createList(links);
     }
