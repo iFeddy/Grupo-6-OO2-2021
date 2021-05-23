@@ -33,6 +33,11 @@ public class UserServicesImpl implements IUserService {
 		return iuserRepository.findById(id).orElse(null);
 	}
 	
+	@Override
+	@Transactional(readOnly = true)
+	public Users findOneByEmail(String email) {
+		return iuserRepository.findByEmail(email).orElse(null);
+	}
 	
 	@Override
 	@Transactional(readOnly = true)

@@ -26,7 +26,7 @@
 							</div>
 							<p class="login-card-description font-weight-bold"><i class="fas fa-user fa-fw mr-2"></i>
 								Iniciar Sesión</p>
-							<form action="#!" class="mx-auto">
+							<form th:action="@{/login}" method="post" class="mx-auto">
 
 								<div class="input-group mb-3">
 									<div class="input-group-prepend">
@@ -34,7 +34,7 @@
 											<i class="far fa-envelope"></i>
 										</span>
 									</div>
-									<input type="email" name="email" class="form-control"
+									<input type="email" name="email" class="form-control" required
 										placeholder="Correo Electrónico">
 								</div>
 
@@ -44,14 +44,15 @@
 											<i class="fas fa-key"></i>
 										</span>
 									</div>
-									<input type="password" name="password" class="form-control"
+									<input type="password" name="password" class="form-control" required
 										placeholder="***********">
 								</div>
 
-								<a th:href="@{/admin/dashboard}">
-									<input name="login" id="login" class="btn btn-block login-btn mb-4" type="button"
-										value="Conectarse">
-								</a>
+								<div class="alert alert-danger" th:if="${message != null}"><span th:text="${message}"></span></div>
+
+								<input type="submit" name="login" id="login" class="btn btn-block login-btn mb-4"
+									value="Conectarse">
+
 								<a th:href="@{/}">
 									<input name="login" id="login" class="btn btn-block login-btn mb-4" type="button"
 										value="Volver al Inicio">

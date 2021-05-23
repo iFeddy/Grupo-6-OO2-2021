@@ -7,18 +7,18 @@ import org.springframework.data.domain.Pageable;
 
 import com.unla.app.entities.Users;
 
-
 public interface IUserService {
 
 	public List<Users> findAll();
-	
+
 	public Page<Users> findAll(Pageable pageable);
-	
-	public void save ( Users user);
-	
+
+	public void save(Users user);
+
 	public Users findOne(Long id);
-	
+
 	public void delete(Long id);
-	
+
+	public Users findOneByEmail(String email);
 
 }

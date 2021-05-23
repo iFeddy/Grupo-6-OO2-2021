@@ -18,12 +18,6 @@ public class HomeController {
         view.addObject("title", "Inicio - " + ConfigHelper.appName);
         view.addObject("appName", ConfigHelper.appName);
         return view;
-    }
+    }   
     
-    @GetMapping("/login")
-    public ModelAndView login() {
-        ModelAndView view = new ModelAndView(RouteHelper.LOGIN);
-        view.addObject("title", "Iniciar Sesión - " + ConfigHelper.appName);       
-        return view;
-    }
 }

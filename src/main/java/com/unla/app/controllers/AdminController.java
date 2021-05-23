@@ -32,7 +32,7 @@ import com.unla.app.services.IUserService;
 @SessionAttributes("user")
 @RequestMapping("/admin")
 public class AdminController {
-	
+
 	@Autowired
 	private IUserService usuarioService;
 
@@ -44,16 +44,16 @@ public class AdminController {
 		String pageName = "Panel de Administración";
 		view.addObject("title", pageName + " - " + ConfigHelper.appName);
 		view.addObject("pageName", pageName);
-		view.addObject("userName", "Administrador"); //Reemplazar con Objeto despues de cargar el user desde la DB
+		view.addObject("userName", "Administrador"); // Reemplazar con Objeto despues de cargar el user desde la DB
 		view.addObject("appName", ConfigHelper.appName);
-		
-		view.addObject("sideBarLink", 1); //ID del link
+
+		view.addObject("sideBarLink", 1); // ID del link
 		view.addObject("sideBar", sideBar.lst_adminSideBar);
 
 		return view;
 	}
-	
-	@GetMapping({ "roles", "/" })// Listar Roles
+
+	@GetMapping({ "roles", "/" }) // Listar Roles
 	public ModelAndView roles() {
 		ModelAndView view = new ModelAndView(RouteHelper.DASHBOARD_ROLES);
 		AdminSideBarHelper sideBar = new AdminSideBarHelper();
@@ -61,40 +61,40 @@ public class AdminController {
 		String pageName = "Roles";
 		view.addObject("title", pageName + " - " + ConfigHelper.appName);
 		view.addObject("pageName", pageName);
-		view.addObject("userName", "Administrador"); //Reemplazar con Objeto despues de cargar el user desde la DB
+		view.addObject("userName", "Administrador"); // Reemplazar con Objeto despues de cargar el user desde la DB
 		view.addObject("appName", ConfigHelper.appName);
 
-		view.addObject("sideBarLink", 3); //ID del link para que quede en azul (activo) en el menu izquierdo
+		view.addObject("sideBarLink", 3); // ID del link para que quede en azul (activo) en el menu izquierdo
 		view.addObject("sideBar", sideBar.lst_adminSideBar);
 
 		return view;
 	}
 
-	@GetMapping({ "users", "/" })// LISTAR USUARIO
-	public ModelAndView users(@RequestParam(name = "page",defaultValue = "0") int page, Model model) {
+	@GetMapping({ "users", "/" }) // LISTAR USUARIO
+	public ModelAndView users(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
 		ModelAndView view = new ModelAndView(RouteHelper.DASHBOARD_USERS);
 		AdminSideBarHelper sideBar = new AdminSideBarHelper();
 
 		String pageName = "Usuarios";
 		view.addObject("title", pageName + " - " + ConfigHelper.appName);
 		view.addObject("pageName", pageName);
-		view.addObject("userName", "Administrador"); //Reemplazar con Objeto despues de cargar el user desde la DB
+		view.addObject("userName", "Administrador"); // Reemplazar con Objeto despues de cargar el user desde la DB
 		view.addObject("appName", ConfigHelper.appName);
 
-		view.addObject("sideBarLink", 2); //ID del link para que quede en azul (activo) en el menu izquierdo
+		view.addObject("sideBarLink", 2); // ID del link para que quede en azul (activo) en el menu izquierdo
 		view.addObject("sideBar", sideBar.lst_adminSideBar);
-		
-		// Paginacion 
+
+		// Paginacion
 		Pageable pageRequest = PageRequest.of(page, 4); // cantidad de registros por pagina.
-		Page <Users> users = usuarioService.findAll(pageRequest); 
+		Page<Users> users = usuarioService.findAll(pageRequest);
 		PageRender<Users> pageRender = new PageRender<>("users", users);
-		model.addAttribute("users",users);
-		model.addAttribute("page",pageRender);
+		model.addAttribute("users", users);
+		model.addAttribute("page", pageRender);
 
 		return view;
 	}
-	
-	@RequestMapping("users_add")     // CREAR USUARIO
+
+	@RequestMapping("users_add") // CREAR USUARIO
 	public ModelAndView newusers(Model model) {
 		ModelAndView view = new ModelAndView(RouteHelper.DASHBOARD_NEW_USERS);
 		AdminSideBarHelper sideBar = new AdminSideBarHelper();
@@ -102,87 +102,83 @@ public class AdminController {
 		String pageName = "Nuevo Usuario";
 		view.addObject("title", pageName + " - " + ConfigHelper.appName);
 		view.addObject("pageName", pageName);
-		view.addObject("userName", "Administrador"); //Reemplazar con Objeto despues de cargar el user desde la DB
+		view.addObject("userName", "Administrador"); // Reemplazar con Objeto despues de cargar el user desde la DB
 		view.addObject("appName", ConfigHelper.appName);
 
-		view.addObject("sideBarLink", 2); //ID del link para que quede en azul (activo) en el menu izquierdo
+		view.addObject("sideBarLink", 2); // ID del link para que quede en azul (activo) en el menu izquierdo
 		view.addObject("sideBar", sideBar.lst_adminSideBar);
-		
+
 		Users user = new Users();
 		model.addAttribute("user", user);
-			
+
 		return view;
-	}	
-	
-	
-	@RequestMapping(value = "users_save", method = RequestMethod.POST)    // GUARDAR USUARIO
-	public String crear( @Valid Users user, BindingResult result, Model model,RedirectAttributes flash,SessionStatus status) {	
+	}
+
+	@RequestMapping(value = "users_save", method = RequestMethod.POST) // GUARDAR USUARIO
+	public String crear(@Valid Users user, BindingResult result, Model model, RedirectAttributes flash,
+			SessionStatus status) {
 		ModelAndView view = new ModelAndView(RouteHelper.DASHBOARD_NEW_USERS);
 		AdminSideBarHelper sideBar = new AdminSideBarHelper();
 
 		String pageName = "Nuevo Usuario";
 		view.addObject("title", pageName + " - " + ConfigHelper.appName);
 		view.addObject("pageName", pageName);
-		view.addObject("userName", "Administrador"); //Reemplazar con Objeto despues de cargar el user desde la DB
+		view.addObject("userName", "Administrador"); // Reemplazar con Objeto despues de cargar el user desde la DB
 		view.addObject("appName", ConfigHelper.appName);
 
-		view.addObject("sideBarLink", 2); //ID del link para que quede en azul (activo) en el menu izquierdo
+		view.addObject("sideBarLink", 2); // ID del link para que quede en azul (activo) en el menu izquierdo
 		view.addObject("sideBar", sideBar.lst_adminSideBar);
-		
-		if(result.hasErrors()) {
-			return"admin/users_add";
+
+		if (result.hasErrors()) {
+			return "admin/users_add";
 		}
-		String mensajeflash= (user.getId()!=null)? "Cliente editado con exito!" :"Cliente creado con exito!";
+		String mensajeflash = (user.getId() != null) ? "Cliente editado con exito!" : "Cliente creado con exito!";
 		user.setActivo(true);
 		usuarioService.save(user);
 		status.setComplete();
 		flash.addFlashAttribute("succes", mensajeflash);
-		return"redirect:users";
-	}	
-	
+		return "redirect:users";
+	}
+
 	@RequestMapping(value = "users_add/{id}") // EDITAR USUARIO
-	public ModelAndView editar(@PathVariable(value = "id") Long id ,Map<String,Object> model , RedirectAttributes flash) {
+	public ModelAndView editar(@PathVariable(value = "id") Long id, Map<String, Object> model,
+			RedirectAttributes flash) {
 		Users user = null;
 		ModelAndView view = new ModelAndView(RouteHelper.DASHBOARD_NEW_USERS);
 		AdminSideBarHelper sideBar = new AdminSideBarHelper();
-		
+
 		String pageName = "Editar Usuario";
 		view.addObject("title", pageName + " - " + ConfigHelper.appName);
 		view.addObject("pageName", pageName);
-		view.addObject("userName", "Administrador"); //Reemplazar con Objeto despues de cargar el user desde la DB
+		view.addObject("userName", "Administrador"); // Reemplazar con Objeto despues de cargar el user desde la DB
 		view.addObject("appName", ConfigHelper.appName);
-		view.addObject("sideBarLink", 2); //ID del link para que quede en azul (activo) en el menu izquierdo
+		view.addObject("sideBarLink", 2); // ID del link para que quede en azul (activo) en el menu izquierdo
 		view.addObject("sideBar", sideBar.lst_adminSideBar);
-		
-		if(id>0) {
+
+		if (id > 0) {
 			user = usuarioService.findOne(id);
-			if(user == null) {
+			if (user == null) {
 				flash.addFlashAttribute("error", "El ID del Usuario no existe en la Base de Datos");
-				ModelAndView modelAndView =  new ModelAndView("redirect:users");
+				ModelAndView modelAndView = new ModelAndView("redirect:users");
 				return modelAndView;
 			}
-		}else{
+		} else {
 			flash.addFlashAttribute("error", "El ID del Usuario no puede ser cero!");
-			ModelAndView modelAndView =  new ModelAndView("redirect:users");
+			ModelAndView modelAndView = new ModelAndView("redirect:users");
 			return modelAndView;
 		}
 		model.put("user", user);
 		model.put("titulo", "Editar Usuario");
 		return view;
 	}
-	
-	@RequestMapping(value = "admin/delete_user/{id}")// ELIMINAR USUARIO
-	public String eliminar(@PathVariable(value ="id") Long id , RedirectAttributes flash) {
-		if(id > 0) {
+
+	@RequestMapping(value = "admin/delete_user/{id}") // ELIMINAR USUARIO
+	public String eliminar(@PathVariable(value = "id") Long id, RedirectAttributes flash) {
+		if (id > 0) {
 			usuarioService.delete(id);
 			flash.addFlashAttribute("succes", "Cliente eliminado con exito!");
 		}
 		return "redirect:users";
 	}
-	
-	
-	
+
 }
-
-
-
