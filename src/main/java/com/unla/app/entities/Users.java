@@ -43,7 +43,7 @@ public class Users implements Serializable {
 	private String typeDni;
 	
 	@NotEmpty
-	@Size(min=8 , max=8)
+	@Size(min=7 , max=8)
 	@Column(name="dni")
 	private String dni;
 	
@@ -69,8 +69,7 @@ public class Users implements Serializable {
 	
 	public Users() {}
 
-	
-	
+		
 	public Long getId() {
 		return id;
 	}
@@ -148,6 +147,5 @@ public class Users implements Serializable {
 	}
 
 	private static final long serialVersionUID = 1L;
-
 
 }

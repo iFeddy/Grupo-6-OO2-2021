@@ -24,9 +24,30 @@
 			<ul class="navbar-nav mr-auto ">
 				<li class="nav-item active"></li>
 			</ul>
-			<ul class="navbar-nav mr-2">
+			<!-- Guest -->
+			<ul class="navbar-nav mr-2" th:if="${user == null}">
 				<li class="nav-item mx-1"><a class="btn btn-dark nav-link text-light px-3"
 						th:href="@{/login}">Ingresar</a>
+				</li>
+				<!-- 
+                	Links del NavBar Izquierda
+            	-->
+			</ul>
+			<!-- Auth -->
+			<ul class="navbar-nav mr-2" th:if="${user != null}">
+				<li class="nav-item mx-1"><a class="btn nav-link text-dark px-3"
+					th:href="@{/dashboard}"><i class="fas fa-user"></i>&nbsp;&nbsp;Bienvenido <strong th:text="${user.getFirstName() + ' ' + user.getLastName()}"></strong> 
+					(DNI <span th:text="${user.getDni()}"></span>)</a>
+				</li>
+				<li class="nav-item mx-1"><a class="btn btn-dark nav-link text-light px-3"
+						th:href="@{/admin/dashboard}"><i class="fas fa-tachometer-alt mx-1"></i> Ir al Panel de Administración</a>
+				</li>
+				<li>
+					<form th:action="@{/logout}" method="post" class="mx-auto">
+						<button class="px-4 text-dark btn" style="background-color:transparent">
+							<i class="fas fa-sign-out-alt"></i>
+							<span>Cerrar Sesión</span></button>
+					</form>
 				</li>
 				<!-- 
                 	Links del NavBar Izquierda
@@ -93,7 +114,7 @@
 										Leonardo Nahuel</a>
 								</div>
 								<p class="login-card-description" align="center"></p>
-								<a th:href="@{/login}"><input name="login" id="login"
+								<a th:href="@{/login}"><input name="login" id="login" th:if="${user == null}"
 										class="btn btn-block login-btn mb-4" type="button" value="Ingresar"></a>
 							</form>
 						</div>

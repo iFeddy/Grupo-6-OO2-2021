@@ -1,7 +1,5 @@
 package com.unla.app.controllers;
 
-import javax.validation.Valid;
-
 import com.unla.app.entities.Users;
 import com.unla.app.helpers.ConfigHelper;
 import com.unla.app.helpers.RouteHelper;
@@ -54,7 +52,7 @@ public class LoginController {
 		}
 		// Todo ok, guardamos la session
 		session.setAttribute("USER", user);
-		return "redirect:login";
+		return "redirect:/";
 	}
 
 	@PostMapping("/logout")

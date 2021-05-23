@@ -72,22 +72,19 @@
 			</div>
 
 			<div class="container-fluid">
-
 				<!-- CONTENIDO DEL ADMIN ACA 
                 Contenido de pageName = <span th:text="${pageName}"></span>-->
-
-
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="white-box">
 							<h4 class="card.title">
-								<a class="btn btn-primary" th:href="@{users_add}">Nuevo Usuario</a>
+								<a class="btn btn-primary my-2" th:href="@{users/create}"><i class="fas fa-user-plus mx-1"></i> Nuevo Usuario</a>
 							</h4>
 							<div class="table-responsive">
-								<div class="alert alert-success" th:if="${success!=null}" th:text="{success}"></div>
-								<div class="alert alert-danger" th:if="${error!=null}" th:text="{error}"></div>
-								<div class="alert alert-warning" th:if="${warning!=null}" th:text="{warning}"></div>
-								<div class="alert alert-info" th:if="${info!=null}" th:text="{info}"></div>
+								<div class="alert alert-success" th:if="${success!=null}" th:text="${success}"></div>
+								<div class="alert alert-danger" th:if="${error!=null}" th:text="${error}"></div>
+								<div class="alert alert-warning" th:if="${warning!=null}" th:text="${warning}"></div>
+								<div class="alert alert-info" th:if="${info!=null}" th:text="${info}"></div>
 								<table class="table table-hover">
 									<thead>
 										<tr>
@@ -110,14 +107,13 @@
 											<td th:text="${user.dni}"></td>
 											<td th:text="${user.userName}"></td>
 											<td>
-												<a class="btn btn-primary" th:href="@{users_add/} + ${user.id}">
+												<a class="btn btn-primary" th:href="@{users/edit/} + ${user.id}">
 													<i class="fas fa-pencil-alt mx-1"></i> Editar
 												</a>
 											</td>
 											<td>
 												<a class="btn btn-danger text-light"
-													th:onclick="eliminar([[${user.id}]])"
-													onclick="return confirm('desea eliminar el registro?');">
+													th:onclick="eliminar([[${user.id}]])">
 													<i class="far fa-trash-alt mx-1"></i> Eliminar
 												</a>
 											</td>

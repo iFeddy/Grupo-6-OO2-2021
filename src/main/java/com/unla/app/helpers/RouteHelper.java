@@ -10,5 +10,5 @@ public class RouteHelper {
 	public final static String DASHBOARD_ROLES = "admin/roles";
 	
 	public final static String DASHBOARD_NEW_USERS = "admin/users_add";
-	public final static String DASHBOARD_SAVE_USERS = "admin/users_save";
+	public final static String DASHBOARD_EDIT_USERS = "admin/users_edit";
 }
