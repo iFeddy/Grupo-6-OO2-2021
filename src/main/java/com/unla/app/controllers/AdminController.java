@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.unla.app.entities.Users;
 import com.unla.app.helpers.AdminSideBarHelper;
+import com.unla.app.helpers.AuthHelper;
 import com.unla.app.helpers.ConfigHelper;
 import com.unla.app.helpers.RouteHelper;
 
@@ -22,13 +23,16 @@ public class AdminController {
 		view.addObject("title", pageName + " - " + ConfigHelper.appName);
 		view.addObject("pageName", pageName);
 		Users user = (Users) session.getAttribute("USER");
-		view.addObject("userName", user.getFirstName() + " " + user.getLastName());
+		if(user != null){
+			view.addObject("userName", user.getFirstName() + " " + user.getLastName());
+		}		
 		view.addObject("appName", ConfigHelper.appName);
 
 		view.addObject("sideBarLink", 1); // ID del link
 		view.addObject("sideBar", sideBar.lst_adminSideBar);
 
-		return view;
+		AuthHelper authHelper = new AuthHelper(session);
+		return authHelper.AuthMiddleware(view);
 	}
 
 	@GetMapping({ "/admin/dashboard", "index", "dashboard" })
@@ -40,13 +44,16 @@ public class AdminController {
 		view.addObject("title", pageName + " - " + ConfigHelper.appName);
 		view.addObject("pageName", pageName);
 		Users user = (Users) session.getAttribute("USER");
-		view.addObject("userName", user.getFirstName() + " " + user.getLastName());
+		if(user != null){
+			view.addObject("userName", user.getFirstName() + " " + user.getLastName());
+		}	
 		view.addObject("appName", ConfigHelper.appName);
 
 		view.addObject("sideBarLink", 1); // ID del link
 		view.addObject("sideBar", sideBar.lst_adminSideBar);
 
-		return view;
+		AuthHelper authHelper = new AuthHelper(session);
+		return authHelper.AuthMiddleware(view);
 	}
 
 	@GetMapping({ "/admin/roles", "roles", "roles" }) // Listar Roles
@@ -58,13 +65,16 @@ public class AdminController {
 		view.addObject("title", pageName + " - " + ConfigHelper.appName);
 		view.addObject("pageName", pageName);
 		Users user = (Users) session.getAttribute("USER");
-		view.addObject("userName", user.getFirstName() + " " + user.getLastName());
+		if(user != null){
+			view.addObject("userName", user.getFirstName() + " " + user.getLastName());
+		}	
 		view.addObject("appName", ConfigHelper.appName);
 
 		view.addObject("sideBarLink", 3); // ID del link para que quede en azul (activo) en el menu izquierdo
 		view.addObject("sideBar", sideBar.lst_adminSideBar);
 
-		return view;
+		AuthHelper authHelper = new AuthHelper(session);
+		return authHelper.AuthMiddleware(view);
 	}
 
 }

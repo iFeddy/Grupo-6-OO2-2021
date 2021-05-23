@@ -5,7 +5,7 @@ import javax.validation.constraints.Size;
 
 public class Role {
 
-	private long id;
+	//private long id;
 	
 	@NotEmpty
 	@Size(min=5 ,max=30)

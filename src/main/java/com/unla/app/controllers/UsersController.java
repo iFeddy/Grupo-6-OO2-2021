@@ -24,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sistema.springboot.app.util.paginator.PageRender;
 import com.unla.app.entities.Users;
 import com.unla.app.helpers.AdminSideBarHelper;
+import com.unla.app.helpers.AuthHelper;
 import com.unla.app.helpers.ConfigHelper;
 import com.unla.app.helpers.RouteHelper;
 
@@ -47,7 +48,9 @@ public class UsersController {
 		view.addObject("title", pageName + " - " + ConfigHelper.appName);
 		view.addObject("pageName", pageName);
 		Users user = (Users) session.getAttribute("USER");
-		view.addObject("userName", user.getFirstName() + " " + user.getLastName());
+		if(user != null){
+			view.addObject("userName", user.getFirstName() + " " + user.getLastName());
+		}	
 		view.addObject("appName", ConfigHelper.appName);
 
 		view.addObject("sideBarLink", 2); // ID del link para que quede en azul (activo) en el menu izquierdo
@@ -60,7 +63,8 @@ public class UsersController {
 		model.addAttribute("users", users);
 		model.addAttribute("page", pageRender);
 
-		return view;
+		AuthHelper authHelper = new AuthHelper(session);
+		return authHelper.AuthMiddleware(view);
 	}
 
     //GET Crear Usuario Nuevo
@@ -82,7 +86,8 @@ public class UsersController {
 		Users user = new Users();
 		model.addAttribute("user", user);
 
-		return view;
+		AuthHelper authHelper = new AuthHelper(session);
+		return authHelper.AuthMiddleware(view);
 	}
 
     //POST Guardar Usuario Nuevo
@@ -128,7 +133,9 @@ public class UsersController {
 
 		model.put("user", user);
 		model.put("titulo", "Editar Usuario");
-		return view;
+		
+		AuthHelper authHelper = new AuthHelper(session);
+		return authHelper.AuthMiddleware(view);
 	}
 
     //POST Editar Usuario 
