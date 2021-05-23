@@ -94,6 +94,7 @@
 											<th class="border-top-0">Tipo Dni</th>
 											<th class="border-top-0">Dni</th>
 											<th class="border-top-0">Usuario</th>
+											<th class="border-top-0">Rol</th>
 											<th class="border-top-0">Editar</th>
 											<th class="border-top-0">Eliminar</th>
 										</tr>
@@ -106,6 +107,7 @@
 											<td th:text="${user.typeDni}"></td>
 											<td th:text="${user.dni}"></td>
 											<td th:text="${user.userName}"></td>
+											<td th:text="${user.roleId}"></td>
 											<td>
 												<a class="btn btn-primary" th:href="@{users/edit/} + ${user.id}">
 													<i class="fas fa-pencil-alt mx-1"></i> Editar

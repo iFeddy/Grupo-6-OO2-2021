@@ -56,25 +56,4 @@ public class AdminController {
 		return authHelper.AuthMiddleware(view);
 	}
 
-	@GetMapping({ "/admin/roles", "roles", "roles" }) // Listar Roles
-	public ModelAndView roles(HttpSession session) {
-		ModelAndView view = new ModelAndView(RouteHelper.DASHBOARD_ROLES);
-		AdminSideBarHelper sideBar = new AdminSideBarHelper();
-
-		String pageName = "Roles";
-		view.addObject("title", pageName + " - " + ConfigHelper.appName);
-		view.addObject("pageName", pageName);
-		Users user = (Users) session.getAttribute("USER");
-		if(user != null){
-			view.addObject("userName", user.getFirstName() + " " + user.getLastName());
-		}	
-		view.addObject("appName", ConfigHelper.appName);
-
-		view.addObject("sideBarLink", 3); // ID del link para que quede en azul (activo) en el menu izquierdo
-		view.addObject("sideBar", sideBar.lst_adminSideBar);
-
-		AuthHelper authHelper = new AuthHelper(session);
-		return authHelper.AuthMiddleware(view);
-	}
-
 }

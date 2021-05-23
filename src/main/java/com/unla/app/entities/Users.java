@@ -3,21 +3,16 @@ package com.unla.app.entities;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name="users")
+@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "userName"))
 public class Users implements Serializable {
 	
 	@Id
@@ -65,8 +60,10 @@ public class Users implements Serializable {
 	@Column(name="updatedat")
 	@UpdateTimestamp
 	private LocalDate updatedat;
-
 	
+	@Column(name="roleId")
+	private String roleId;
+
 	public Users() {}
 
 		
@@ -144,6 +141,38 @@ public class Users implements Serializable {
 	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public void setRoleId(String role){
+		this.roleId = role;
+	}
+
+	public String getRoleId(){
+		return roleId;
+	}
+
+	//get User Role
+	public UsersRole getUserRole(){
+		UsersRole usersRole = new UsersRole();
+		return usersRole;
+	}
+
+	
+
+	@Override
+	public String toString() {
+		return "{" +
+			" id='" + getId() + "'" +
+			", firstName='" + getFirstName() + "'" +
+			", lastName='" + getLastName() + "'" +
+			", email='" + getEmail() + "'" +
+			", typeDni='" + getTypeDni() + "'" +
+			", dni='" + getDni() + "'" +
+			", userName='" + getUserName() + "'" +
+			", password='" + getPassword() + "'" +
+			", activo='" + isActivo() + "'" +
+			", roleId='" + getRoleId() + "'" +
+			"}";
 	}
 
 	private static final long serialVersionUID = 1L;

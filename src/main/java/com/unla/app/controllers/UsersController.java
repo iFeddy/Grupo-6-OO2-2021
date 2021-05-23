@@ -77,7 +77,9 @@ public class UsersController {
 		view.addObject("title", pageName + " - " + ConfigHelper.appName);
 		view.addObject("pageName", pageName);
 		Users loggedUser = (Users) session.getAttribute("USER");
-		view.addObject("userName", loggedUser.getFirstName() + " " + loggedUser.getLastName());
+		if(loggedUser != null){
+			view.addObject("userName", loggedUser.getFirstName() + " " + loggedUser.getLastName());
+		}
 		view.addObject("appName", ConfigHelper.appName);
 
 		view.addObject("sideBarLink", 2); // ID del link para que quede en azul (activo) en el menu izquierdo
@@ -126,7 +128,9 @@ public class UsersController {
 		view.addObject("title", pageName + " - " + ConfigHelper.appName);
 		view.addObject("pageName", pageName);
         Users loggedUser = (Users) session.getAttribute("USER");
-		view.addObject("userName", loggedUser.getFirstName() + " " + loggedUser.getLastName());
+		if(loggedUser != null){
+			view.addObject("userName", loggedUser.getFirstName() + " " + loggedUser.getLastName());
+		}
 		view.addObject("appName", ConfigHelper.appName);
 		view.addObject("sideBarLink", 2); // ID del link para que quede en azul (activo) en el menu izquierdo
 		view.addObject("sideBar", sideBar.lst_adminSideBar);

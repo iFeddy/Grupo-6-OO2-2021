@@ -31,7 +31,7 @@ Contraseña: oo2tpc
 Para ver las Sessiones en los metodos donde se necesite, hay que agregarle (HttpSession session) y el metodo para traer la info de la sesion es session.getAttribute("KEY");
 
 ### Session de Usuario
-Key: [USER] - Clase Users
+Key: [USER] - Clase User
 
 #
 
@@ -88,3 +88,29 @@ Si llegamos a necesitar Tablas podemos usar DataTables.js que funciona con jQuer
 - Para iconos: https://fontawesome.com/
 - Para Bootstrap: https://getbootstrap.com/docs/4.4/getting-started/introduction/
 - Para jQuery: https://api.jquery.com/
+
+
+## Primera Entrega
+
+Faltan los perfiles (Roles) hay que hacer la relacion y tabla en db
+Falta hacer el diagrama de clases (DIA)
+1 usuario 1 perfil
+
+Roles
+1 Usuario
+2 Admin (Puede Verificar todo)
+3 Auditoria (Puede descargar datos en PDF????)
+
+ABM Usuarios
+
+## Segunda Entrega
+(Front) Pagina de Registro de usuario
+(Front) Pedir Permiso sin estar registrado (nro dni)
+(Front) Alta de Rodados
+(Front) Traer Permiso por Persona
+(Admin) Traer Permiso por Rodado
+(Admin) Traer Permisos Activos entre Fecha y Fecha
+(Admin) Traer permisos Activos entre Fecha y Fecha que salgan / lleguen a un lugar determinado
+
+## Tercera Entrega
+Código QR para que muestre la info del permiso
