@@ -11,15 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name="user")
-public class User implements Serializable {
+@Table(name="users")
+public class Users implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -68,7 +67,7 @@ public class User implements Serializable {
 	private LocalDate updatedat;
 
 	
-	public User() {}
+	public Users() {}
 
 	
 	

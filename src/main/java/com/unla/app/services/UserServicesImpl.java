@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.unla.app.entities.User;
+import com.unla.app.entities.Users;
 import com.unla.app.repositories.IUserRepository;
 
 @Service("userService")
@@ -22,27 +22,27 @@ public class UserServicesImpl implements IUserService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public List<User> findAll() {
+	public List<Users> findAll() {
 		
-		return (List<User>) iuserRepository.findAll();
+		return (List<Users>) iuserRepository.findAll();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public User findOne(Long id) {
+	public Users findOne(Long id) {
 		return iuserRepository.findById(id).orElse(null);
 	}
 	
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Page<User> findAll(Pageable pageable) {
+	public Page<Users> findAll(Pageable pageable) {
 		return iuserRepository.findAll(pageable);
 	}
 
 	@Override
 	@Transactional
-	public void save(User user) {
+	public void save(Users user) {
 		iuserRepository.save(user);
 	}
 

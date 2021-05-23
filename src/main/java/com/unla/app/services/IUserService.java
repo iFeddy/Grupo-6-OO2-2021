@@ -5,18 +5,18 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.unla.app.entities.User;
+import com.unla.app.entities.Users;
 
 
 public interface IUserService {
 
-	public List<User> findAll();
+	public List<Users> findAll();
 	
-	public Page<User> findAll(Pageable pageable);
+	public Page<Users> findAll(Pageable pageable);
 	
-	public void save ( User user);
+	public void save ( Users user);
 	
-	public User findOne(Long id);
+	public Users findOne(Long id);
 	
 	public void delete(Long id);
 	

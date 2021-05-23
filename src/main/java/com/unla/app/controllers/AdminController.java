@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +21,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sistema.springboot.app.util.paginator.PageRender;
-import com.unla.app.entities.User;
+import com.unla.app.entities.Users;
 import com.unla.app.helpers.AdminSideBarHelper;
 import com.unla.app.helpers.ConfigHelper;
 import com.unla.app.helpers.RouteHelper;
@@ -87,8 +86,8 @@ public class AdminController {
 		
 		// Paginacion 
 		Pageable pageRequest = PageRequest.of(page, 4); // cantidad de registros por pagina.
-		Page <User> users = usuarioService.findAll(pageRequest); 
-		PageRender<User> pageRender = new PageRender<>("users", users);
+		Page <Users> users = usuarioService.findAll(pageRequest); 
+		PageRender<Users> pageRender = new PageRender<>("users", users);
 		model.addAttribute("users",users);
 		model.addAttribute("page",pageRender);
 
@@ -109,7 +108,7 @@ public class AdminController {
 		view.addObject("sideBarLink", 2); //ID del link para que quede en azul (activo) en el menu izquierdo
 		view.addObject("sideBar", sideBar.lst_adminSideBar);
 		
-		User user = new User();
+		Users user = new Users();
 		model.addAttribute("user", user);
 			
 		return view;
@@ -117,7 +116,7 @@ public class AdminController {
 	
 	
 	@RequestMapping(value = "users_save", method = RequestMethod.POST)    // GUARDAR USUARIO
-	public String crear( @Valid User user, BindingResult result, Model model,RedirectAttributes flash,SessionStatus status) {	
+	public String crear( @Valid Users user, BindingResult result, Model model,RedirectAttributes flash,SessionStatus status) {	
 		ModelAndView view = new ModelAndView(RouteHelper.DASHBOARD_NEW_USERS);
 		AdminSideBarHelper sideBar = new AdminSideBarHelper();
 
@@ -143,7 +142,7 @@ public class AdminController {
 	
 	@RequestMapping(value = "users_add/{id}") // EDITAR USUARIO
 	public ModelAndView editar(@PathVariable(value = "id") Long id ,Map<String,Object> model , RedirectAttributes flash) {
-		User user = null;
+		Users user = null;
 		ModelAndView view = new ModelAndView(RouteHelper.DASHBOARD_NEW_USERS);
 		AdminSideBarHelper sideBar = new AdminSideBarHelper();
 		
