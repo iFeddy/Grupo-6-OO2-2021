@@ -26,8 +26,11 @@
 			</ul>
 			<!-- Guest -->
 			<ul class="navbar-nav mr-2" th:if="${user == null}">
-				<li class="nav-item mx-1"><a class="btn btn-dark nav-link text-light px-3"
-						th:href="@{/login}">Ingresar</a>
+				<li class="nav-item mx-1"><a class="btn btn-outline nav-link px-3"
+						th:href="@{/register}"><i class="fas fa-user-plus mx-2"></i>Nuevo Registro</a>
+				</li>
+				<li class="nav-item mx-1"><a class="btn btn-outline nav-link px-3"
+						th:href="@{/login}"><i class="fas fa-sign-in-alt mx-2"></i>Ingresar al Sistema</a>
 				</li>
 				<!-- 
                 	Links del NavBar Izquierda
@@ -35,16 +38,18 @@
 			</ul>
 			<!-- Auth -->
 			<ul class="navbar-nav mr-2" th:if="${user != null}">
-				<li class="nav-item mx-1"><a class="btn nav-link text-dark px-3"
-					th:href="@{/dashboard}"><i class="fas fa-user"></i>&nbsp;&nbsp;Bienvenido <strong th:text="${user.getFirstName() + ' ' + user.getLastName()}"></strong> 
-					(DNI <span th:text="${user.getDni()}"></span>)</a>
+				<li class="nav-item mx-1"><a class="btn nav-link text-dark px-3" th:href="@{/dashboard}"><i
+							class="fas fa-user"></i>&nbsp;&nbsp;Bienvenido <strong
+							th:text="${user.getFirstName() + ' ' + user.getLastName()}"></strong>
+						(DNI <span th:text="${user.getDni()}"></span>)</a>
 				</li>
 				<li class="nav-item mx-1"><a class="btn btn-dark nav-link text-light px-3"
-						th:href="@{/admin/dashboard}"><i class="fas fa-tachometer-alt mx-1"></i> Ir al Panel de Administración</a>
+						th:href="@{/admin/dashboard}"><i class="fas fa-tachometer-alt mx-1"></i> Ir al Panel de
+						Administración</a>
 				</li>
 				<li>
 					<form th:action="@{/logout}" method="post" class="mx-auto">
-						<button class="px-4 text-dark btn" style="background-color:transparent">
+						<button class="btn btn-outline nav-link px-3" style="background-color:transparent">
 							<i class="fas fa-sign-out-alt"></i>
 							<span>Cerrar Sesión</span></button>
 					</form>
