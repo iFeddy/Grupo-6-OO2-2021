@@ -25,9 +25,9 @@
 				<li class="nav-item active"></li>
 			</ul>
 			<!-- Guest -->
-			<ul class="navbar-nav mr-2" th:if="${user == null}">
-				<li class="nav-item mx-1"><a class="btn btn-dark nav-link text-light px-3"
-						th:href="@{/login}">Ingresar</a>
+			<ul class="navbar-nav mr-2" th:if="${user == null}">			
+				<li class="nav-item mx-1"><a class="btn btn-outline nav-link px-3" th:href="@{/login}"><i
+							class="fas fa-sign-in-alt mx-2"></i>Ingresar al Sistema</a>
 				</li>
 				<!-- 
                 	Links del NavBar Izquierda
@@ -35,16 +35,18 @@
 			</ul>
 			<!-- Auth -->
 			<ul class="navbar-nav mr-2" th:if="${user != null}">
-				<li class="nav-item mx-1"><a class="btn nav-link text-dark px-3"
-					th:href="@{/dashboard}"><i class="fas fa-user"></i>&nbsp;&nbsp;Bienvenido <strong th:text="${user.getFirstName() + ' ' + user.getLastName()}"></strong> 
-					(DNI <span th:text="${user.getDni()}"></span>)</a>
+				<li class="nav-item mx-1"><a class="btn nav-link text-dark px-3" th:href="@{/dashboard}"><i
+							class="fas fa-user"></i>&nbsp;&nbsp;Bienvenido <strong
+							th:text="${user.getFirstName() + ' ' + user.getLastName()}"></strong>
+						(DNI <span th:text="${user.getDni()}"></span>)</a>
 				</li>
 				<li class="nav-item mx-1"><a class="btn btn-dark nav-link text-light px-3"
-						th:href="@{/admin/dashboard}"><i class="fas fa-tachometer-alt mx-1"></i> Ir al Panel de Administración</a>
+						th:href="@{/admin/dashboard}"><i class="fas fa-tachometer-alt mx-1"></i> Ir al Panel de
+						Administración</a>
 				</li>
 				<li>
 					<form th:action="@{/logout}" method="post" class="mx-auto">
-						<button class="px-4 text-dark btn" style="background-color:transparent">
+						<button class="btn btn-outline nav-link px-3" style="background-color:transparent">
 							<i class="fas fa-sign-out-alt"></i>
 							<span>Cerrar Sesión</span></button>
 					</form>
@@ -55,8 +57,29 @@
 			</ul>
 		</div>
 	</nav>
+
 	<main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
-		<div class="container">
+		<div class="container mb-5">
+			<div class="mt-5 pt-5">
+				<div class="row mbr-justify-content-center">
+					<div class="col-lg-6 mbr-col-md-10">
+						<a class="text-dark text-decoration-none" href="/permisos/create">
+							<div class="wrap">
+							<div class="ico-wrap">
+								<span class="mbr-iconfont fa-route fas"></span>
+							</div>
+							<div class="text-wrap vcenter">
+								<h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">Solicitar un Permiso</h2>
+								<p class="mbr-fonts-style text1 mbr-text display-6">Solicitá un permiso para viajar, seleccionado 
+									fechas, destino y rodado
+								</p>
+							</div>
+						</div>
+					</a>
+					</div>					
+				</div>
+
+			</div>
 			<div class="card login-card">
 				<div class="row no-gutters">
 					<div class="col-md-5">
@@ -123,6 +146,7 @@
 			</div>
 		</div>
 	</main>
+
 	<script src="/assets/js/jquery.js"></script>
 	<script src="/assets/js/popper.js"></script>
 	<script src="/assets/js/bootstrap.js"></script>
