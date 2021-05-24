@@ -25,10 +25,7 @@
 				<li class="nav-item active"></li>
 			</ul>
 			<!-- Guest -->
-			<ul class="navbar-nav mr-2" th:if="${user == null}">
-				<li class="nav-item mx-1"><a class="btn btn-outline nav-link px-3" th:href="@{/register}"><i
-							class="fas fa-user-plus mx-2"></i>Nuevo Registro</a>
-				</li>
+			<ul class="navbar-nav mr-2" th:if="${user == null}">			
 				<li class="nav-item mx-1"><a class="btn btn-outline nav-link px-3" th:href="@{/login}"><i
 							class="fas fa-sign-in-alt mx-2"></i>Ingresar al Sistema</a>
 				</li>
