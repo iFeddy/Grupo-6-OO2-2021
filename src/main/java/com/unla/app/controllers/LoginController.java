@@ -29,7 +29,7 @@ public class LoginController {
 		ModelAndView view = new ModelAndView(RouteHelper.LOGIN);
 		Users user = (Users) session.getAttribute("USER");		
 		if (user != null) {
-			return new ModelAndView("redirect:admin/dashboard");
+			return new ModelAndView("redirect:/");
 		}
 		view.addObject("title", "Iniciar Sesión - " + ConfigHelper.appName);
 		return view;
