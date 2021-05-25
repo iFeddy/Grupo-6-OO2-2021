@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import com.sistema.springboot.app.util.paginator.PageRender;
+
 import com.unla.app.entities.Users;
 import com.unla.app.helpers.AdminSideBarHelper;
 import com.unla.app.helpers.AuthHelper;
@@ -29,6 +29,7 @@ import com.unla.app.helpers.ConfigHelper;
 import com.unla.app.helpers.RouteHelper;
 
 import com.unla.app.services.IUserService;
+import com.unla.app.util.PageRender;
 
 @Controller
 @CrossOrigin(origins = "*", maxAge = 3600L)
@@ -68,7 +69,7 @@ public class UsersController {
 	}
 
     //GET Crear Usuario Nuevo
-    @GetMapping({"/users/create", "create", "users.create"})
+    @GetMapping({"users/create", "create", "users.create"})
 	public ModelAndView create(Model model, HttpSession session) {
 		ModelAndView view = new ModelAndView(RouteHelper.DASHBOARD_NEW_USERS);
 		AdminSideBarHelper sideBar = new AdminSideBarHelper();
@@ -142,7 +143,7 @@ public class UsersController {
 		return authHelper.AuthMiddleware(view);
 	}
 
-    //POST Editar Usuario 
+    //POST Editar Usuario / Guardar edición
 	@PostMapping({"/users/{id}", "update", "users.update"})
 	public String update(@Valid Users user, @PathVariable(value = "id") Long id, BindingResult result, Model model, RedirectAttributes flash) {	
         if (result.hasErrors()) {            
@@ -159,7 +160,7 @@ public class UsersController {
 		}
 
 		usuarioService.save(user);		
-		flash.addFlashAttribute("success", "Cliente Editado con exito!");
+		flash.addFlashAttribute("success", "Usuario Editado con exito!");
 		return "redirect:/admin/users";
 	}
 
@@ -168,7 +169,7 @@ public class UsersController {
 	public String destroy(@PathVariable(value = "id") Long id, RedirectAttributes flash) {
 		if (id > 0) {
 			usuarioService.delete(id);
-			flash.addFlashAttribute("success", "Cliente eliminado con exito!");
+			flash.addFlashAttribute("success", "Usuario eliminado con exito!");
 		}
 		return "redirect:/admin/users";
 	}

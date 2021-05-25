@@ -1,4 +1,4 @@
-package com.sistema.springboot.app.util.paginator;
+package com.unla.app.util;
 
 public class PageItem {
 	private int numero;
