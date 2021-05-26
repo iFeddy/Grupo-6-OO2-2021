@@ -43,6 +43,20 @@ public class CustomErrorController implements ErrorController {
  
         return view;
     }
+
+    @RequestMapping("/403")
+    public ModelAndView handle403(HttpServletResponse response, HttpSession session)
+    {
+        ModelAndView view = new ModelAndView();
+        view.addObject("appName", ConfigHelper.appName);
+        Users user = (Users) session.getAttribute("USER");
+        view.addObject("user", user);
+
+        view.addObject("title", "Error 403 - " + ConfigHelper.appName);
+        view.setViewName(RouteHelper.ERROR_403);
+
+        return view;
+    }
  
     @Override
     public String getErrorPath() {

@@ -162,8 +162,18 @@ public class Users implements Serializable {
 				currentUserRoleName = usersRole.getName();
 			}
 		}
-
 		return currentUserRoleName;
+	}
+
+	public int getRoleAdminLevel(List<UsersRole> roles) {
+		int currentUserRoleLevel = 0;
+		Long currentUserRoleId = parseRoleId(this.getRoleId());		
+		for (UsersRole usersRole : roles) {
+			if(usersRole.getId() == currentUserRoleId){
+				currentUserRoleLevel = usersRole.getAdminLevel();
+			}
+		}
+		return currentUserRoleLevel;
 	}
 
 	private Long parseRoleId(String value) {
