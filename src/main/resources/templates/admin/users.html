@@ -77,9 +77,17 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="white-box">
-							<h4 class="card.title">
+						<div class="d-flex justify-content-between">
+								<h4 class="card.title">
 								<a class="btn btn-primary my-2" th:href="@{users/create}"><i class="fas fa-user-plus mx-1"></i> Nuevo Usuario</a>
-							</h4>
+								</h4>
+								<h4>
+								<a class="px-4 text-warning btn" th:href="@{/admin/users/(format=pdf)}" title =" Export PDF" target="_blanck">
+								<img class="img-responsive " th:src="@{/assets/images/pdf-negro.png}">
+								</a>
+								</h4>	
+						</div>
+											
 							<div class="table-responsive">
 								<div class="alert alert-success" th:if="${success!=null}" th:text="${success}"></div>
 								<div class="alert alert-danger" th:if="${error!=null}" th:text="${error}"></div>
