@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.document.AbstractPdfView;
 
@@ -24,9 +23,13 @@ import com.lowagie.text.pdf.PdfWriter;
 import com.unla.app.entities.Users;
 import com.unla.app.entities.UsersRole;
 import com.unla.app.services.IUserRoleService;
+import com.unla.app.services.IUserService;
 
 @Component("admin/users")
 public class ListarUsuariosPdf extends AbstractPdfView {
+
+	@Autowired
+	private IUserService usuarioService;
 
 	@Autowired
 	private IUserRoleService userRoleService;
@@ -34,9 +37,8 @@ public class ListarUsuariosPdf extends AbstractPdfView {
 	@Override
 	protected void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter writer,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		@SuppressWarnings("unchecked")
-		Page<Users> listadoUsuarios = (Page<Users>) model.get("users"); // Lista de Objeto Users
+
+		List<Users> listadoUsuarios = usuarioService.findAll(); // Lista de Objeto Users
 		
 		document.setPageSize(PageSize.LETTER.rotate()); // modificando Horizantolamente
 		document.setMargins(-20, -20, 40, 20);
