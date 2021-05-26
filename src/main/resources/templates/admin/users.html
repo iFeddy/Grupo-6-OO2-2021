@@ -115,7 +115,7 @@
 											<td th:text="${user.typeDni}"></td>
 											<td th:text="${user.dni}"></td>
 											<td th:text="${user.userName}"></td>
-											<td th:text="${user.roleId}"></td>
+											<td th:text="${user.getRoleName(roles)}"></td>
 											<td>
 												<a class="btn btn-primary" th:href="@{users/edit/} + ${user.id}">
 													<i class="fas fa-pencil-alt mx-1"></i> Editar

@@ -2,71 +2,73 @@ package com.unla.app.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "userName"))
 public class Users implements Serializable {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotEmpty
-	@Size(min=4 , max=30)
-	@Column(name="firstName")
+	@Size(min = 4, max = 30)
+	@Column(name = "firstName")
 	private String firstName;
-	
+
 	@NotEmpty
-	@Column(name="lastName")
+	@Column(name = "lastName")
 	private String lastName;
-	
+
 	@NotEmpty
 	@Email
-	@Column(name="email")
+	@Column(name = "email")
 	private String email;
-	
+
 	@NotEmpty
-	@Column(name="typeDni")
+	@Column(name = "typeDni")
 	private String typeDni;
-	
+
 	@NotEmpty
-	@Size(min=7 , max=8)
-	@Column(name="dni")
+	@Size(min = 7, max = 8)
+	@Column(name = "dni")
 	private String dni;
-	
+
 	@NotEmpty
-	@Column(name="userName")
+	@Column(name = "userName")
 	private String userName;
-	
+
 	@NotEmpty
-	@Column(name="password")
+	@Column(name = "password")
 	private String password;
-	
-	@Column(name="activo")
+
+	@Column(name = "activo")
 	private boolean activo;
-	
-	@Column(name="createdat")
+
+	@Column(name = "createdat")
 	@CreationTimestamp
 	private LocalDate createdat;
-	
-	@Column(name="updatedat")
+
+	@Column(name = "updatedat")
 	@UpdateTimestamp
 	private LocalDate updatedat;
-	
-	@Column(name="roleId")
+
+	@Column(name = "roleId")
 	private String roleId;
 
-	public Users() {}
+	public Users() {
+	}
 
-		
 	public Long getId() {
 		return id;
 	}
@@ -138,41 +140,46 @@ public class Users implements Serializable {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-	
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-	public void setRoleId(String role){
+	public void setRoleId(String role) {
 		this.roleId = role;
 	}
 
-	public String getRoleId(){
+	public String getRoleId() {
 		return roleId;
 	}
 
-	//get User Role
-	public UsersRole getUserRole(){
-		UsersRole usersRole = new UsersRole();
-		return usersRole;
+	public String getRoleName(List<UsersRole> roles) {
+		String currentUserRoleName = "No Configurado";
+		Long currentUserRoleId = parseRoleId(this.getRoleId());
+		System.out.println(currentUserRoleId);
+		for (UsersRole usersRole : roles) {
+			if(usersRole.getId() == currentUserRoleId){
+				currentUserRoleName = usersRole.getName();
+			}
+		}
+
+		return currentUserRoleName;
 	}
 
-	
+	private Long parseRoleId(String value) {
+		try {
+			return Long.parseLong(value);
+		} catch (NumberFormatException e) {
+			return 0L;
+		}
+	}
 
 	@Override
 	public String toString() {
-		return "{" +
-			" id='" + getId() + "'" +
-			", firstName='" + getFirstName() + "'" +
-			", lastName='" + getLastName() + "'" +
-			", email='" + getEmail() + "'" +
-			", typeDni='" + getTypeDni() + "'" +
-			", dni='" + getDni() + "'" +
-			", userName='" + getUserName() + "'" +
-			", password='" + getPassword() + "'" +
-			", activo='" + isActivo() + "'" +
-			", roleId='" + getRoleId() + "'" +
-			"}";
+		return "{" + " id='" + getId() + "'" + ", firstName='" + getFirstName() + "'" + ", lastName='" + getLastName()
+				+ "'" + ", email='" + getEmail() + "'" + ", typeDni='" + getTypeDni() + "'" + ", dni='" + getDni() + "'"
+				+ ", userName='" + getUserName() + "'" + ", password='" + getPassword() + "'" + ", activo='"
+				+ isActivo() + "'" + ", roleId='" + getRoleId() + "'" + "}";
 	}
 
 	private static final long serialVersionUID = 1L;

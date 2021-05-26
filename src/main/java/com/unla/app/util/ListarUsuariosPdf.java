@@ -1,11 +1,13 @@
 package com.unla.app.util;
 
 import java.awt.Color;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.document.AbstractPdfView;
@@ -20,10 +22,15 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import com.unla.app.entities.Users;
+import com.unla.app.entities.UsersRole;
+import com.unla.app.services.IUserRoleService;
 
 @Component("admin/users")
 public class ListarUsuariosPdf extends AbstractPdfView {
 
+	@Autowired
+	private IUserRoleService userRoleService;
+	
 	@Override
 	protected void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter writer,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -55,8 +62,8 @@ public class ListarUsuariosPdf extends AbstractPdfView {
 		
 		
 		/*Tabla Para Mostrar Listado de Clientes*/
-		PdfPTable tablaUsers = new PdfPTable(7);
-		tablaUsers.setWidths(new float[] {0.8f, 2f, 2.5f, 3.5f, 2f, 1.5f,1.5f});		
+		PdfPTable tablaUsers = new PdfPTable(8);
+		tablaUsers.setWidths(new float[] {0.8f, 2f, 2f, 3.5f, 2f, 1.5f,1.5f,1.7f});		
 		
 		celda = new PdfPCell(new Phrase("ID", fuenteTituloColumnas));
 		celda.setBackgroundColor(Color.lightGray);
@@ -106,9 +113,17 @@ public class ListarUsuariosPdf extends AbstractPdfView {
 		celda.setVerticalAlignment(Element.ALIGN_CENTER);
 		celda.setPadding(10);
 		tablaUsers.addCell(celda);
+
+		celda = new PdfPCell(new Phrase("ROL", fuenteTituloColumnas));
+		celda.setBackgroundColor(Color.lightGray);
+		celda.setHorizontalAlignment(Element.ALIGN_CENTER);
+		celda.setVerticalAlignment(Element.ALIGN_CENTER);
+		celda.setPadding(10);
+		tablaUsers.addCell(celda);
 		
 		/*Bucle For, mostrar todos los datos de los clientes*/		
-		
+		List<UsersRole> roles = userRoleService.findAll();		
+
 		for (Users user : listadoUsuarios) {
 			celda = new PdfPCell(new Phrase(user.getId().toString(), fuenteDataCeldas));
 			celda.setPadding(5);
@@ -135,6 +150,11 @@ public class ListarUsuariosPdf extends AbstractPdfView {
 			tablaUsers.addCell(celda);
 			
 			celda = new PdfPCell(new Phrase(user.getUserName(), fuenteDataCeldas));
+			celda.setPadding(5);
+			tablaUsers.addCell(celda);
+
+
+			celda = new PdfPCell(new Phrase(user.getRoleName(roles), fuenteDataCeldas));
 			celda.setPadding(5);
 			tablaUsers.addCell(celda);
 			

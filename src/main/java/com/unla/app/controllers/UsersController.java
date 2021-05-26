@@ -1,5 +1,6 @@
 package com.unla.app.controllers;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -23,11 +24,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.unla.app.entities.Users;
+import com.unla.app.entities.UsersRole;
 import com.unla.app.helpers.AdminSideBarHelper;
 import com.unla.app.helpers.AuthHelper;
 import com.unla.app.helpers.ConfigHelper;
 import com.unla.app.helpers.RouteHelper;
-
+import com.unla.app.services.IUserRoleService;
 import com.unla.app.services.IUserService;
 import com.unla.app.util.PageRender;
 
@@ -38,6 +40,9 @@ public class UsersController {
 
 	@Autowired
 	private IUserService usuarioService;
+
+	@Autowired
+	private IUserRoleService userRoleService;
 
     //GET Listado de Usuarios
 	@GetMapping({ "/users", "index", "users.index" })
@@ -61,7 +66,11 @@ public class UsersController {
 		Pageable pageRequest = PageRequest.of(page, ConfigHelper.listResultadosMax); // cantidad de registros por pagina.
 		Page<Users> users = usuarioService.findAll(pageRequest);
 		PageRender<Users> pageRender = new PageRender<>("users", users);
+
 		model.addAttribute("users", users);
+		List<UsersRole> roles = userRoleService.findAll();		
+		model.addAttribute("roles", roles);
+		
 		model.addAttribute("page", pageRender);
 
 		AuthHelper authHelper = new AuthHelper(session);
@@ -88,6 +97,10 @@ public class UsersController {
 
 		Users user = new Users();
 		model.addAttribute("user", user);
+		//Listado de Roles Disponibles
+
+		List<UsersRole> roles = userRoleService.findAll();		
+		model.addAttribute("roles", roles);
 
 		AuthHelper authHelper = new AuthHelper(session);
 		return authHelper.AuthMiddleware(view);
@@ -136,7 +149,13 @@ public class UsersController {
 		view.addObject("sideBarLink", 2); // ID del link para que quede en azul (activo) en el menu izquierdo
 		view.addObject("sideBar", sideBar.lst_adminSideBar);
 
+		//Listado de Roles Disponibles
+
+		List<UsersRole> roles = userRoleService.findAll();		
+		view.addObject("roles", roles);
+
 		model.put("user", user);
+		
 		model.put("titulo", "Editar Usuario");
 		
 		AuthHelper authHelper = new AuthHelper(session);
