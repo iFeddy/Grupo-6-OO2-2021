@@ -136,7 +136,7 @@ public class RolesController {
 		return authHelper.AuthMiddleware(view);
 	}
     //POST Editar Role / Guardar Edición 
-   	@PostMapping({"/admin/roles/{id}", "update", "role.update"})
+   	@PostMapping({"/admin/roles/{id}", "update", "roles.update"})
    	public String update(@Valid UsersRole user, @PathVariable(value = "id") Long id, BindingResult result, Model model, RedirectAttributes flash) {	
            if (result.hasErrors()) {            
                flash.addFlashAttribute("error", result.getAllErrors());
@@ -156,7 +156,7 @@ public class RolesController {
    		return "redirect:/admin/roles";
    	}
     //DELETE Eliminar Role
-    @DeleteMapping({"/admin/users/{id}", "destroy", "users.destroy"})
+    @DeleteMapping({"/admin/roles/{id}", "destroy", "roles.destroy"})
 	public String destroy(@PathVariable(value = "id") Long id, RedirectAttributes flash) {
 		if (id > 0) { 
 			roleService.delete(id);
