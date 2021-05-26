@@ -95,22 +95,14 @@
 								<table class="table table-hover">
 									<thead>
 										<tr>
-											<th class="border-top-0">Nombre</th>
-											<th class="border-top-0"></th>
-											<th class="border-top-0"></th>
-											<th class="border-top-0"></th>
-											<th class="border-top-0"></th>
+											<th class="border-top-0">Nombre</th>										
 											<th class="border-top-0">Editar</th>
 											<th class="border-top-0">Eliminar</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr th:each="usersrole: ${usersRole}">
-											<td th:text="${usersrole.name}"></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
+											<td style="width: 80%" th:text="${usersrole.name}"></td>
 											<td>
 												<a class="btn btn-primary" th:href="@{roles/edit/} + ${usersrole.id}">
 													<i class="fas fa-pencil-alt mx-1"></i> Editar

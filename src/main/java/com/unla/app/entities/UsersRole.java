@@ -26,6 +26,9 @@ public class UsersRole implements Serializable {
 	@Column(name="name")
 	private String name;
 
+    @Column(columnDefinition = "integer default 0")
+    private Integer adminLevel;
+
     public UsersRole() {
     }
 
@@ -44,5 +47,15 @@ public class UsersRole implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+
+    public Integer getAdminLevel() {
+        return this.adminLevel;
+    }
+
+    public void setAdminLevel(Integer adminLevel) {
+        this.adminLevel = adminLevel;
+    }
+
 		
 }

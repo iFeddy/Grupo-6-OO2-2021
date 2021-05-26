@@ -156,7 +156,7 @@ public class Users implements Serializable {
 	public String getRoleName(List<UsersRole> roles) {
 		String currentUserRoleName = "No Configurado";
 		Long currentUserRoleId = parseRoleId(this.getRoleId());
-		System.out.println(currentUserRoleId);
+		
 		for (UsersRole usersRole : roles) {
 			if(usersRole.getId() == currentUserRoleId){
 				currentUserRoleName = usersRole.getName();
