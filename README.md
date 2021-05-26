@@ -25,8 +25,19 @@ Usuario: oo2tpc
 Contraseña: oo2tpc
 ```
 
-#
+La carga de datos iniciales esta en modo automatico en el archivo [src/main/resources/data.sql](src/main/resources/data.sql)
 
+## Usuarios Predeterminados Para el Administrador
+#
+### Usuario (Acceso Restringido)
+usuario@usuario.com : 1234
+#
+### Auditor (Acceso Intermedio)
+auditor@auditor.com : 1234
+#
+### Administrador (Acceso Total)
+admin@admin.com : 1234
+#
 ## Sessiones
 Para ver las Sessiones en los metodos donde se necesite, hay que agregarle (HttpSession session) y el metodo para traer la info de la sesion es session.getAttribute("KEY");
 
@@ -37,13 +48,14 @@ Key: [USER] - Clase User
 
 ## Helpers
 
-### AuthHelper
-Este es un middleware para determinar si el usuario puede o no puede ingresar al sistema segun el area, aca se pondria tambien los roles del usuario. Por el momento si Inicio Sesion, lo deja pasar al admin/*.
+### MiddlewareHelper
+Este es un middleware para determinar si el usuario puede o no puede ingresar al sistema segun el area, aca se pondria tambien los roles del usuario. Se puede "En-nestar" para RoleMiddleware es necesario el listado de roles. Para el Auth no es necesario nada.
 En el ultimo return de los ModelAndView de Mapeo GET reemplazar el return view; por este codigo:
 
 ```
-AuthHelper authHelper = new AuthHelper(session);
-return authHelper.AuthMiddleware(view);
+List<UsersRole> roles = userRoleService.findAll();
+MiddlewareHelper mHelper = new MiddlewareHelper(session);
+return mHelper.AuthMiddleware(mHelper.RoleMiddleware(view, 50, roles));
 ```
 #
 ### ConfigHelper
@@ -92,16 +104,18 @@ Si llegamos a necesitar Tablas podemos usar DataTables.js que funciona con jQuer
 
 ## Primera Entrega
 
-Faltan los perfiles (Roles) hay que hacer la relacion y tabla en db
-Falta hacer el diagrama de clases (DIA)
-1 usuario 1 perfil
-
 Roles
-1 Usuario
-2 Admin (Puede Verificar todo)
-3 Auditoria (Puede descargar datos en PDF????)
+1 Usuario (Listo)
+2 Admin (Listo)
+3 Auditoria (Listo)
 
-ABM Usuarios
+ABM Usuarios (Listo)
+ABM Roles (Listo)
+
+Descarga de PDF para Auditor (Listo)
+
+Queda pendiente Ocultar Iconos según el Rol
+Encriptar Password
 
 ## Segunda Entrega
 (Front) Pagina de Registro de usuario
@@ -113,4 +127,4 @@ ABM Usuarios
 (Admin) Traer permisos Activos entre Fecha y Fecha que salgan / lleguen a un lugar determinado
 
 ## Tercera Entrega
-Código QR para que muestre la info del permiso
+Código QR para que muestre la info del permiso (Listo)
