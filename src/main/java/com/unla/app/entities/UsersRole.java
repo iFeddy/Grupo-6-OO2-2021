@@ -1,7 +1,9 @@
 package com.unla.app.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
+import javax.persistence.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,8 +13,11 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 @Entity
-@Table(name="roles")
+@Table(name="roles", uniqueConstraints=@UniqueConstraint(columnNames={"name","users_id"}))
 public class UsersRole implements Serializable {
 
 	private static final long serialVersionUID = -7043414479526661974L;
@@ -21,41 +26,81 @@ public class UsersRole implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@ManyToOne (fetch=FetchType.LAZY)
+	@JoinColumn(name="users_id", nullable=false)
+	private Users users;
+	
 	@NotEmpty
 	@Size(min=4 , max=30)
-	@Column(name="name")
+	@Column(name="name", nullable=false,length=60)
 	private String name;
 
-    @Column(columnDefinition = "integer default 0")
-    private Integer adminLevel;
+	@Column(name = "createdat")
+	@CreationTimestamp
+	private LocalDate createdat;
 
+	@Column(name = "updatedat")
+	@UpdateTimestamp
+	private LocalDate updatedat;
+	
+	
     public UsersRole() {
     }
 
-    public Long getId() {
-        return this.id;
-    }
+	public UsersRole(Long id, Users users,String name, LocalDate createdat,
+			LocalDate updatedat) {
+		this.id = id;
+		this.users = users;
+		this.name = name;
+		this.createdat = createdat;
+		this.updatedat = updatedat;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getName() {
-        return this.name;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public Users getUsers() {
+		return users;
+	}
 
+	public void setUsers(Users users) {
+		this.users = users;
+	}
 
-    public Integer getAdminLevel() {
-        return this.adminLevel;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setAdminLevel(Integer adminLevel) {
-        this.adminLevel = adminLevel;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public LocalDate getCreatedat() {
+		return createdat;
+	}
+
+	public void setCreatedat(LocalDate createdat) {
+		this.createdat = createdat;
+	}
+
+	public LocalDate getUpdatedat() {
+		return updatedat;
+	}
+
+	public void setUpdatedat(LocalDate updatedat) {
+		this.updatedat = updatedat;
+	}
+
+	@Override
+	public String toString() {
+		return "UsersRole [id=" + id + ", users=" + users + ", name=" + name + ", createdat=" + createdat
+				+ ", updatedat=" + updatedat + "]";
+	}
 
 		
 }

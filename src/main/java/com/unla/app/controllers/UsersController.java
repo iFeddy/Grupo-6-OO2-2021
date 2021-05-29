@@ -26,7 +26,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.unla.app.entities.Users;
 import com.unla.app.entities.UsersRole;
 import com.unla.app.helpers.AdminSideBarHelper;
-import com.unla.app.helpers.MiddlewareHelper;
 import com.unla.app.helpers.ConfigHelper;
 import com.unla.app.helpers.RouteHelper;
 import com.unla.app.services.IUserRoleService;
@@ -46,18 +45,13 @@ public class UsersController {
 
 	// GET Listado de Usuarios
 	@GetMapping({ "/users", "index", "users.index" })
-	public ModelAndView index(@RequestParam(name = "page", defaultValue = "0") int page, Model model,
-			HttpSession session) {
+	public ModelAndView index(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
 		ModelAndView view = new ModelAndView(RouteHelper.DASHBOARD_USERS);
 		AdminSideBarHelper sideBar = new AdminSideBarHelper();
 
 		String pageName = "Usuarios";
 		view.addObject("title", pageName + " - " + ConfigHelper.appName);
 		view.addObject("pageName", pageName);
-		Users user = (Users) session.getAttribute("USER");
-		if (user != null) {
-			view.addObject("userName", user.getFirstName() + " " + user.getLastName());
-		}
 		view.addObject("appName", ConfigHelper.appName);
 
 		view.addObject("sideBarLink", 2); // ID del link para que quede en azul (activo) en el menu izquierdo
@@ -74,24 +68,18 @@ public class UsersController {
 		model.addAttribute("roles", roles);
 
 		model.addAttribute("page", pageRender);
-
-		MiddlewareHelper mHelper = new MiddlewareHelper(session);
-		return mHelper.AuthMiddleware(mHelper.RoleMiddleware(view, 25, roles));
+		return view;
 	}
 
 	// GET Crear Usuario Nuevo
 	@GetMapping({ "users/create", "create", "users.create" })
-	public ModelAndView create(Model model, HttpSession session) {
+	public ModelAndView create(Model model) {
 		ModelAndView view = new ModelAndView(RouteHelper.DASHBOARD_NEW_USERS);
 		AdminSideBarHelper sideBar = new AdminSideBarHelper();
 
 		String pageName = "Nuevo Usuario";
 		view.addObject("title", pageName + " - " + ConfigHelper.appName);
 		view.addObject("pageName", pageName);
-		Users loggedUser = (Users) session.getAttribute("USER");
-		if (loggedUser != null) {
-			view.addObject("userName", loggedUser.getFirstName() + " " + loggedUser.getLastName());
-		}
 		view.addObject("appName", ConfigHelper.appName);
 
 		view.addObject("sideBarLink", 2); // ID del link para que quede en azul (activo) en el menu izquierdo
@@ -99,13 +87,7 @@ public class UsersController {
 
 		Users user = new Users();
 		model.addAttribute("user", user);
-		// Listado de Roles Disponibles
-
-		List<UsersRole> roles = userRoleService.findAll();
-		model.addAttribute("roles", roles);
-
-		MiddlewareHelper mHelper = new MiddlewareHelper(session);
-		return mHelper.AuthMiddleware(mHelper.RoleMiddleware(view, 50, roles));
+		return view;
 	}
 
 	// POST Guardar Usuario Nuevo
@@ -125,8 +107,7 @@ public class UsersController {
 
 	// GET Editar Usuario
 	@GetMapping({ "/users/edit/{id}", "edit", "users.edit" })
-	public ModelAndView edit(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash,
-			HttpSession session) {
+	public ModelAndView edit(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) {
 		Users user = null;
 		ModelAndView view = new ModelAndView(RouteHelper.DASHBOARD_EDIT_USERS);
 		AdminSideBarHelper sideBar = new AdminSideBarHelper();
@@ -143,10 +124,6 @@ public class UsersController {
 		String pageName = "Editar Usuario - #" + user.getId() + " " + user.getFirstName() + " " + user.getLastName();
 		view.addObject("title", pageName + " - " + ConfigHelper.appName);
 		view.addObject("pageName", pageName);
-		Users loggedUser = (Users) session.getAttribute("USER");
-		if (loggedUser != null) {
-			view.addObject("userName", loggedUser.getFirstName() + " " + loggedUser.getLastName());
-		}
 		view.addObject("appName", ConfigHelper.appName);
 		view.addObject("sideBarLink", 2); // ID del link para que quede en azul (activo) en el menu izquierdo
 		view.addObject("sideBar", sideBar.lst_adminSideBar);
@@ -159,9 +136,8 @@ public class UsersController {
 		model.put("user", user);
 
 		model.put("titulo", "Editar Usuario");
+		return view;
 
-		MiddlewareHelper mHelper = new MiddlewareHelper(session);
-		return mHelper.AuthMiddleware(mHelper.RoleMiddleware(view, 50, roles));
 	}
 
 	// POST Editar Usuario / Guardar edición

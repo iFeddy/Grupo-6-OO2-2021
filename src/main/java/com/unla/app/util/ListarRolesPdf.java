@@ -35,14 +35,14 @@ public class ListarRolesPdf extends AbstractPdfView {
 
 		List<UsersRole> listadoRoles = userRoleService.findAll(); // Lista de Objeto Users
 
-		document.setPageSize(PageSize.LETTER.rotate()); // modificando Horizantolamente
+		document.setPageSize(PageSize.LETTER.rotate()); // modificando la Pagina Horizantolamente
 		document.setMargins(-20, -20, 40, 20);
 		document.open();
 
-		PdfPTable tablaTitulo = new PdfPTable(1); // tabla para el titulo
+		PdfPTable tablaTitulo = new PdfPTable(1); // tabla para el titulo del PDF.
 		PdfPCell celda = null;
 
-		// Fuentes Celdas
+		// Fuentes de las Celdas
 		Font fuentetitulo = FontFactory.getFont("Helvetica", 16, Color.blue);
 		Font fuenteTituloColumnas = FontFactory.getFont("Helvetica", 10, Color.black);
 		Font fuenteDataCeldas = FontFactory.getFont("Helvetica", 10, Color.black);

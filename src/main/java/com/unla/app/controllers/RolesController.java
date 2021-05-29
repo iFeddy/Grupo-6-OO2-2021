@@ -1,6 +1,5 @@
 package com.unla.app.controllers;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -9,7 +8,6 @@ import javax.validation.Valid;
 import com.unla.app.entities.Users;
 import com.unla.app.entities.UsersRole;
 import com.unla.app.helpers.AdminSideBarHelper;
-import com.unla.app.helpers.MiddlewareHelper;
 import com.unla.app.helpers.ConfigHelper;
 import com.unla.app.helpers.RouteHelper;
 import com.unla.app.services.IUserRoleService;
@@ -39,18 +37,13 @@ public class RolesController {
 
 	// GET listado de Roles
 	@GetMapping({ "/admin/roles", "roles", "roles" })
-	public ModelAndView roles(@RequestParam(name = "page", defaultValue = "0") int page, Model model,
-			HttpSession session) {
+	public ModelAndView roles(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
 		ModelAndView view = new ModelAndView(RouteHelper.DASHBOARD_ROLES);
 		AdminSideBarHelper sideBar = new AdminSideBarHelper();
 
 		String pageName = "Roles";
 		view.addObject("title", pageName + " - " + ConfigHelper.appName);
 		view.addObject("pageName", pageName);
-		Users user = (Users) session.getAttribute("USER");
-		if (user != null) {
-			view.addObject("userName", user.getFirstName() + " " + user.getLastName());
-		}
 		view.addObject("appName", ConfigHelper.appName);
 
 		view.addObject("sideBarLink", 3); // ID del link para que quede en azul (activo) en el menu izquierdo
@@ -63,10 +56,8 @@ public class RolesController {
 		PageRender<UsersRole> pageRender = new PageRender<>("usersRole", usersRole);
 		model.addAttribute("usersRole", usersRole);
 		model.addAttribute("page", pageRender);
+		return view;
 
-		List<UsersRole> roles = userRoleService.findAll();
-		MiddlewareHelper mHelper = new MiddlewareHelper(session);
-		return mHelper.AuthMiddleware(mHelper.RoleMiddleware(view, 25, roles));
 	}
 
 	// GET Crear Role Nuevo
@@ -89,10 +80,8 @@ public class RolesController {
 
 		UsersRole userRole = new UsersRole();
 		model.addAttribute("role", userRole);
+		return view;
 
-		List<UsersRole> roles = userRoleService.findAll();
-		MiddlewareHelper mHelper = new MiddlewareHelper(session);
-		return mHelper.AuthMiddleware(mHelper.RoleMiddleware(view, 50, roles));
 	}
 
 	// POST Guardar Role Nuevo
@@ -111,8 +100,7 @@ public class RolesController {
 
 	// GET Editar Role
 	@GetMapping({ "/admin/roles/edit/{id}", "edit", "roles.edit" })
-	public ModelAndView edit(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash,
-			HttpSession session) {
+	public ModelAndView edit(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) {
 		UsersRole role = null;
 		ModelAndView view = new ModelAndView(RouteHelper.DASHBOARD_EDIT_ROLES);
 		AdminSideBarHelper sideBar = new AdminSideBarHelper();
@@ -129,20 +117,13 @@ public class RolesController {
 		String pageName = "Editar Rol - #" + role.getName();
 		view.addObject("title", pageName + " - " + ConfigHelper.appName);
 		view.addObject("pageName", pageName);
-		Users loggedUser = (Users) session.getAttribute("USER");
-		if (loggedUser != null) {
-			view.addObject("userName", loggedUser.getFirstName() + " " + loggedUser.getLastName());
-		}
 		view.addObject("appName", ConfigHelper.appName);
 		view.addObject("sideBarLink", 2); // ID del link para que quede en azul (activo) en el menu izquierdo
 		view.addObject("sideBar", sideBar.lst_adminSideBar);
 
 		model.put("role", role);
 		model.put("titulo", "Editar Rol");
-
-		List<UsersRole> roles = userRoleService.findAll();
-		MiddlewareHelper mHelper = new MiddlewareHelper(session);
-		return mHelper.AuthMiddleware(mHelper.RoleMiddleware(view, 50, roles));
+		return view;
 	}
 
 	// POST Editar Role / Guardar Edición

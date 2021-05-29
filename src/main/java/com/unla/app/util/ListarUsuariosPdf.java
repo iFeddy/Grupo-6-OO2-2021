@@ -21,8 +21,6 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import com.unla.app.entities.Users;
-import com.unla.app.entities.UsersRole;
-import com.unla.app.services.IUserRoleService;
 import com.unla.app.services.IUserService;
 
 @Component("admin/users")
@@ -31,8 +29,8 @@ public class ListarUsuariosPdf extends AbstractPdfView {
 	@Autowired
 	private IUserService usuarioService;
 
-	@Autowired
-	private IUserRoleService userRoleService;
+	/*@Autowired
+	private IUserRoleService userRoleService;*/
 	
 	@Override
 	protected void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter writer,
@@ -40,14 +38,14 @@ public class ListarUsuariosPdf extends AbstractPdfView {
 
 		List<Users> listadoUsuarios = usuarioService.findAll(); // Lista de Objeto Users
 		
-		document.setPageSize(PageSize.LETTER.rotate()); // modificando Horizantolamente
+		document.setPageSize(PageSize.LETTER.rotate()); // modificando la pagina Horizantolamente
 		document.setMargins(-20, -20, 40, 20);
 		document.open();
 		
-		PdfPTable tablaTitulo = new PdfPTable(1); // tabla para el titulo
+		PdfPTable tablaTitulo = new PdfPTable(1); // tabla para el titulo del documento PDf
 		PdfPCell celda =null;
 		
-		//Fuentes Celdas
+		//Fuentes de las Celdas
 		Font fuentetitulo = FontFactory.getFont("Helvetica",16,Color.blue);
 		Font fuenteTituloColumnas = FontFactory.getFont("Helvetica",10,Color.black);
 		Font fuenteDataCeldas = FontFactory.getFont("Helvetica",10,Color.black);
@@ -124,7 +122,7 @@ public class ListarUsuariosPdf extends AbstractPdfView {
 		tablaUsers.addCell(celda);
 		
 		/*Bucle For, mostrar todos los datos de los clientes*/		
-		List<UsersRole> roles = userRoleService.findAll();		
+		//List<UsersRole> roles = userRoleService.findAll();		
 
 		for (Users user : listadoUsuarios) {
 			celda = new PdfPCell(new Phrase(user.getId().toString(), fuenteDataCeldas));
@@ -156,9 +154,9 @@ public class ListarUsuariosPdf extends AbstractPdfView {
 			tablaUsers.addCell(celda);
 
 
-			celda = new PdfPCell(new Phrase(user.getRoleName(roles), fuenteDataCeldas));
+			/*celda = new PdfPCell(new Phrase(user.getEmail(), fuenteDataCeldas));
 			celda.setPadding(5);
-			tablaUsers.addCell(celda);
+			tablaUsers.addCell(celda);*/
 			
 		}
 		

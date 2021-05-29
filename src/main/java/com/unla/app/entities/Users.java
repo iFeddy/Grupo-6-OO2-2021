@@ -2,7 +2,8 @@ package com.unla.app.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -14,7 +15,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "userName"))
+@Table(name = "users")
 public class Users implements Serializable {
 
 	@Id
@@ -45,11 +46,11 @@ public class Users implements Serializable {
 	private String dni;
 
 	@NotEmpty
-	@Column(name = "userName")
+	@Column(name = "userName" , unique=true, nullable=false , length=45)
 	private String userName;
 
 	@NotEmpty
-	@Column(name = "password")
+	@Column(name = "password", nullable=false , length=50 )
 	private String password;
 
 	@Column(name = "activo")
@@ -63,10 +64,27 @@ public class Users implements Serializable {
 	@UpdateTimestamp
 	private LocalDate updatedat;
 
-	@Column(name = "roleId")
-	private String roleId;
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="users")
+	private Set<UsersRole> usersRole = new HashSet<UsersRole>();
 
 	public Users() {
+	}
+	
+	public Users(Long id,String firstName, String lastName,String email,String typeDni, String dni,
+			String userName,String password, boolean activo, LocalDate createdat,
+			LocalDate updatedat, Set<UsersRole> usersRole) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.typeDni = typeDni;
+		this.dni = dni;
+		this.userName = userName;
+		this.password = password;
+		this.activo = activo;
+		this.createdat = createdat;
+		this.updatedat = updatedat;
+		this.usersRole = usersRole;
 	}
 
 	public Long getId() {
@@ -141,47 +159,28 @@ public class Users implements Serializable {
 		this.activo = activo;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public LocalDate getCreatedat() {
+		return createdat;
 	}
 
-	public void setRoleId(String role) {
-		this.roleId = role;
+	public void setCreatedat(LocalDate createdat) {
+		this.createdat = createdat;
 	}
 
-	public String getRoleId() {
-		return roleId;
+	public LocalDate getUpdatedat() {
+		return updatedat;
 	}
 
-	public String getRoleName(List<UsersRole> roles) {
-		String currentUserRoleName = "No Configurado";
-		Long currentUserRoleId = parseRoleId(this.getRoleId());
-		
-		for (UsersRole usersRole : roles) {
-			if(usersRole.getId() == currentUserRoleId){
-				currentUserRoleName = usersRole.getName();
-			}
-		}
-		return currentUserRoleName;
+	public void setUpdatedat(LocalDate updatedat) {
+		this.updatedat = updatedat;
 	}
 
-	public int getRoleAdminLevel(List<UsersRole> roles) {
-		int currentUserRoleLevel = 0;
-		Long currentUserRoleId = parseRoleId(this.getRoleId());		
-		for (UsersRole usersRole : roles) {
-			if(usersRole.getId() == currentUserRoleId){
-				currentUserRoleLevel = usersRole.getAdminLevel();
-			}
-		}
-		return currentUserRoleLevel;
+	public Set<UsersRole> getUsersRole() {
+		return usersRole;
 	}
 
-	private Long parseRoleId(String value) {
-		try {
-			return Long.parseLong(value);
-		} catch (NumberFormatException e) {
-			return 0L;
-		}
+	public void setUsersRole(Set<UsersRole> usersRole) {
+		this.usersRole = usersRole;
 	}
 
 	@Override
@@ -189,7 +188,7 @@ public class Users implements Serializable {
 		return "{" + " id='" + getId() + "'" + ", firstName='" + getFirstName() + "'" + ", lastName='" + getLastName()
 				+ "'" + ", email='" + getEmail() + "'" + ", typeDni='" + getTypeDni() + "'" + ", dni='" + getDni() + "'"
 				+ ", userName='" + getUserName() + "'" + ", password='" + getPassword() + "'" + ", activo='"
-				+ isActivo() + "'" + ", roleId='" + getRoleId() + "'" + "}";
+				+ isActivo() + "'" +  getUsersRole() + "'" +"}";
 	}
 
 	private static final long serialVersionUID = 1L;
