@@ -64,8 +64,14 @@ public class Users implements Serializable {
 	@UpdateTimestamp
 	private LocalDate updatedat;
 
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="users")
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name="user_roles"
+		,joinColumns=@JoinColumn(name="users_id")
+		,inverseJoinColumns=@JoinColumn(name="usersrole_id"))
 	private Set<UsersRole> usersRole = new HashSet<UsersRole>();
+	
+	/*@OneToMany(fetch=FetchType.LAZY, mappedBy="users")
+	private Set<UsersRole> usersRole = new HashSet<UsersRole>();*/
 
 	public Users() {
 	}

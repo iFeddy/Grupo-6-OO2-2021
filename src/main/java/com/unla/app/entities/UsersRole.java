@@ -3,7 +3,6 @@ package com.unla.app.entities;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import javax.persistence.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +16,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name="roles", uniqueConstraints=@UniqueConstraint(columnNames={"name","users_id"}))
+@Table(name="roles")
 public class UsersRole implements Serializable {
 
 	private static final long serialVersionUID = -7043414479526661974L;
@@ -26,14 +25,13 @@ public class UsersRole implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne (fetch=FetchType.LAZY)
-	@JoinColumn(name="users_id", nullable=false)
-	private Users users;
-	
 	@NotEmpty
 	@Size(min=4 , max=30)
 	@Column(name="name", nullable=false,length=60)
 	private String name;
+	
+	@Column
+	private String description;
 
 	@Column(name = "createdat")
 	@CreationTimestamp
@@ -47,11 +45,11 @@ public class UsersRole implements Serializable {
     public UsersRole() {
     }
 
-	public UsersRole(Long id, Users users,String name, LocalDate createdat,
+	public UsersRole(Long id,String name, String description, LocalDate createdat,
 			LocalDate updatedat) {
 		this.id = id;
-		this.users = users;
 		this.name = name;
+		this.description = description;
 		this.createdat = createdat;
 		this.updatedat = updatedat;
 	}
@@ -64,20 +62,20 @@ public class UsersRole implements Serializable {
 		this.id = id;
 	}
 
-	public Users getUsers() {
-		return users;
-	}
-
-	public void setUsers(Users users) {
-		this.users = users;
-	}
-
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public LocalDate getCreatedat() {
@@ -98,7 +96,7 @@ public class UsersRole implements Serializable {
 
 	@Override
 	public String toString() {
-		return "UsersRole [id=" + id + ", users=" + users + ", name=" + name + ", createdat=" + createdat
+		return "UsersRole [id=" + id + ", name=" + name + ", description=" + description + ", createdat=" + createdat
 				+ ", updatedat=" + updatedat + "]";
 	}
 
