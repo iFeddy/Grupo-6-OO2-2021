@@ -75,7 +75,7 @@ public class RolesController {
 		}
 		view.addObject("appName", ConfigHelper.appName);
 
-		view.addObject("sideBarLink", 2); // ID del link para que quede en azul (activo) en el menu izquierdo
+		view.addObject("sideBarLink", 3); // ID del link para que quede en azul (activo) en el menu izquierdo
 		view.addObject("sideBar", sideBar.lst_adminSideBar);
 
 		UsersRole userRole = new UsersRole();

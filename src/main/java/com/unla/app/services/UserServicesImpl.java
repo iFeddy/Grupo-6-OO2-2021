@@ -47,14 +47,15 @@ public class UserServicesImpl implements IUserService {
 
 	@Override
 	@Transactional
-	public void save(Users user) {
-		iuserRepository.save(user);
-	}
-
-	@Override
-	@Transactional
 	public void delete(Long id) {
 		iuserRepository.deleteById(id);
 	}
+
+	@Override
+	public void save(Users user) {
+		iuserRepository.save(user);
+		
+	}
+
 
 }

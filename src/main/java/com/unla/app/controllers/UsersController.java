@@ -2,8 +2,6 @@ package com.unla.app.controllers;
 
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +62,7 @@ public class UsersController {
 		PageRender<Users> pageRender = new PageRender<>("users", users);
 
 		model.addAttribute("users", users);
+		
 		List<UsersRole> roles = userRoleService.findAll();
 		model.addAttribute("roles", roles);
 
@@ -87,21 +86,25 @@ public class UsersController {
 
 		Users user = new Users();
 		model.addAttribute("user", user);
+		
+		List<UsersRole> roles = userRoleService.findAll();
+		model.addAttribute("roles", roles);
+		
 		return view;
 	}
 
 	// POST Guardar Usuario Nuevo
 	@PostMapping({ "/users", "store", "users.store" })
-	public String store(@Valid Users user, BindingResult result, Model model, RedirectAttributes flash) {
+	public String store(@Valid Users user, BindingResult result, Model model, RedirectAttributes flash) throws Exception {
 		if (result.hasErrors()) {
 			flash.addFlashAttribute("error", result.getAllErrors());
 			return "redirect:/admin/users/create";
 		}
 		user.setActivo(true);
+			usuarioService.save(user);
 
-		usuarioService.save(user);
 
-		flash.addFlashAttribute("success", "Cliente creado con exito!");
+		flash.addFlashAttribute("success", "Usuario creado con exito!");
 		return "redirect:/admin/users";
 	}
 
@@ -143,7 +146,7 @@ public class UsersController {
 	// POST Editar Usuario / Guardar edición
 	@PostMapping({ "/users/{id}", "update", "users.update" })
 	public String update(@Valid Users user, @PathVariable(value = "id") Long id, BindingResult result, Model model,
-			RedirectAttributes flash, HttpSession session) {
+			RedirectAttributes flash) throws Exception {
 
 		if (result.hasErrors()) {
 			flash.addFlashAttribute("error", result.getAllErrors());
@@ -157,14 +160,7 @@ public class UsersController {
 				return "redirect:/admin/users";
 			}
 		}
-
 		usuarioService.save(user);
-
-		// si es el mismo usuario que hace los cambios actualizamos la sesion
-		Users sessionUser = (Users) session.getAttribute("USER");
-		if (sessionUser.getId().equals(id)) {
-			session.setAttribute("USER", user);
-		}
 
 		flash.addFlashAttribute("success", "Usuario Editado con exito!");
 		return "redirect:/admin/users";

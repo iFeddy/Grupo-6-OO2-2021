@@ -157,13 +157,9 @@
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label">Rol de Usuario</label>
 									<div class="col-sm-6">
-										<select class="form-select" aria-label="Default select example" th:field="*{roleId}"
-											th:errorclass="'form-control alert-danger'">
-											<option th:each="role: ${roles}" th:selected="${roleId == role.id}" th:value="${role.id}" th:text="${role.name}"></option>
-										</select> 
-										<small
-											class="form-text text-danger"
-											th:if="${#fields.hasErrors('roleId')}" th:errors="*{roleId}"></small>
+										<select class="form-select" aria-label="Default select example">
+											<option th:each="role: ${roles}" th:value="${role.id}" th:text="${role.name}"></option>
+										</select> 	
 									</div>
 								</div>
 								<div class="form-group row">

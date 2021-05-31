@@ -25,7 +25,7 @@
 				<li class="nav-item active"></li>
 			</ul>
 			<!-- Guest -->
-			<ul class="navbar-nav mr-2" th:if="${user == null}">			
+			<ul class="navbar-nav mr-2" >			
 				<li class="nav-item mx-1"><a class="btn btn-outline nav-link px-3" th:href="@{/login}"><i
 							class="fas fa-sign-in-alt mx-2"></i>Ingresar al Sistema</a>
 				</li>
@@ -35,10 +35,7 @@
 			</ul>
 			<!-- Auth -->
 			<ul class="navbar-nav mr-2" th:if="${user != null}">
-				<li class="nav-item mx-1"><a class="btn nav-link text-dark px-3" th:href="@{/dashboard}"><i
-							class="fas fa-user"></i>&nbsp;&nbsp;Bienvenido <strong
-							th:text="${user.getFirstName() + ' ' + user.getLastName()}"></strong>
-						(DNI <span th:text="${user.getDni()}"></span>)</a>
+				<li class="nav-item mx-1"><a class="btn nav-link text-dark px-3" th:href="@{/dashboard}"></a>
 				</li>
 				<li class="nav-item mx-1"><a class="btn btn-dark nav-link text-light px-3"
 						th:href="@{/admin/dashboard}"><i class="fas fa-tachometer-alt mx-1"></i> Ir al Panel de
