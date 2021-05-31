@@ -1,10 +1,12 @@
 package com.unla.app.controllers;
 
+import java.security.MessageDigest;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import javax.xml.bind.DatatypeConverter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -117,6 +119,19 @@ public class UsersController {
 		}
 		user.setActivo(true);
 
+		String passwordHash;
+		try{
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(user.getPassword().getBytes());
+			byte[] digest = md.digest();
+			passwordHash = DatatypeConverter
+			.printHexBinary(digest).toUpperCase();
+		}catch(Exception e){
+			flash.addFlashAttribute("message", e.getMessage());
+			return "redirect:/admin/users";
+		}
+		user.setPassword(passwordHash);
+
 		usuarioService.save(user);
 
 		flash.addFlashAttribute("success", "Cliente creado con exito!");
@@ -182,6 +197,19 @@ public class UsersController {
 			}
 		}
 
+		String passwordHash;
+		try{
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(user.getPassword().getBytes());
+			byte[] digest = md.digest();
+			passwordHash = DatatypeConverter
+			.printHexBinary(digest).toUpperCase();
+		}catch(Exception e){
+			flash.addFlashAttribute("message", e.getMessage());
+			return "redirect:/admin/users";
+		}
+		user.setPassword(passwordHash);
+		
 		usuarioService.save(user);
 
 		// si es el mismo usuario que hace los cambios actualizamos la sesion
