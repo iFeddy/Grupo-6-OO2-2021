@@ -25,5 +25,5 @@ public class HomeController {
         view.addObject("user", user);
         return view;
     }   
-    
+
 }

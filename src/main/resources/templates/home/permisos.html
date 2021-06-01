@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title th:text="${title}"></title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/css/permisos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+</head>
+
+<body style="background-color: #edf1f5;">
+    <div class="register vh-100 w-100 overflow-hidden">
+        <div class="row">
+            <div class="col-md-3 vh-100 d-flex justify-content-center flex-column align-items-center register-left">
+                <img src="/assets/images/checking.png" alt="" />
+                <h3>Solicitar Permiso</h3>
+                <p id="info-general">Solicitá un permiso para viajar, seleccionado
+                    fechas, destino y rodado</p>
+                <div id="info-persona" class="px-4 d-none">Creando Permiso para <strong id="info-name">Federico Perez</strong> DNI <strong id="info-dni">35324234</strong></div>
+                
+                <a type="submit" href="/">Volver al Sistema</a>
+            </div>
+            <div class="col-md-9 vh-100 d-flex justify-content-center flex-column align-items-center register-right">
+                <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="persona-tab" data-toggle="tab" href="#persona" role="tab"
+                            aria-controls="persona" aria-selected="true">Persona</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" id="rodado-tab" data-toggle="tab" href="#rodado" role="tab"
+                            aria-controls="rodado" aria-selected="false">Rodado</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" id="lugar-tab" data-toggle="tab" href="#lugar" role="tab"
+                            aria-controls="lugar" aria-selected="false">Lugar</a>
+                    </li>
+                </ul>
+                <div class="tab-content w-75" id="myTabContent">
+                    <!-- Tab de Persona -->
+                    <div class="tab-pane fade show active" id="persona" role="tabpanel" aria-labelledby="persona-tab">
+                        <h3 class="register-heading">Completa tus Datos</h3>
+                        <form id="form-1-persona" method="POST" action="/permisos/personas/create">
+                            <div class="row register-form">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="nombre" placeholder="Nombre"
+                                            value="" autocomplete="off" required tabindex="1" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="dni" placeholder="DNI" value=""
+                                            pattern="[0-9]{7,8}" autocomplete="off" required tabindex="3" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="apellido" placeholder="Apellido"
+                                            value="" autocomplete="off" required  tabindex="2"/>
+                                    </div>
+                                    <div class="form-group">
+                                        &nbsp;
+                                    </div>
+
+                                    <button class="btn btn-primary btn-block btn-granate" type="submit">
+                                        <span id="form-1-continue">Continuar</span>
+                                        <div id="form-1-spinner"
+                                            class="spinner-border d-none text-light spinner-border-sm m-1"
+                                            role="status">
+                                            <span class="sr-only">Cargando...</span>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Tab de Rodado-->
+                    <div class="tab-pane fade show" id="rodado" role="tabpanel" aria-labelledby="rodado-tab">
+                        <h3 class="register-heading">Completa Rodado?</h3>
+                        <form id="form-2-rodado" method="POST" action="/permisos/personas/create">
+                            <div class="row register-form">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="nombre" placeholder="Nombre"
+                                            value="" autocomplete="off" required tabindex="1" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="dni" placeholder="DNI" value=""
+                                            pattern="[0-9]{7,8}" autocomplete="off" required tabindex="3" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="apellido" placeholder="Apellido"
+                                            value="" autocomplete="off" required  tabindex="2"/>
+                                    </div>
+                                    <div class="form-group">
+                                        &nbsp;
+                                    </div>
+
+                                    <button class="btn btn-primary btn-block btn-granate" type="submit">
+                                        <span id="form-2-continue">Continuar</span>
+                                        <div id="form-2-spinner"
+                                            class="spinner-border d-none text-light spinner-border-sm m-1"
+                                            role="status">
+                                            <span class="sr-only">Cargando...</span>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Tab de Lugar-->
+                    <div class="tab-pane fade show" id="lugar" role="tabpanel" aria-labelledby="lugar-tab">
+                        <h3 class="register-heading">Completa tus datos</h3>
+                        <form>
+                            form lugar
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/assets/js/jquery.js"></script>
+    <script src="/assets/js/popper.js"></script>
+    <script src="/assets/js/bootstrap.js"></script>
+    <script src="/assets/js/permisos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js"></script>
+</body>
+
+</html>

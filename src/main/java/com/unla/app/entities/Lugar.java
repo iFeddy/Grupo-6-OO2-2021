@@ -29,7 +29,7 @@ public class Lugar {
 	
 	@ManyToMany
 	@JoinTable(name = "permiso_lugar",joinColumns = @JoinColumn(name="idLugar"), inverseJoinColumns = @JoinColumn(name="idPermiso") )
-	private Set<Permiso> permisos;
+	private Set<Permisos> permisos;
 	
 	@Column(name="createdat")
 	@CreationTimestamp
@@ -42,7 +42,7 @@ public class Lugar {
 	
 	public Lugar() {}
 
-	public Lugar( String lugar, String codigoPostal, Set<Permiso> permisos) {		
+	public Lugar( String lugar, String codigoPostal, Set<Permisos> permisos) {		
 		this.lugar = lugar;
 		this.codigoPostal = codigoPostal;
 		this.permisos = permisos;
@@ -72,11 +72,11 @@ public class Lugar {
 		this.codigoPostal = codigoPostal;
 	}
 
-	public Set<Permiso> getPermisos() {
+	public Set<Permisos> getPermisos() {
 		return permisos;
 	}
 
-	public void setPermisos(Set<Permiso> permisos) {
+	public void setPermisos(Set<Permisos> permisos) {
 		this.permisos = permisos;
 	}
 
