@@ -1,58 +1,42 @@
 package com.unla.app.entities;
 
-import java.time.LocalDateTime;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
-@Entity(name="lugar")
+@Entity
+@Table(name="lugar")
 public class Lugar {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idLugar;
-	@Column(name="lugar",nullable = false,length = 45)
+	private Long idLugar;
+	
+	@Column(name="lugar", nullable = false)
 	private String lugar;
 	
-	@Column(name="codigoPostal",nullable = false,length = 45)
+	@Column(name="codigoPostal", nullable = false)
 	private String codigoPostal;
-	
-	@ManyToMany
-	@JoinTable(name = "permiso_lugar",joinColumns = @JoinColumn(name="idLugar"), inverseJoinColumns = @JoinColumn(name="idPermiso") )
-	private Set<Permiso> permisos;
-	
-	@Column(name="createdat")
-	@CreationTimestamp
-	private LocalDateTime createdAt;
-	
-	@Column(name="updatedat")
-	@UpdateTimestamp
-	private LocalDateTime updatedAt;
-	
-	
-	public Lugar() {}
 
-	public Lugar( String lugar, String codigoPostal, Set<Permiso> permisos) {		
-		this.lugar = lugar;
-		this.codigoPostal = codigoPostal;
-		this.permisos = permisos;
+	public Lugar() {
+		super();
 	}
 
-	public int getIdLugar() {
+	public Lugar(Long idLugar, String lugar, String codigoPostal) {
+		super();
+		this.idLugar = idLugar;
+		this.lugar = lugar;
+		this.codigoPostal = codigoPostal;
+	}
+
+	public Long getIdLugar() {
 		return idLugar;
 	}
 
-	public void setIdLugar(int idLugar) {
+	public void setIdLugar(Long idLugar) {
 		this.idLugar = idLugar;
 	}
 
@@ -70,18 +54,5 @@ public class Lugar {
 
 	public void setCodigoPostal(String codigoPostal) {
 		this.codigoPostal = codigoPostal;
-	}
-
-	public Set<Permiso> getPermisos() {
-		return permisos;
-	}
-
-	public void setPermisos(Set<Permiso> permisos) {
-		this.permisos = permisos;
-	}
-
-	@Override
-	public String toString() {
-		return "Lugar [idLugar=" + idLugar + ", lugar=" + lugar + ", codigoPostal=" + codigoPostal + "]";
 	}
 }

@@ -1,56 +1,42 @@
  package com.unla.app.entities;
 
- import java.time.LocalDateTime;
- import java.util.Set;
-
- import javax.persistence.CascadeType;
  import javax.persistence.Column;
  import javax.persistence.Entity;
- import javax.persistence.FetchType;
  import javax.persistence.GeneratedValue;
  import javax.persistence.GenerationType;
  import javax.persistence.Id;
- import javax.persistence.OneToMany;
+ import javax.persistence.Table;
 
- import org.hibernate.annotations.CreationTimestamp;
- import org.hibernate.annotations.UpdateTimestamp;
-
- @Entity(name="rodado")
+ @Entity
+ @Table(name="rodado")
  public class Rodado {
+ 	
  	@Id
  	@GeneratedValue(strategy = GenerationType.IDENTITY)
- 	private int idRodado;
+ 	private Long idRodado;
  	
- 	@Column(name="dominio", nullable=false, length=45)
+ 	@Column(name="dominio", nullable = false)
  	private String dominio;
  	
- 	@Column(name="vehiculo", nullable=false, length=45)
+ 	@Column(name="vehiculo", nullable = false)
  	private String vehiculo;
- 	
- 	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER, mappedBy="rodado")
- 	private Set<PermisoPeriodo> permisosPeriodo;
- 	
- 	@Column(name="createdat")
- 	@CreationTimestamp
- 	private LocalDateTime createdAt;
- 	
- 	@Column(name="updatedat")
- 	@UpdateTimestamp
- 	private LocalDateTime updatedAt;
 
- 	public Rodado() {}
-
- 	public Rodado( String dominio, String vehiculo, Set<PermisoPeriodo> permisosPeriodo) {
- 		this.dominio = dominio;
- 		this.vehiculo = vehiculo;
- 		this.permisosPeriodo = permisosPeriodo;
+ 	public Rodado() {
+ 		super();
  	}
 
- 	public int getIdRodado() {
+ 	public Rodado(Long idRodado, String dominio, String vehiculo) {
+ 		super();
+ 		this.idRodado = idRodado;
+ 		this.dominio = dominio;
+ 		this.vehiculo = vehiculo;
+ 	}
+
+ 	public Long getIdRodado() {
  		return idRodado;
  	}
 
- 	public void setIdRodado(int idRodado) {
+ 	public void setIdRodado(Long idRodado) {
  		this.idRodado = idRodado;
  	}
 
@@ -69,20 +55,5 @@
  	public void setVehiculo(String vehiculo) {
  		this.vehiculo = vehiculo;
  	}
-
- 	public Set<PermisoPeriodo> getPermisosPeriodo() {
- 		return permisosPeriodo;
- 	}
-
- 	public void setPermisosPeriodo(Set<PermisoPeriodo> permisosPeriodo) {
- 		this.permisosPeriodo = permisosPeriodo;
- 	}
  	
-
- 	@Override
- 	public String toString() {
- 		return "Rodado [idRodado=" + idRodado + ", dominio=" + dominio + ", vehiculo=" + vehiculo + "]";
- 	}
- 	
-
  }

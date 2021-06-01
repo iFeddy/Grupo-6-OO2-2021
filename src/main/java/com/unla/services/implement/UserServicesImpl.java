@@ -1,4 +1,4 @@
-package com.unla.app.services;
+package com.unla.services.implement;
 
 import java.util.List;
 
@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.unla.app.entities.Users;
 import com.unla.app.repositories.IUserRepository;
+import com.unla.app.services.IUserService;
 
 @Service("userService")
 public class UserServicesImpl implements IUserService {

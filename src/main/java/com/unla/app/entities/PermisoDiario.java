@@ -1,23 +1,27 @@
 package com.unla.app.entities;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
-@Entity(name = "permisoDiario")
-@PrimaryKeyJoinColumn(name = "idPermisoDiario")
+@Entity
+@Table(name="permisoDiario")
+@PrimaryKeyJoinColumn(referencedColumnName ="idPermiso")
 public class PermisoDiario extends Permiso {
 	
-	@Column(name = "motivo",nullable=false, length=60)
+	@Column(name="motivo", nullable = false)
 	private String motivo;
 
-	
+	public PermisoDiario() {
+		super();
+	}
 
-	public PermisoDiario(Persona persona, LocalDate fecha, Set<Lugar> desdeHasta,String motivo) {
-		super( persona, fecha,  desdeHasta);
+	public PermisoDiario(Long idPermiso, Persona pedido, LocalDate fecha, Lugar lugarSalida, Lugar lugarLlegada,
+			String motivo) {
+		super(idPermiso, pedido, fecha, lugarSalida, lugarLlegada);
 		this.motivo = motivo;
 	}
 
@@ -28,12 +32,5 @@ public class PermisoDiario extends Permiso {
 	public void setMotivo(String motivo) {
 		this.motivo = motivo;
 	}
-
-	@Override
-	public String toString() {
-		return "PermisoDiario [motivo=" + motivo + ", idPermiso=" + idPermiso + ", fecha=" + fecha + "]";
-	}
-	
-	
 	
 }
