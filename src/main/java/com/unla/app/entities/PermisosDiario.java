@@ -9,14 +9,14 @@ import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity(name = "permisoDiario")
 @PrimaryKeyJoinColumn(name = "idPermisoDiario")
-public class PermisoDiario extends Permiso {
+public class PermisosDiario extends Permisos {
 	
 	@Column(name = "motivo",nullable=false, length=60)
 	private String motivo;
 
 	
 
-	public PermisoDiario(Persona persona, LocalDate fecha, Set<Lugar> desdeHasta,String motivo) {
+	public PermisosDiario(Personas persona, LocalDate fecha, Set<Lugar> desdeHasta,String motivo) {
 		super( persona, fecha,  desdeHasta);
 		this.motivo = motivo;
 	}

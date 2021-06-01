@@ -20,9 +20,9 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-@Entity(name="permiso")
+@Entity(name="permisos")
 @Inheritance( strategy = InheritanceType.JOINED)
-public class Permiso {
+public class Permisos {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +30,7 @@ public class Permiso {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_persona",nullable=false)
-	protected Persona persona;
+	protected Personas persona;
 	
 	@Column(name = "fecha", nullable=false)
 	protected LocalDate  fecha;
@@ -49,12 +49,12 @@ public class Permiso {
 
 	
 	
-	public Permiso() {
+	public Permisos() {
 		super();
 	}
 	
 
-	public Permiso( Persona persona, LocalDate fecha, Set<Lugar> desdeHasta) {
+	public Permisos( Personas persona, LocalDate fecha, Set<Lugar> desdeHasta) {
 		this.persona = persona;
 		this.fecha = fecha;
 		this.desdeHasta = desdeHasta;
@@ -80,11 +80,11 @@ public class Permiso {
 		this.fecha = fecha;
 	}
 	
-		public Persona getPersona() {
+		public Personas getPersona() {
 		return persona;
 	}
 
-	public void setPersona(Persona persona) {
+	public void setPersona(Personas persona) {
 		this.persona = persona;
 	}
 

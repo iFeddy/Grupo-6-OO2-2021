@@ -12,31 +12,32 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import javax.persistence.OneToMany;
+import javax.validation.constraints.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-@Entity(name="persona")
+@Entity(name="personas")
 
-public class Persona {
+public class Personas {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idPersona;
 	
 	@Column(name="nombre", nullable=false, length=45)
 	private String nombre;
-	
+
 	@Column(name="apellido", nullable=false, length=45)
 	private String apellido;
 	
-	@Column(name="dni", nullable=false)
+	@Column(name="dni", nullable=false, unique = true)
 	private long dni;
 	
 	@JsonBackReference
 	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER, mappedBy="persona")
-	private Set<Permiso> permisos;
+	private Set<Permisos> permisos;
 	
 	@Column(name="createdat")
 	@CreationTimestamp
@@ -46,10 +47,10 @@ public class Persona {
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 	
-	public Persona() {}
+	public Personas() {}
 	
 	
-	public Persona( String nombre, String apellido, long dni, Set<Permiso> permisos) {
+	public Personas( String nombre, String apellido, long dni, Set<Permisos> permisos) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.dni = dni;
@@ -89,11 +90,11 @@ public class Persona {
 		this.dni = dni;
 	}
 
-	public Set<Permiso> getPermisos() {
+	public Set<Permisos> getPermisos() {
 		return permisos;
 	}
 
-	public void setPermisos(Set<Permiso> permisos) {
+	public void setPermisos(Set<Permisos> permisos) {
 		this.permisos = permisos;
 	}
 

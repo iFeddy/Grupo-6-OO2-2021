@@ -10,9 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
-@Entity(name = "permisoPeriodo")
+@Entity(name = "permisosPeriodo")
 @PrimaryKeyJoinColumn(name = "idPermisoPeriodo")
-public class PermisoPeriodo extends Permiso {
+public class PermisosPeriodo extends Permisos {
 	@Column(name = "cantDias")
 	private int cantDias;
 	
@@ -21,17 +21,17 @@ public class PermisoPeriodo extends Permiso {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_rodado",nullable=false)
-	private Rodado rodado;
+	private Rodados rodado;
 	
 	
-	public PermisoPeriodo(Persona persona, LocalDate fecha, Set<Lugar> desdeHasta,int cantDias, boolean vacacion, Rodado rodado) {
+	public PermisosPeriodo(Personas persona, LocalDate fecha, Set<Lugar> desdeHasta,int cantDias, boolean vacacion, Rodados rodado) {
 		super( persona,  fecha, desdeHasta);
 		this.cantDias = cantDias;
 		this.vacacion = vacacion;
 		this.rodado = rodado;
 	}
 
-	public PermisoPeriodo() {
+	public PermisosPeriodo() {
 		super();
 	}
 		
@@ -48,10 +48,10 @@ public class PermisoPeriodo extends Permiso {
 		this.vacacion = vacacion;
 	}
 	
-	public Rodado getRodado() {
+	public Rodados getRodado() {
 		return rodado;
 	}
-	public void setRodado(Rodado rodado) {
+	public void setRodado(Rodados rodado) {
 		this.rodado = rodado;
 	}
 

@@ -16,7 +16,7 @@
  import org.hibernate.annotations.UpdateTimestamp;
 
  @Entity(name="rodado")
- public class Rodado {
+ public class Rodados {
  	@Id
  	@GeneratedValue(strategy = GenerationType.IDENTITY)
  	private int idRodado;
@@ -28,7 +28,7 @@
  	private String vehiculo;
  	
  	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER, mappedBy="rodado")
- 	private Set<PermisoPeriodo> permisosPeriodo;
+ 	private Set<PermisosPeriodo> permisosPeriodo;
  	
  	@Column(name="createdat")
  	@CreationTimestamp
@@ -38,9 +38,9 @@
  	@UpdateTimestamp
  	private LocalDateTime updatedAt;
 
- 	public Rodado() {}
+ 	public Rodados() {}
 
- 	public Rodado( String dominio, String vehiculo, Set<PermisoPeriodo> permisosPeriodo) {
+ 	public Rodados( String dominio, String vehiculo, Set<PermisosPeriodo> permisosPeriodo) {
  		this.dominio = dominio;
  		this.vehiculo = vehiculo;
  		this.permisosPeriodo = permisosPeriodo;
@@ -70,11 +70,11 @@
  		this.vehiculo = vehiculo;
  	}
 
- 	public Set<PermisoPeriodo> getPermisosPeriodo() {
+ 	public Set<PermisosPeriodo> getPermisosPeriodo() {
  		return permisosPeriodo;
  	}
 
- 	public void setPermisosPeriodo(Set<PermisoPeriodo> permisosPeriodo) {
+ 	public void setPermisosPeriodo(Set<PermisosPeriodo> permisosPeriodo) {
  		this.permisosPeriodo = permisosPeriodo;
  	}
  	
