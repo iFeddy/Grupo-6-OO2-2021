@@ -43,6 +43,10 @@
                         <a class="nav-link disablede" id="lugar-tab" data-toggle="tab" href="#lugar" role="tab"
                             aria-controls="lugar" aria-selected="false">Lugar</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link disablede" id="fecha-tab" data-toggle="tab" href="#fecha" role="tab"
+                            aria-controls="fecha" aria-selected="false">Fecha</a>
+                    </li>
                 </ul>
                 <div class="tab-content w-75" id="myTabContent">
                     <!-- Tab de Persona -->
@@ -181,7 +185,7 @@
                     <!-- Tab de Lugar-->
                     <div class="tab-pane fade show" id="lugar" role="tabpanel" aria-labelledby="lugar-tab">
                         <h3 class="register-heading">Completa Datos de Lugar salida/llegada</h3>
-                        <form id="form-2-rodado" method="POST" action="/permisos/lugares/create">
+                        <form id="form-3-lugar" method="POST" action="/permisos/lugares/create">
                             <div class="row register-form">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -205,6 +209,13 @@
                                     </button>
                                 </div>
                             </div>
+                        </form>
+                    </div>
+                     <!-- Tab de Fecha-->
+                     <div class="tab-pane fade show" id="fecha" role="tabpanel" aria-labelledby="fecha-tab">
+                        <h3 class="register-heading">Completa Datos de Fecha</h3>
+                        <form id="form-4-fecha-1" method="POST" action="/permisos/lugares/create">
+                            Fechas aca si es un dia o muchos dias
                         </form>
                     </div>
                 </div>
