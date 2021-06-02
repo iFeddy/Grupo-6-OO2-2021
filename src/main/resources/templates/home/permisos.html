@@ -20,12 +20,17 @@
                 <h3>Solicitar Permiso</h3>
                 <p id="info-general">Solicitá un permiso para viajar, seleccionado
                     fechas, destino y rodado</p>
-                <div id="info-persona" class="px-4 d-none">Creando Permiso para <strong id="info-name"></strong> DNI <strong id="info-dni"></strong></div>
+                <div id="info-persona" class="px-4 d-none">Creando Permiso para <strong id="info-name"></strong> DNI
+                    <strong id="info-dni"></strong></div>
                 <div id="info-rodado" class="px-4 d-none">Medio de Transporte <strong id="info-rodado-type"> </strong>
                     <div id="info-rodado-2" class="px-4 d-none">
-                        Dominio: <strong id="info-rodado-dominio"></strong><br/>
+                        Dominio: <strong id="info-rodado-dominio"></strong><br />
                         Tipo: <strong id="info-rodado-vehiculo"></strong>
                     </div>
+                </div>
+                <div id="info-lugar" class="px-4 d-none">
+                    Salida: <strong id="info-lugar-salida"></strong><br/>
+                    Destino: <strong id="info-lugar-destino"></strong>
                 </div>
                 <a type="submit" href="/">Volver al Sistema</a>
             </div>
@@ -152,7 +157,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-     
+
                                         <input class="form-control" list="datalistOptions" id="rodadoDataList"
                                             placeholder="Tipo de Vehículos..." name="vehiculo" required>
                                         <datalist id="datalistOptions">
@@ -184,24 +189,27 @@
                     </div>
                     <!-- Tab de Lugar-->
                     <div class="tab-pane fade show" id="lugar" role="tabpanel" aria-labelledby="lugar-tab">
-                        <h3 class="register-heading">Completa Datos de Lugar salida/llegada</h3>
+                        <h3 class="register-heading">Completa Datos de Lugar de Salida y Destino</h3>
                         <form id="form-3-lugar" method="POST" action="/permisos/lugares/create">
                             <div class="row register-form">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="lugar" placeholder="Lugar"
-                                            value="" autocomplete="off" required tabindex="1" />
+                                        <select class="custom-select" name="salida" id="lugar-salida" required>
+                                            <option selected disabled>Seleccionar Salida</option>
+                                            <option th:each="lugar: ${lugares}" th:value="${lugar}" th:text="${lugar.lugar}"></option>                                          
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="codigoPostal"
-                                            placeholder="Codigo Postal" value="" autocomplete="off" required
-                                            tabindex="2" />
+                                        <select class="custom-select" name="destino" id="lugar-destino" required>
+                                            <option selected disabled>Seleccionar Destino</option>
+                                            <option th:each="lugar: ${lugares}" th:value="${lugar}" th:text="${lugar.lugar}"></option>                                          
+                                        </select>
                                     </div>
                                     <button class="btn btn-primary btn-block btn-granate" type="submit">
-                                        <span id="form-2-continue">Continuar</span>
-                                        <div id="form-2-spinner"
+                                        <span id="form-3-continue">Continuar</span>
+                                        <div id="form-3-spinner"
                                             class="spinner-border d-none text-light spinner-border-sm m-1"
                                             role="status">
                                             <span class="sr-only">Cargando...</span>
@@ -211,8 +219,8 @@
                             </div>
                         </form>
                     </div>
-                     <!-- Tab de Fecha-->
-                     <div class="tab-pane fade show" id="fecha" role="tabpanel" aria-labelledby="fecha-tab">
+                    <!-- Tab de Fecha-->
+                    <div class="tab-pane fade show" id="fecha" role="tabpanel" aria-labelledby="fecha-tab">
                         <h3 class="register-heading">Completa Datos de Fecha</h3>
                         <form id="form-4-fecha-1" method="POST" action="/permisos/lugares/create">
                             Fechas aca si es un dia o muchos dias

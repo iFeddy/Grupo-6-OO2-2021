@@ -2,7 +2,8 @@ $(function () {
     //Objeto Persona
     let persona;
     let rodado;
-    let lugar;
+    let lugar_salida;
+    let lugar_destino;
 
     //Form 1
     $("#form-1-persona").on("submit", (function (event) {
@@ -20,7 +21,9 @@ $(function () {
 
         //Envia Petición a Servidor
         $.post(url, {
-            nombre, apellido, dni
+            nombre,
+            apellido,
+            dni
         }).done(function (data) {
             //Si termina con status 200
             //Si nos devolvio los datos de la persona
@@ -67,7 +70,6 @@ $(function () {
             }
         });
         if (tipoRodado != 2) {
-
             //Abrimos el tercer  tab
             $("#lugar-tab").trigger("click");
 
@@ -86,8 +88,8 @@ $(function () {
         $("#info-rodado").removeClass("d-none");
     }));
 
-      //Form 3
-      $("#form-2-rodado-2").on("submit", (function (event) {
+    //Form 3
+    $("#form-2-rodado-2").on("submit", (function (event) {
         event.preventDefault();
         //Activa el spinner
         $("#form-2-continue").addClass("d-none");
@@ -101,7 +103,8 @@ $(function () {
 
         //Envia Petición a Servidor
         $.post(url, {
-            dominio, vehiculo
+            dominio,
+            vehiculo
         }).done(function (data) {
             //Si termina con status 200
             //Si nos devolvio los datos de la rodado
@@ -109,13 +112,13 @@ $(function () {
                 //Todo Ok
                 toastr.success('Rodado cargado Exitosamente', 'Carga Correcta');
                 //Guardamos el rodado en la variable global
-                rodado = data;     
+                rodado = data;
                 //Abrimos el tercer tab
                 $("#lugar-tab").trigger("click");
 
                 $("#info-rodado-dominio").text(rodado.dominio);
                 $("#info-rodado-vehiculo").text(rodado.vehiculo);
-                $("#info-rodado-2").removeClass("d-none");         
+                $("#info-rodado-2").removeClass("d-none");
             }
             console.log(rodado);
         }).fail(function (error) {
@@ -129,14 +132,43 @@ $(function () {
         });
     }));
 
+    //Form 4
+    $("#form-3-lugar").on("submit", (function (event) {
+        event.preventDefault();
+        //Activa el spinner
+        $("#form-3-continue").addClass("d-none");
+        $("#form-3-spinner").removeClass("d-none");
+        let lugarSalidaText = $("#lugar-salida option:selected").text();
+        let lugarDestinoText = $("#lugar-destino option:selected").text();
+
+        if($("#lugar-salida").val() != undefined && $("#lugar-destino").val() != undefined){            
+            lugar_salida = $("#lugar-salida").val();
+            lugar_destino = $("#lugar-destino").val();
+
+            $("#info-lugar-salida").text(lugarSalidaText);
+            $("#info-lugar-destino").text(lugarDestinoText);
+            $("#info-lugar").removeClass("d-none");
+
+            toastr.success('Lugares de Salida y Destino cargados Exitosamente', 'Carga Correcta');
+
+            //Abrimos el tercer tab
+            $("#fecha-tab").trigger("click");
+
+        }else{
+            toastr.error('Por favor Completa todos los datos', 'Datos Incompletos');
+        }
+
+        $("#form-3-continue").removeClass("d-none");
+        $("#form-3-spinner").addClass("d-none");
+
+    }));
+
     function mostrarError(num) {
         if (num == 404) {
             toastr.error('Página no Encontrada', 'Error 404');
-        }
-        else if (num == 500) {
+        } else if (num == 500) {
             toastr.error('Problema Interno del Servidor', 'Error 500');
-        }
-        else {
+        } else {
             toastr.error('Se ha detectado un Error Inesperado', 'Error');
         }
     }
