@@ -26,8 +26,8 @@ public abstract class Permisos {
 	protected int idPermiso;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="pedido_id", nullable=false)
-	protected Personas pedido;
+	@JoinColumn(name="persona_id", nullable=false)
+	protected Personas persona;
 	
 	@Column(name="fecha")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -46,10 +46,10 @@ public abstract class Permisos {
 		super();
 	}
 
-	public Permisos(int idPermiso, Personas pedido, LocalDate fecha, Lugares lugarSalida, Lugares lugarLlegada) {
+	public Permisos(int idPermiso, Personas persona, LocalDate fecha, Lugares lugarSalida, Lugares lugarLlegada) {
 		super();
 		this.idPermiso = idPermiso;
-		this.pedido = pedido;
+		this.persona = persona;
 		this.fecha = fecha;
 		this.lugarSalida = lugarSalida;
 		this.lugarLlegada = lugarLlegada;
@@ -63,12 +63,12 @@ public abstract class Permisos {
 		this.idPermiso = idPermiso;
 	}
 
-	public Personas getPedido() {
-		return pedido;
+	public Personas getPersona() {
+		return persona;
 	}
 
-	public void setPedido(Personas pedido) {
-		this.pedido = pedido;
+	public void setPedido(Personas persona) {
+		this.persona = persona;
 	}
 
 	public LocalDate getFecha() {
