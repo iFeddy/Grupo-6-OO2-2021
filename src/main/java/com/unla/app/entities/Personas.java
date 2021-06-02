@@ -10,21 +10,17 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import javax.persistence.OneToMany;
-import javax.validation.constraints.*;
-
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity(name="personas")
 
 public class Personas {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idPersona;
+	private long idPersona;
 	
 	@Column(name="nombre", nullable=false, length=45)
 	private String nombre;
@@ -35,9 +31,8 @@ public class Personas {
 	@Column(name="dni", nullable=false, unique = true)
 	private long dni;
 	
-	@JsonBackReference
-	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER, mappedBy="persona")
-	private Set<Permisos> permisos;
+	/*@OneToMany(cascade= CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="persona")
+	private Set<Users> users;*/
 	
 	@Column(name="createdat")
 	@CreationTimestamp
@@ -50,19 +45,19 @@ public class Personas {
 	public Personas() {}
 	
 	
-	public Personas( String nombre, String apellido, long dni, Set<Permisos> permisos) {
+	public Personas( long idPersona,String nombre, String apellido, long dni) {
+		this.idPersona=idPersona;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.dni = dni;
-		this.permisos = permisos;
 	}
 
 
-	public int getIdPersona() {
+	public long getIdPersona() {
 		return idPersona;
 	}
 	
-	public void setIdPersona(int idPersona) {
+	public void setIdPersona(long idPersona) {
 		this.idPersona = idPersona;
 	}
 	
@@ -89,15 +84,6 @@ public class Personas {
 	public void setDni(long dni) {
 		this.dni = dni;
 	}
-
-	public Set<Permisos> getPermisos() {
-		return permisos;
-	}
-
-	public void setPermisos(Set<Permisos> permisos) {
-		this.permisos = permisos;
-	}
-
 
 	@Override
 	public String toString() {

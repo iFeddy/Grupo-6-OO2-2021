@@ -79,27 +79,19 @@
                     <!-- Tab de Rodado-->
                     <div class="tab-pane fade show" id="rodado" role="tabpanel" aria-labelledby="rodado-tab">
                         <h3 class="register-heading">Completa Rodado?</h3>
-                        <form id="form-2-rodado" method="POST" action="/permisos/personas/create">
+                        <form id="form-2-rodado" method="POST" action="/permisos/rodados/create">
                             <div class="row register-form">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="nombre" placeholder="Nombre"
-                                            value="" autocomplete="off" required tabindex="1" />
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="dni" placeholder="DNI" value=""
-                                            pattern="[0-9]{7,8}" autocomplete="off" required tabindex="3" />
-                                    </div>
+                                        <input type="text" class="form-control" name="dominio" placeholder="Dominio"
+                                            value="" pattern="[a-z]{2}[\d]{3}[a-z]{2}" autocomplete="off" required tabindex="1" />
+                                    </div>                                
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="apellido" placeholder="Apellido"
-                                            value="" autocomplete="off" required  tabindex="2"/>
+									 <div class="form-group">
+                                        <input type="text" class="form-control" name="vehiculo" placeholder="Vehiculo" value=""
+                                            autocomplete="off" required tabindex="2" />
                                     </div>
-                                    <div class="form-group">
-                                        &nbsp;
-                                    </div>
-
                                     <button class="btn btn-primary btn-block btn-granate" type="submit">
                                         <span id="form-2-continue">Continuar</span>
                                         <div id="form-2-spinner"
@@ -114,9 +106,30 @@
                     </div>
                     <!-- Tab de Lugar-->
                     <div class="tab-pane fade show" id="lugar" role="tabpanel" aria-labelledby="lugar-tab">
-                        <h3 class="register-heading">Completa tus datos</h3>
-                        <form>
-                            form lugar
+                        <h3 class="register-heading">Completa Datos de Lugar salida/llegada</h3>
+                        <form id="form-2-rodado" method="POST" action="/permisos/lugares/create">
+                            <div class="row register-form">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="lugar" placeholder="Lugar"
+                                            value="" autocomplete="off" required tabindex="1" />
+                                    </div>                                
+                                </div>
+                                <div class="col-md-6">
+									 <div class="form-group">
+                                        <input type="text" class="form-control" name="codigoPostal" placeholder="Codigo Postal" value=""
+                                            autocomplete="off" required tabindex="2" />
+                                    </div>
+                                    <button class="btn btn-primary btn-block btn-granate" type="submit">
+                                        <span id="form-2-continue">Continuar</span>
+                                        <div id="form-2-spinner"
+                                            class="spinner-border d-none text-light spinner-border-sm m-1"
+                                            role="status">
+                                            <span class="sr-only">Cargando...</span>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>

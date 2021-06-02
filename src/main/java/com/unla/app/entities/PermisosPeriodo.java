@@ -1,7 +1,6 @@
 package com.unla.app.entities;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,56 +8,58 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
-@Entity(name = "permisosPeriodo")
-@PrimaryKeyJoinColumn(name = "idPermisoPeriodo")
+@Entity
+@Table(name="permisosPeriodo")
+@PrimaryKeyJoinColumn(referencedColumnName ="idPermiso")
 public class PermisosPeriodo extends Permisos {
-	@Column(name = "cantDias")
+	
+	@Column(name="cantDias", nullable = false)
 	private int cantDias;
 	
-	@Column(name = "vacacion",nullable=false, length=60)
-	private boolean vacacion;
+	@Column(name="vacaciones", nullable = false)
+	private boolean vacaciones;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_rodado",nullable=false)
+	@JoinColumn(name="rodado_id", nullable=false)
 	private Rodados rodado;
-	
-	
-	public PermisosPeriodo(Personas persona, LocalDate fecha, Set<Lugar> desdeHasta,int cantDias, boolean vacacion, Rodados rodado) {
-		super( persona,  fecha, desdeHasta);
-		this.cantDias = cantDias;
-		this.vacacion = vacacion;
-		this.rodado = rodado;
-	}
 
 	public PermisosPeriodo() {
 		super();
 	}
-		
-	public int getCantDias() {
-		return cantDias;
-	}
-	public void setCantDias(int cantDias) {
-		this.cantDias = cantDias;
-	}
-	public boolean isVacacion() {
-		return vacacion;
-	}
-	public void setVacacion(boolean vacacion) {
-		this.vacacion = vacacion;
-	}
 	
-	public Rodados getRodado() {
-		return rodado;
-	}
-	public void setRodado(Rodados rodado) {
+	public PermisosPeriodo(int idPermiso, Personas pedido, LocalDate fecha, Lugares lugarSalida, Lugares lugarLlegada,
+			int cantDias, boolean vacaciones, Rodados rodado) {
+		super(idPermiso, pedido, fecha, lugarSalida, lugarLlegada);
+		this.cantDias = cantDias;
+		this.vacaciones = vacaciones;
 		this.rodado = rodado;
 	}
 
-	@Override
-	public String toString() {
-		return "PermisoPeriodo [cantDias=" + cantDias + ", vacacion=" + vacacion + ", rodado=" + rodado + "]";
+	public int getCantDias() {
+		return cantDias;
+	}
+
+	public void setCantDias(int cantDias) {
+		this.cantDias = cantDias;
+	}
+
+	public boolean isVacaciones() {
+		return vacaciones;
+	}
+
+	public void setVacaciones(boolean vacaciones) {
+		this.vacaciones = vacaciones;
+	}
+
+	public Rodados getRodado() {
+		return rodado;
+	}
+
+	public void setRodado(Rodados rodado) {
+		this.rodado = rodado;
 	}
 	
-		
+	
 }

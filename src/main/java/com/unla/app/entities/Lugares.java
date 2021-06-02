@@ -1,35 +1,31 @@
 package com.unla.app.entities;
 
 import java.time.LocalDateTime;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-@Entity(name="lugar")
-public class Lugar {
+@Entity(name="lugares")
+public class Lugares {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idLugar;
+	private long idLugar;
+	
 	@Column(name="lugar",nullable = false,length = 45)
 	private String lugar;
 	
 	@Column(name="codigoPostal",nullable = false,length = 45)
 	private String codigoPostal;
 	
-	@ManyToMany
+	/*@ManyToMany
 	@JoinTable(name = "permiso_lugar",joinColumns = @JoinColumn(name="idLugar"), inverseJoinColumns = @JoinColumn(name="idPermiso") )
-	private Set<Permisos> permisos;
+	private Set<Permisos> permisos;*/
 	
 	@Column(name="createdat")
 	@CreationTimestamp
@@ -40,48 +36,74 @@ public class Lugar {
 	private LocalDateTime updatedAt;
 	
 	
-	public Lugar() {}
+	public Lugares() {}
 
-	public Lugar( String lugar, String codigoPostal, Set<Permisos> permisos) {		
+
+	public Lugares(long idLugar, String lugar, String codigoPostal, LocalDateTime createdAt, LocalDateTime updatedAt) {
+		super();
+		this.idLugar = idLugar;
 		this.lugar = lugar;
 		this.codigoPostal = codigoPostal;
-		this.permisos = permisos;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
 	}
 
-	public int getIdLugar() {
+
+	public long getIdLugar() {
 		return idLugar;
 	}
 
-	public void setIdLugar(int idLugar) {
+
+	public void setIdLugar(long idLugar) {
 		this.idLugar = idLugar;
 	}
+
 
 	public String getLugar() {
 		return lugar;
 	}
 
+
 	public void setLugar(String lugar) {
 		this.lugar = lugar;
 	}
+
 
 	public String getCodigoPostal() {
 		return codigoPostal;
 	}
 
+
 	public void setCodigoPostal(String codigoPostal) {
 		this.codigoPostal = codigoPostal;
 	}
 
-	public Set<Permisos> getPermisos() {
-		return permisos;
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
 	}
 
-	public void setPermisos(Set<Permisos> permisos) {
-		this.permisos = permisos;
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
 	}
+
+
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
 
 	@Override
 	public String toString() {
-		return "Lugar [idLugar=" + idLugar + ", lugar=" + lugar + ", codigoPostal=" + codigoPostal + "]";
+		return "Lugar [idLugar=" + idLugar + ", lugar=" + lugar + ", codigoPostal=" + codigoPostal + ", createdAt="
+				+ createdAt + ", updatedAt=" + updatedAt + "]";
 	}
+
+
 }

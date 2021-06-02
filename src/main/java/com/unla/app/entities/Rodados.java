@@ -1,25 +1,20 @@
  package com.unla.app.entities;
 
  import java.time.LocalDateTime;
- import java.util.Set;
-
- import javax.persistence.CascadeType;
  import javax.persistence.Column;
  import javax.persistence.Entity;
- import javax.persistence.FetchType;
  import javax.persistence.GeneratedValue;
  import javax.persistence.GenerationType;
  import javax.persistence.Id;
- import javax.persistence.OneToMany;
 
  import org.hibernate.annotations.CreationTimestamp;
  import org.hibernate.annotations.UpdateTimestamp;
 
- @Entity(name="rodado")
+ @Entity(name="rodados")
  public class Rodados {
  	@Id
  	@GeneratedValue(strategy = GenerationType.IDENTITY)
- 	private int idRodado;
+ 	private Long idRodado;
  	
  	@Column(name="dominio", nullable=false, length=45)
  	private String dominio;
@@ -27,8 +22,8 @@
  	@Column(name="vehiculo", nullable=false, length=45)
  	private String vehiculo;
  	
- 	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER, mappedBy="rodado")
- 	private Set<PermisosPeriodo> permisosPeriodo;
+ 	/*@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER, mappedBy="rodado")
+ 	private Set<PermisosPeriodo> permisosPeriodo;*/
  	
  	@Column(name="createdat")
  	@CreationTimestamp
@@ -40,49 +35,61 @@
 
  	public Rodados() {}
 
- 	public Rodados( String dominio, String vehiculo, Set<PermisosPeriodo> permisosPeriodo) {
- 		this.dominio = dominio;
- 		this.vehiculo = vehiculo;
- 		this.permisosPeriodo = permisosPeriodo;
- 	}
+	public Rodados(Long idRodado, String dominio, String vehiculo, LocalDateTime createdAt, LocalDateTime updatedAt) {
+		super();
+		this.idRodado = idRodado;
+		this.dominio = dominio;
+		this.vehiculo = vehiculo;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+	}
 
- 	public int getIdRodado() {
- 		return idRodado;
- 	}
+	public Long getIdRodado() {
+		return idRodado;
+	}
 
- 	public void setIdRodado(int idRodado) {
- 		this.idRodado = idRodado;
- 	}
+	public void setIdRodado(Long idRodado) {
+		this.idRodado = idRodado;
+	}
 
- 	public String getDominio() {
- 		return dominio;
- 	}
+	public String getDominio() {
+		return dominio;
+	}
 
- 	public void setDominio(String dominio) {
- 		this.dominio = dominio;
- 	}
+	public void setDominio(String dominio) {
+		this.dominio = dominio;
+	}
 
- 	public String getVehiculo() {
- 		return vehiculo;
- 	}
+	public String getVehiculo() {
+		return vehiculo;
+	}
 
- 	public void setVehiculo(String vehiculo) {
- 		this.vehiculo = vehiculo;
- 	}
+	public void setVehiculo(String vehiculo) {
+		this.vehiculo = vehiculo;
+	}
 
- 	public Set<PermisosPeriodo> getPermisosPeriodo() {
- 		return permisosPeriodo;
- 	}
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
 
- 	public void setPermisosPeriodo(Set<PermisosPeriodo> permisosPeriodo) {
- 		this.permisosPeriodo = permisosPeriodo;
- 	}
- 	
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
 
- 	@Override
- 	public String toString() {
- 		return "Rodado [idRodado=" + idRodado + ", dominio=" + dominio + ", vehiculo=" + vehiculo + "]";
- 	}
- 	
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	@Override
+	public String toString() {
+		return "Rodados [idRodado=" + idRodado + ", dominio=" + dominio + ", vehiculo=" + vehiculo + ", createdAt="
+				+ createdAt + ", updatedAt=" + updatedAt + "]";
+	}
+
+ 
 
  }
