@@ -32,3 +32,14 @@ INSERT INTO `users` (`id`, `activo`, `createdat`, `dni`, `email`, `first_name`, 
 INSERT INTO `users` (`id`, `activo`, `createdat`, `dni`, `email`, `first_name`, `last_name`, `password`, `role_id`, `type_dni`, `updatedat`, `user_name`) VALUES (28, b'1', '2021-05-26', '24959206', 'vamy@mailinator.com', 'Willow', 'Bernard', '81DC9BDB52D04DC20036DBD8313ED055', '2', 'DNI', '2021-05-26', 'rysihalih');
 INSERT INTO `users` (`id`, `activo`, `createdat`, `dni`, `email`, `first_name`, `last_name`, `password`, `role_id`, `type_dni`, `updatedat`, `user_name`) VALUES (29, b'1', '2021-05-26', '49296249', 'hewuwafy@mailinator.com', 'Lars', 'Bradshaw', '81DC9BDB52D04DC20036DBD8313ED055', '1', 'LC', '2021-05-26', 'hegubyqa');
 INSERT INTO `users` (`id`, `activo`, `createdat`, `dni`, `email`, `first_name`, `last_name`, `password`, `role_id`, `type_dni`, `updatedat`, `user_name`) VALUES (30, b'1', '2021-05-26', '11171015', 'tykobu@mailinator.com', 'Moses', 'Andrews', '81DC9BDB52D04DC20036DBD8313ED055', '1', 'CI', '2021-05-26', 'zucynetaw');
+
+INSERT INTO `lugares` (`id_lugar`, `codigo_postal`, `createdat`, `lugar`, `updatedat`) VALUES (1, '1870', '2021-06-02 12:49:28.000000', 'Avellaneda', '2021-06-02 12:49:31.000000');
+INSERT INTO `lugares` (`id_lugar`, `codigo_postal`, `createdat`, `lugar`, `updatedat`) VALUES (2, '1828', '2021-06-02 12:49:51.000000', 'Banfield', '2021-06-02 12:49:54.000000');
+INSERT INTO `lugares` (`id_lugar`, `codigo_postal`, `createdat`, `lugar`, `updatedat`) VALUES (3, '1824', '2021-06-02 12:50:14.000000', 'Lanus', '2021-06-02 12:50:16.000000');
+INSERT INTO `lugares` (`id_lugar`, `codigo_postal`, `createdat`, `lugar`, `updatedat`) VALUES (4, '1864', '2021-06-02 12:50:14.000000', 'Alejandro Korn', '2021-06-02 12:50:16.000000');
+INSERT INTO `lugares` (`id_lugar`, `codigo_postal`, `createdat`, `lugar`, `updatedat`) VALUES (5, '1832', '2021-06-02 12:51:13.000000', 'Lomas De Zamora', '2021-06-02 12:51:15.000000');
+INSERT INTO `lugares` (`id_lugar`, `codigo_postal`, `createdat`, `lugar`, `updatedat`) VALUES (6, '1804', '2021-06-02 12:51:48.000000', 'Ezeiza', '2021-06-01 12:51:50.000000');
+INSERT INTO `lugares` (`id_lugar`, `codigo_postal`, `createdat`, `lugar`, `updatedat`) VALUES (7, '1842', '2021-06-02 12:52:09.000000', 'Monte Grande', '2021-06-02 12:52:10.000000');
+INSERT INTO `lugares` (`id_lugar`, `codigo_postal`, `createdat`, `lugar`, `updatedat`) VALUES (8, '1878', '2021-06-02 12:52:44.000000', 'Quilmes', '2021-06-02 12:52:48.000000');
+INSERT INTO `lugares` (`id_lugar`, `codigo_postal`, `createdat`, `lugar`, `updatedat`) VALUES (9, '1900', '2021-06-02 12:53:04.000000', 'La Plata', '2021-06-02 12:53:07.000000');
+INSERT INTO `lugares` (`id_lugar`, `codigo_postal`, `createdat`, `lugar`, `updatedat`) VALUES (10, '1714', '2021-06-02 12:53:31.000000', 'Ituzaingo', '2021-06-03 12:53:32.000000');
