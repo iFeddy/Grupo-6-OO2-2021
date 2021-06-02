@@ -118,6 +118,13 @@
 .register-heading {
     text-align: center;
     margin-top: 8%;
-    margin-bottom: -15%;
+    margin-bottom: -10%;
     color: #495057;
+}
+
+.register-subheading {
+    text-align: center;
+    margin-top: 10%;
+    margin-bottom: -15%;
+    color: #6e6e6e;
 }

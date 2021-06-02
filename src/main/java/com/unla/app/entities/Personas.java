@@ -1,16 +1,13 @@
 package com.unla.app.entities;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -43,15 +40,13 @@ public class Personas {
 	private LocalDateTime updatedAt;
 	
 	public Personas() {}
-	
-	
+		
 	public Personas( long idPersona,String nombre, String apellido, long dni) {
 		this.idPersona=idPersona;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.dni = dni;
 	}
-
 
 	public long getIdPersona() {
 		return idPersona;

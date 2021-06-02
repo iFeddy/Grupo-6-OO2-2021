@@ -20,8 +20,13 @@
                 <h3>Solicitar Permiso</h3>
                 <p id="info-general">Solicitá un permiso para viajar, seleccionado
                     fechas, destino y rodado</p>
-                <div id="info-persona" class="px-4 d-none">Creando Permiso para <strong id="info-name">Federico Perez</strong> DNI <strong id="info-dni">35324234</strong></div>
-                
+                <div id="info-persona" class="px-4 d-none">Creando Permiso para <strong id="info-name"></strong> DNI <strong id="info-dni"></strong></div>
+                <div id="info-rodado" class="px-4 d-none">Medio de Transporte <strong id="info-rodado-type"> </strong>
+                    <div id="info-rodado-2" class="px-4 d-none">
+                        Dominio: <strong id="info-rodado-dominio"></strong><br/>
+                        Tipo: <strong id="info-rodado-vehiculo"></strong>
+                    </div>
+                </div>
                 <a type="submit" href="/">Volver al Sistema</a>
             </div>
             <div class="col-md-9 vh-100 d-flex justify-content-center flex-column align-items-center register-right">
@@ -31,11 +36,11 @@
                             aria-controls="persona" aria-selected="true">Persona</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" id="rodado-tab" data-toggle="tab" href="#rodado" role="tab"
+                        <a class="nav-link disablede" id="rodado-tab" data-toggle="tab" href="#rodado" role="tab"
                             aria-controls="rodado" aria-selected="false">Rodado</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" id="lugar-tab" data-toggle="tab" href="#lugar" role="tab"
+                        <a class="nav-link disablede" id="lugar-tab" data-toggle="tab" href="#lugar" role="tab"
                             aria-controls="lugar" aria-selected="false">Lugar</a>
                     </li>
                 </ul>
@@ -58,7 +63,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <input type="text" class="form-control" name="apellido" placeholder="Apellido"
-                                            value="" autocomplete="off" required  tabindex="2"/>
+                                            value="" autocomplete="off" required tabindex="2" />
                                     </div>
                                     <div class="form-group">
                                         &nbsp;
@@ -78,31 +83,100 @@
                     </div>
                     <!-- Tab de Rodado-->
                     <div class="tab-pane fade show" id="rodado" role="tabpanel" aria-labelledby="rodado-tab">
-                        <h3 class="register-heading">Completa Rodado?</h3>
-                        <form id="form-2-rodado" method="POST" action="/permisos/rodados/create">
-                            <div class="row register-form">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="dominio" placeholder="Dominio"
-                                            value="" pattern="[a-z]{2}[\d]{3}[a-z]{2}" autocomplete="off" required tabindex="1" />
-                                    </div>                                
-                                </div>
-                                <div class="col-md-6">
-									 <div class="form-group">
-                                        <input type="text" class="form-control" name="vehiculo" placeholder="Vehiculo" value=""
-                                            autocomplete="off" required tabindex="2" />
-                                    </div>
-                                    <button class="btn btn-primary btn-block btn-granate" type="submit">
-                                        <span id="form-2-continue">Continuar</span>
-                                        <div id="form-2-spinner"
-                                            class="spinner-border d-none text-light spinner-border-sm m-1"
-                                            role="status">
-                                            <span class="sr-only">Cargando...</span>
+                        <div id="rodado-first">
+                            <h3 class="register-heading">Datos del transporte a usar</h3>
+                            <h4 class="register-subheading">¿Qué medio de transporte usás?</h2>
+                                <form id="form-2-rodado-1">
+                                    <div class="row register-form">
+                                        <div class="col-md-12">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="rodadoRadios[]"
+                                                    id="rodadoRadios1" value="1" checked>
+                                                <label class="form-check-label" for="rodadoRadios1">
+                                                    Transporte público
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="rodadoRadios[]"
+                                                    id="rodadoRadios2" value="2">
+                                                <label class="form-check-label" for="rodadoRadios2">
+                                                    Vehículo y/o Moto
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="rodadoRadios[]"
+                                                    id="rodadoRadios3" value="3">
+                                                <label class="form-check-label" for="rodadoRadios3">
+                                                    Bicicleta
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="rodadoRadios[]"
+                                                    id="rodadoRadios4" value="4">
+                                                <label class="form-check-label" for="rodadoRadios4">
+                                                    Pie
+                                                </label>
+                                            </div>
+
                                         </div>
-                                    </button>
+                                        <div class="col-md-6">
+                                            &nbsp;
+                                        </div>
+                                        <div class="col-md-6">
+                                            <button class="btn btn-primary btn-block btn-granate" type="submit">
+                                                <span id="form-2-1-continue">Continuar</span>
+                                                <div id="form-2-1-spinner"
+                                                    class="spinner-border d-none text-light spinner-border-sm m-1"
+                                                    role="status">
+                                                    <span class="sr-only">Cargando...</span>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                        </div>
+                        <div id="rodado-second" style="display: none;">
+                            <h3 class="register-heading">Completa los datos del Rodado</h3>
+                            <form id="form-2-rodado-2" method="POST" action="/permisos/rodados/create">
+                                <div class="row register-form">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="dominio" placeholder="Dominio"
+                                                value=""
+                                                pattern="[a-zA-Z]{2,2}[0-9]{3,3}[a-zA-Z]{2,2}|[a-zA-Z]{3,3}[0-9]{3,3}"
+                                                autocomplete="off" required tabindex="1" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+     
+                                        <input class="form-control" list="datalistOptions" id="rodadoDataList"
+                                            placeholder="Tipo de Vehículos..." name="vehiculo" required>
+                                        <datalist id="datalistOptions">
+                                            <option value="Motocicleta">
+                                            <option value="Motocarro">
+                                            <option value="Automóvil de tres ruedas">
+                                            <option value="Autobús">
+                                            <option value="Trolebús">
+                                            <option value="Automóvil" selected>
+                                            <option value="Camión">
+                                            <option value="Autobús">
+                                            <option value="Furgón">
+                                            <option value="Tractor">
+                                            <option value="Motocultor">
+                                        </datalist>
+
+                                        <button class="btn btn-primary btn-block btn-granate" type="submit">
+                                            <span id="form-2-continue">Continuar</span>
+                                            <div id="form-2-spinner"
+                                                class="spinner-border d-none text-light spinner-border-sm m-1"
+                                                role="status">
+                                                <span class="sr-only">Cargando...</span>
+                                            </div>
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                     <!-- Tab de Lugar-->
                     <div class="tab-pane fade show" id="lugar" role="tabpanel" aria-labelledby="lugar-tab">
@@ -113,12 +187,13 @@
                                     <div class="form-group">
                                         <input type="text" class="form-control" name="lugar" placeholder="Lugar"
                                             value="" autocomplete="off" required tabindex="1" />
-                                    </div>                                
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
-									 <div class="form-group">
-                                        <input type="text" class="form-control" name="codigoPostal" placeholder="Codigo Postal" value=""
-                                            autocomplete="off" required tabindex="2" />
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="codigoPostal"
+                                            placeholder="Codigo Postal" value="" autocomplete="off" required
+                                            tabindex="2" />
                                     </div>
                                     <button class="btn btn-primary btn-block btn-granate" type="submit">
                                         <span id="form-2-continue">Continuar</span>
