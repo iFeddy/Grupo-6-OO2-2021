@@ -6,11 +6,11 @@ $(function () {
     let lugar_destino;
 
     let permiso_tipo;
+    let permiso_fecha;
 
     let motivo_desc;
     let motivo_vacaciones;
     let motivo_dias;
-
 
     //Form 1
     $("#form-1-persona").on("submit", (function (event) {
@@ -181,8 +181,6 @@ $(function () {
 
         if ($("#motivo-permiso").val() != undefined) {
 
-            toastr.success('Motivo cargado Exitosamente', 'Carga Correcta');
-
             $("#info-motivo-permiso").text(permisoMotivoText);
             $("#info-motivo").removeClass("d-none");
 
@@ -254,13 +252,25 @@ $(function () {
     $("#form-6-fecha").on("submit", (function (event) {
         event.preventDefault();
         //Activa el spinner
-        $("#form-5-continue").addClass("d-none");
-        $("#form-5-spinner").removeClass("d-none");
+        $("#form-6-continue").addClass("d-none");
+        $("#form-6-spinner").removeClass("d-none");
 
-       
+        permiso_fecha = $("#permiso-fecha").val();
+        console.log(persona);
+        console.log(rodado);
+        console.log(lugar_salida);
+        console.log(lugar_destino);
 
-        $("#form-5-continue").removeClass("d-none");
-        $("#form-5-spinner").addClass("d-none");
+        console.log(permiso_tipo);
+        console.log(permiso_fecha);
+
+        console.log(motivo_desc);
+        console.log(motivo_vacaciones);
+        console.log(motivo_dias);
+
+
+        $("#form-6-continue").removeClass("d-none");
+        $("#form-6-spinner").addClass("d-none");
     }));
 
 
