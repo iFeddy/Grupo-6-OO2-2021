@@ -13,10 +13,10 @@ import com.unla.app.entities.PermisosDiario;
 @Repository("permisoDiarioRepository")
 public interface IPermisoDiarioRepository extends JpaRepository<PermisosDiario, Serializable> {
 	
-	@Query(nativeQuery=true,value="Select p.*, pd.* from permiso p, permiso_diario pd where p.id_permiso=pd.id_permiso and p.pedido_id=(:id)")
+	@Query(nativeQuery=true,value="Select p.*, pd.* from permisos p, permisos_diario pd where p.id_permiso=pd.id_permiso and p.pedido_id=(:id)")
 	public List<PermisosDiario> traerPorPersona(int id);
 	
 	
-	@Query(nativeQuery=true,value="Select p.*, pd.* from permiso p, permiso_diario pd where p.id_permiso=pd.id_permiso and p.fecha between (:fechaInicio) and (:fechaFin)")
+	@Query(nativeQuery=true,value="Select p.*, pd.* from permisos p, permisos_diario pd where p.id_permiso=pd.id_permiso and p.fecha between (:fechaInicio) and (:fechaFin)")
 	public List<PermisosDiario> traerPorFecha(LocalDate fechaInicio, LocalDate fechaFin);
 }
