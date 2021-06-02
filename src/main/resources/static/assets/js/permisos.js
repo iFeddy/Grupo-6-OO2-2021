@@ -148,7 +148,7 @@ $(function () {
         let lugarSalidaText = $("#lugar-salida option:selected").text();
         let lugarDestinoText = $("#lugar-destino option:selected").text();
 
-        if($("#lugar-salida").val() != undefined && $("#lugar-destino").val() != undefined){            
+        if ($("#lugar-salida").val() != undefined && $("#lugar-destino").val() != undefined) {
             lugar_salida = $("#lugar-salida").val();
             lugar_destino = $("#lugar-destino").val();
 
@@ -161,7 +161,7 @@ $(function () {
             //Abrimos el tercer tab
             $("#motivo-tab").trigger("click");
 
-        }else{
+        } else {
             toastr.error('Por favor Completa todos los datos', 'Datos Incompletos');
         }
 
@@ -179,7 +179,7 @@ $(function () {
 
         let permisoMotivoText = $("#motivo-permiso option:selected").text();
 
-        if($("#motivo-permiso").val() != undefined ){ 
+        if ($("#motivo-permiso").val() != undefined) {
 
             toastr.success('Motivo cargado Exitosamente', 'Carga Correcta');
 
@@ -187,21 +187,21 @@ $(function () {
             $("#info-motivo").removeClass("d-none");
 
             $("#motivo-1").fadeOut();
-            if($("#motivo-permiso").val() == "1"){   
-                permiso_tipo = 1;             
+            if ($("#motivo-permiso").val() == "1") {
+                permiso_tipo = 1;
                 setTimeout(() => {
                     $("#motivo-2").fadeIn();
                 }, 500);
             }
 
-            if($("#motivo-permiso").val() == "2"){  
-                permiso_tipo = 2;              
+            if ($("#motivo-permiso").val() == "2") {
+                permiso_tipo = 2;
                 setTimeout(() => {
                     $("#motivo-3").fadeIn();
                 }, 500);
             }
 
-        }else{
+        } else {
             toastr.error('Por favor Completa todos los datos', 'Datos Incompletos');
         }
 
@@ -214,15 +214,15 @@ $(function () {
         event.preventDefault();
         //Activa el spinner
         $("#form-5-continue").addClass("d-none");
-        $("#form-5-spinner").removeClass("d-none");        
+        $("#form-5-spinner").removeClass("d-none");
 
-        if($("#motivo-permiso-descripcion").val() != undefined ){ 
+        if ($("#motivo-permiso-descripcion").val() != undefined) {
 
             toastr.success('Motivo cargado Exitosamente', 'Carga Correcta');
             motivo_desc = $("#motivo-permiso-descripcion").val();
-            $("#fecha-tab").trigger("click");                 
+            $("#fecha-tab").trigger("click");
 
-        }else{
+        } else {
             toastr.error('Por favor Completa todos los datos', 'Datos Incompletos');
         }
 
@@ -237,7 +237,7 @@ $(function () {
         $("#form-5-continue").addClass("d-none");
         $("#form-5-spinner").removeClass("d-none");
 
-        motivo_vacaciones = $("#motivo-vacaciones").prop("checked");      
+        motivo_vacaciones = $("#motivo-vacaciones").prop("checked");
         motivo_dias = $("#motivo-cant-dias").val();
         console.log(motivo_dias);
 
@@ -250,6 +250,20 @@ $(function () {
         $("#form-5-spinner").addClass("d-none");
     }));
 
+    //Ultimo Form
+    $("#form-6-fecha").on("submit", (function (event) {
+        event.preventDefault();
+        //Activa el spinner
+        $("#form-5-continue").addClass("d-none");
+        $("#form-5-spinner").removeClass("d-none");
+
+       
+
+        $("#form-5-continue").removeClass("d-none");
+        $("#form-5-spinner").addClass("d-none");
+    }));
+
+
     function mostrarError(num) {
         if (num == 404) {
             toastr.error('Página no Encontrada', 'Error 404');
@@ -259,4 +273,10 @@ $(function () {
             toastr.error('Se ha detectado un Error Inesperado', 'Error');
         }
     }
+
+    $('.input-group.date').datepicker({
+        format: "yyyy-mm-dd",
+        language: "es"
+    });
+
 });

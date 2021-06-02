@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/assets/css/bootstrap.css">
     <link rel="stylesheet" href="/assets/css/permisos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link href="/assets/css/bootstrap-datepicker.css" rel="stylesheet" />
 </head>
 
 <body style="background-color: #edf1f5;">
@@ -27,7 +28,7 @@
                         Dominio: <strong id="info-rodado-dominio"></strong><br />
                         Tipo: <strong id="info-rodado-vehiculo"></strong>
                     </div>
-                </div>              
+                </div>
                 <div id="info-lugar" class="px-4 d-none">
                     <i class="fas fa-map-marker-alt"></i> <strong id="info-lugar-salida"></strong> <i
                         class="fas fa-arrow-right mx-2"></i> <i class="fas fa-map-marker-alt"></i>
@@ -269,9 +270,11 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <div class="form-group">
-                                                <label for="exampleFormControlTextarea1">¿Cuál es el Motivo del Permiso?</label>
-                                                <textarea class="form-control" id="motivo-permiso-descripcion" rows="6" required></textarea>
-                                              </div>
+                                                <label for="exampleFormControlTextarea1">¿Cuál es el Motivo del
+                                                    Permiso?</label>
+                                                <textarea class="form-control" id="motivo-permiso-descripcion" rows="6"
+                                                    required></textarea>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -297,16 +300,18 @@
                                 <div class="row register-form">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="number" class="form-control" name="cant-dias" id="motivo-cant-dias" placeholder="Cantidad de Días"
-                                                value="" autocomplete="off" min=1 max=30 required tabindex="1" />
+                                            <input type="number" class="form-control" name="cant-dias"
+                                                id="motivo-cant-dias" placeholder="Cantidad de Días" value=""
+                                                autocomplete="off" min=1 max=30 required tabindex="1" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="motivo-vacaciones">
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                    id="motivo-vacaciones">
                                                 <label class="form-check-label" for="defaultCheck1">
-                                                  Motivo por Vacaciones
+                                                    Motivo por Vacaciones
                                                 </label>
                                             </div>
                                         </div>
@@ -332,9 +337,28 @@
                     </div>
                     <!-- Tab de Fecha-->
                     <div class="tab-pane fade show" id="fecha" role="tabpanel" aria-labelledby="fecha-tab">
-                        <h3 class="register-heading">Completa Datos de Fecha</h3>
-                        <form id="form-4-fecha-1" method="POST" action="/permisos/lugares/create">
-                            Fechas aca si es un dia o muchos dias
+                        <h3 class="register-heading">Seleccionar Fecha</h3>
+                        <form id="form-6-fecha" method="POST" action="/permisos/lugares/create">
+                            <div class="row register-form">
+                                <div class="col-md-12 my-2">
+                                    <i class="far fa-calendar-alt mr-2"></i> Seleccionar Fecha del Permiso
+                                </div>
+                                <div class="col-md-6">                                    
+                                    <div class="input-group date">
+                                        <input type="text" class="form-control" required><span class="input-group-addon"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6" style="margin-top: -4%;">                                
+                                    <button class="btn btn-primary btn-block btn-granate" type="submit">
+                                        <span id="form-6-continue">Solicitar Permiso</span>
+                                        <div id="form-6-spinner"
+                                            class="spinner-border d-none text-light spinner-border-sm m-1"
+                                            role="status">
+                                            <span class="sr-only">Cargando...</span>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -345,6 +369,9 @@
     <script src="/assets/js/jquery.js"></script>
     <script src="/assets/js/popper.js"></script>
     <script src="/assets/js/bootstrap.js"></script>
+    <script src="/assets/js/bootstrap-datepicker.js"></script>
+    <script src="/assets/locales/bootstrap-datepicker.es.min.js"></script>
+
     <script src="/assets/js/permisos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js"></script>
