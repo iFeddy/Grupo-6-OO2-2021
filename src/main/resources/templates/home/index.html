@@ -25,7 +25,7 @@
 				<li class="nav-item active"></li>
 			</ul>
 			<!-- Guest -->
-			<ul class="navbar-nav mr-2" th:if="${user == null}">			
+			<ul class="navbar-nav mr-2" th:if="${user == null}">
 				<li class="nav-item mx-1"><a class="btn btn-outline nav-link px-3" th:href="@{/login}"><i
 							class="fas fa-sign-in-alt mx-2"></i>Ingresar al Sistema</a>
 				</li>
@@ -65,18 +65,37 @@
 					<div class="col-lg-6 mbr-col-md-10">
 						<a class="text-dark text-decoration-none" href="/permisos">
 							<div class="wrap">
-							<div class="ico-wrap">
-								<span class="mbr-iconfont fa-route fas"></span>
+								<div class="ico-wrap">
+									<span class="mbr-iconfont fa-route fas"></span>
+								</div>
+								<div class="text-wrap vcenter">
+									<h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">Solicitar un
+										Permiso</h2>
+									<p class="mbr-fonts-style text1 mbr-text display-6">Solicitá un permiso para viajar,
+										seleccionado
+										fechas, destino y rodado
+									</p>
+								</div>
 							</div>
-							<div class="text-wrap vcenter">
-								<h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">Solicitar un Permiso</h2>
-								<p class="mbr-fonts-style text1 mbr-text display-6">Solicitá un permiso para viajar, seleccionado 
-									fechas, destino y rodado
-								</p>
+						</a>
+					</div>
+					<div class="col-lg-6 mbr-col-md-10">
+						<a class="text-dark text-decoration-none" href="#" data-toggle="modal"
+							data-target="#buscarModal">
+							<div class="wrap">
+								<div class="ico-wrap">
+									<span class="mbr-iconfont fab fa-searchengin"></span>
+								</div>
+								<div class="text-wrap vcenter">
+									<h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">Buscar Permisos
+									</h2>
+									<p class="mbr-fonts-style text1 mbr-text display-6">Buscar el estado de tu Permiso
+										con tu número de documento (DNI)
+									</p>
+								</div>
 							</div>
-						</div>
-					</a>
-					</div>					
+						</a>
+					</div>
 				</div>
 
 			</div>
@@ -118,11 +137,6 @@
 								</div>
 								<div>
 									<a> <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>Castillo,
-										Ivan Luciano</a>
-								</div>
-								<div>
-									<a> <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>Perez,
 										Federico Bernardo</a>
 								</div>
@@ -146,6 +160,84 @@
 			</div>
 		</div>
 	</main>
+
+	<!-- Modal -->
+	<div class="modal fade" id="buscarModal" tabindex="-1" role="dialog" aria-labelledby="buscarModal"
+		aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h6 class="modal-title font-weight-bold"><span class="fab fa-searchengin"></span> Buscar Permiso
+					</h6>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="alert alert-danger alert-dismissible fade show" role="alert">
+						<b>Error</b>: La <strong>Persona</strong> no se encuentra en la base de datos.
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
+					<div class="col-md-12">
+						<div class="form-group">
+							<input type="text" class="form-control" name="nombre" placeholder="Nombre" value=""
+								autocomplete="off" required tabindex="1" />
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" name="apellido" placeholder="Apellido" value=""
+								autocomplete="off" required tabindex="2" />
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="form-group">
+							<input type="text" class="form-control" name="dni" placeholder="DNI" value=""
+								pattern="[0-9]{7,8}" autocomplete="off" required tabindex="3" />
+						</div>
+					</div>
+
+					<hr>
+
+					<div class="container">
+						<h5>Listado de Permisos Solicitados</h5>
+						<div class="list-group my-2">
+							<a href="#" class="list-group-item list-group-item-action"><b>Nombre y Apellido</b> -
+								<b>35123321</b> - Permiso Especial - Fecha: <b>10/06/2021</b>
+								<div class="text-muted float-right">Ver Permiso</div>
+							</a>
+							<a href="#" class="list-group-item list-group-item-action"><b>Nombre y Apellido</b> -
+								<b>35123321</b> - Permiso Especial - Fecha: <b>10/06/2021</b>
+								<div class="text-muted float-right">Ver Permiso</div>
+							</a>
+							<a href="#" class="list-group-item list-group-item-action"><b>Nombre y Apellido</b> -
+								<b>35123321</b> - Permiso Especial - Fecha: <b>10/06/2021</b>
+								<div class="text-muted float-right">Ver Permiso</div>
+							</a>
+							<a href="#" class="list-group-item list-group-item-action"><b>Nombre y Apellido</b> -
+								<b>35123321</b> - Permiso Especial - Fecha: <b>10/06/2021</b>
+								<div class="text-muted float-right">Ver Permiso</div>
+							</a>
+							<a href="#" class="list-group-item list-group-item-action"><b>Nombre y Apellido</b> -
+								<b>35123321</b> - Permiso Especial - Fecha: <b>10/06/2021</b>
+								<div class="text-muted float-right">Ver Permiso</div>
+							</a>
+							<a href="#" class="list-group-item list-group-item-action"><b>Nombre y Apellido</b> -
+								<b>35123321</b> - Permiso Especial - Fecha: <b>10/06/2021</b>
+								<div class="text-muted float-right">Ver Permiso</div>
+							</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-primary">Buscar</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<script src="/assets/js/jquery.js"></script>
 	<script src="/assets/js/popper.js"></script>
