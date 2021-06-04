@@ -1,4 +1,4 @@
-package com.unla.app.services;
+package com.unla.app.services.implementation;
 
 import java.util.List;
 
@@ -10,17 +10,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.unla.app.entities.Lugares;
 import com.unla.app.repositories.ILugarRepository;
-
-
+import com.unla.app.services.ILugarService;
 
 @Service("lugarService")
-public class LugaresServicesImpl implements ILugarService {
+public class LugaresServices implements ILugarService {
 
 	@Autowired
 	@Qualifier("lugarRepository")
 	private ILugarRepository iLugarRepository;
-	
-	
+		
 	@Override
 	@Transactional(readOnly = true)
 	public List<Lugares> findAll() {

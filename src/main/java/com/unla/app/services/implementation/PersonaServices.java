@@ -1,4 +1,4 @@
-package com.unla.app.services;
+package com.unla.app.services.implementation;
 
 import java.util.List;
 
@@ -11,9 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.unla.app.entities.Personas;
 import com.unla.app.repositories.IPersonaRepository;
+import com.unla.app.services.IPersonaService;
 
 @Service("personaService")
-public class PersonaServicesImpl implements IPersonaService {
+public class PersonaServices implements IPersonaService {
 
 	@Autowired
 	@Qualifier("personaRepository")
@@ -33,7 +34,7 @@ public class PersonaServicesImpl implements IPersonaService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Personas findOneByDNI(Long dni) {
+	public Personas findOneByDNI(int dni) {
 		return iPersonaRepository.findByDni(dni).orElse(null);
 	}
 	

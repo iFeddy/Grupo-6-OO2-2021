@@ -19,6 +19,6 @@ public interface IPersonaService {
 
 	public void delete(Long id);
 
-	public Personas findOneByDNI(Long dni);
+	public Personas findOneByDNI(int dni);
 
 }
