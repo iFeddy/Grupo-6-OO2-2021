@@ -2,6 +2,7 @@ package com.unla.app.repositories;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
+import java.util.Optional;
 
 import com.unla.app.entities.Personas;
 
@@ -10,6 +11,6 @@ public interface IPersonaRepository extends PagingAndSortingRepository<Personas,
 
     Personas findById(long idPersona);
 
-    Personas findByDni(int dni);
-
+    Optional<Personas> findByDni(int dni);
+	    
 }
