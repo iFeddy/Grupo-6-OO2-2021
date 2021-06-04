@@ -12,7 +12,7 @@ public class PermisoDiarioModel extends PermisoModel {
 	
 	public PermisoDiarioModel() {
 		super();
-		this.motivo = new String();
+		motivo = new String();
 	}
 
 	public PermisoDiarioModel(int idPermiso, PersonaModel persona, Date fecha, List<LugarModel> desdeHasta, String motivo) {

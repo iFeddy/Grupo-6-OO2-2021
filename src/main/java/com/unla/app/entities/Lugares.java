@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -93,4 +96,9 @@ public class Lugares {
 			"}";
 	}
 
+	public String toJson(Lugares lugar) throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonString = mapper.writeValueAsString(lugar);
+		return jsonString;
+	}
 }

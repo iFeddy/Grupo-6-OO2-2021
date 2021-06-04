@@ -49,7 +49,7 @@ $(function () {
                 //Ocultamos la info general
                 $("#info-general").fadeOut();
                 //Actualizamos la info de persona y la mostramos
-                $("#info-name").text(persona.nombre);
+                $("#info-name").text(persona.nombre + " " + persona.apellido);
                 $("#info-dni").text(persona.dni);
                 $("#info-persona").removeClass("d-none");
             }
@@ -273,16 +273,35 @@ $(function () {
             url = $form.attr("action");
 
         //Envia Petición a Servidor
+        var permisoDiario = new Object();
+
+        permisoDiario.idPermiso = 0;
+        permisoDiario.persona = persona;
+        permisoDiario.fecha = permiso_fecha;
+        permisoDiario.desdeHasta = new Array(
+                jQuery.parseJSON(lugar_salida),
+                jQuery.parseJSON(lugar_destino)
+        );
+        permisoDiario.motivo = motivo_desc;
+        console.log(permisoDiario);
+
+        $.ajax({
+            url: url,
+            type:"POST",
+            contentType:"application/json; charset=utf-8",
+            dataType:"json",
+            data: JSON.stringify(permisoDiario),           
+        /*
         $.post(url, {
-            persona: persona,
-            rodado: rodado,
-            lugar_salida: lugar_salida,
-            lugar_destino: lugar_destino,
+            persona: JSON.stringify(persona),
+            rodado: JSON.stringify(rodado),
+            lugar_salida: JSON.stringify(lugar_salida),
+            lugar_destino: JSON.stringify(lugar_destino),
             permiso_tipo: permiso_tipo,
             permiso_fecha: permiso_fecha,
             motivo_desc: motivo_desc,
             motivo_vacaciones: motivo_vacaciones,
-            motivo_dias: motivo_dias
+            motivo_dias: motivo_dias*/
         }).done(function (data) {
             //Si termina con status 200
             console.log(data);

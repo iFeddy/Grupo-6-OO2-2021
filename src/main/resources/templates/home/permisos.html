@@ -206,7 +206,7 @@
                                     <div class="form-group">
                                         <select class="custom-select" name="salida" id="lugar-salida" required>
                                             <option selected disabled>Seleccionar Salida</option>
-                                            <option th:each="lugar: ${lugares}" th:value="${lugar}"
+                                            <option th:each="lugar: ${lugares}" th:value="${lugar.toJson(lugar)}"
                                                 th:text="${lugar.lugar}"></option>
                                         </select>
                                     </div>
@@ -215,7 +215,7 @@
                                     <div class="form-group">
                                         <select class="custom-select" name="destino" id="lugar-destino" required>
                                             <option selected disabled>Seleccionar Destino</option>
-                                            <option th:each="lugar: ${lugares}" th:value="${lugar}"
+                                            <option th:each="lugar: ${lugares}" th:value="${lugar.toJson(lugar)}"
                                                 th:text="${lugar.lugar}"></option>
                                         </select>
                                     </div>
