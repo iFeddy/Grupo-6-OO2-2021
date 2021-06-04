@@ -44,7 +44,14 @@
 		this.updatedAt = updatedAt;
 	}
 
-	public Long getIdRodado() {
+	public Rodados(long idRodado, String dominio, String vehiculo) {
+		super();
+		this.idRodado = idRodado;
+		this.dominio = dominio;
+		this.vehiculo = vehiculo;
+    }
+
+    public Long getIdRodado() {
 		return idRodado;
 	}
 

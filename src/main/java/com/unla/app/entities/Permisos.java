@@ -1,7 +1,10 @@
 package com.unla.app.entities;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,13 +14,21 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name="permisos")
+@DynamicInsert(true)
+@DynamicUpdate(true)
+@Table(name = "permisos")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Permisos {
 	
@@ -25,34 +36,40 @@ public abstract class Permisos {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected int idPermiso;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="persona_id", nullable=false)
+	@ManyToOne(optional = false, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JoinColumn(name = "idPersona", nullable = false)
 	protected Personas persona;
 	
-	@Column(name="fecha")
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "fecha")
 	protected LocalDate fecha;
 	
+	@JoinTable(
+			name = "permisoxlugar",
+			joinColumns = @JoinColumn(name="FK_permiso", nullable = false),
+			inverseJoinColumns = @JoinColumn(name="FK_lugar", nullable = false)
+	)
+	@ManyToMany(fetch = FetchType.LAZY)	
+	@OrderBy("createAt")
+	protected Set<Lugares> desdeHasta;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="lugar_salida_id", nullable=false)
-	protected Lugares lugarSalida;
+	@Column(name = "createdat")
+	@CreationTimestamp
+	private LocalDateTime createAt;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="lugar_llegada_id", nullable=false)
-	protected Lugares lugarLlegada;
-
+	@Column(name = "updatedat") 
+	@UpdateTimestamp
+	private LocalDateTime updateAt;
+	
 	public Permisos() {
-		super();
+		
 	}
-
-	public Permisos(int idPermiso, Personas persona, LocalDate fecha, Lugares lugarSalida, Lugares lugarLlegada) {
+	
+	public Permisos(int idPermiso, Personas persona, LocalDate fecha, Set<Lugares> desdeHasta) {
 		super();
 		this.idPermiso = idPermiso;
 		this.persona = persona;
 		this.fecha = fecha;
-		this.lugarSalida = lugarSalida;
-		this.lugarLlegada = lugarLlegada;
+		this.desdeHasta = desdeHasta;
 	}
 
 	public int getIdPermiso() {
@@ -67,7 +84,7 @@ public abstract class Permisos {
 		return persona;
 	}
 
-	public void setPedido(Personas persona) {
+	public void setPersona(Personas persona) {
 		this.persona = persona;
 	}
 
@@ -79,20 +96,40 @@ public abstract class Permisos {
 		this.fecha = fecha;
 	}
 
-	public Lugares getLugarSalida() {
-		return lugarSalida;
+	public Set<Lugares> getDesdeHasta() {
+		return desdeHasta;
 	}
 
-	public void setLugarSalida(Lugares lugarSalida) {
-		this.lugarSalida = lugarSalida;
+	public void setDesdeHasta(Set<Lugares> desdeHasta) {
+		this.desdeHasta = desdeHasta;
 	}
 
-	public Lugares getLugarLlegada() {
-		return lugarLlegada;
+	public LocalDateTime getCreateAt() {
+		return createAt;
 	}
 
-	public void setLugarLlegada(Lugares lugarLlegada) {
-		this.lugarLlegada = lugarLlegada;
+	public void setCreateAt(LocalDateTime createAt) {
+		this.createAt = createAt;
 	}
+
+	public LocalDateTime getUpdateAt() {
+		return updateAt;
+	}
+
+	public void setUpdateAt(LocalDateTime updateAt) {
+		this.updateAt = updateAt;
+	}
+
+	@Override
+	public String toString() {
+		return "{" +
+			" idPermiso='" + getIdPermiso() + "'" +
+			", persona='" + getPersona() + "'" +
+			", fecha='" + getFecha() + "'" +
+			", desdeHasta='" + getDesdeHasta() + "'" +
+			", createAt='" + getCreateAt() + "'" +
+			", updateAt='" + getUpdateAt() + "'" +
+			"}";
+	}
+	
 }
-
