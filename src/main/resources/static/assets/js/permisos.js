@@ -269,8 +269,33 @@ $(function () {
         console.log(motivo_dias);
 
 
-        $("#form-6-continue").removeClass("d-none");
-        $("#form-6-spinner").addClass("d-none");
+        var $form = $(this),
+            url = $form.attr("action");
+
+        //Envia Petición a Servidor
+        $.post(url, {
+            persona: persona,
+            rodado: rodado,
+            lugar_salida: lugar_salida,
+            lugar_destino: lugar_destino,
+            permiso_tipo: permiso_tipo,
+            permiso_fecha: permiso_fecha,
+            motivo_desc: motivo_desc,
+            motivo_vacaciones: motivo_vacaciones,
+            motivo_dias: motivo_dias
+        }).done(function (data) {
+            //Si termina con status 200
+            console.log(data);
+        }).fail(function (error) {
+            //Si existe algun error
+            console.log(error);
+            mostrarError(error.status);
+        }).always(() => {
+            //Cambia los iconos del boton 1 
+            $("#form-6-continue").removeClass("d-none");
+            $("#form-6-spinner").addClass("d-none");
+        });
+     
     }));
 
 

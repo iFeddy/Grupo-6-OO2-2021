@@ -20,7 +20,7 @@ public class PersonasController {
     @Autowired
     private IPersonaService personaService;
 
-    @PostMapping({ "personas/create", "index", "permisos.index" })
+    @PostMapping({ "personas/create", "index", "personas.index" })
     public Personas store(@Valid Personas persona, BindingResult result, Model model) {
         // Falta Validar persona
         Personas existePersona = null;
@@ -35,6 +35,17 @@ public class PersonasController {
         
         // Devuelve en JSON la Persona
         return persona;
+    }
+
+    @PostMapping({ "personas/show", "show", "personas.show" })
+    public Personas show(@Valid Personas persona, BindingResult result, Model model) {        
+        Personas buscarPersona = null;
+        buscarPersona = personaService.findOneByDNI(persona.getDni());
+        if(buscarPersona != null){
+            return buscarPersona;         
+        }        
+        //devuelve persona vacia
+        return new Personas();
     }
 
 }
