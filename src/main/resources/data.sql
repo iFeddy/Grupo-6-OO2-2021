@@ -43,3 +43,13 @@ INSERT INTO `lugares` (`id_lugar`, `codigo_postal`, `createdat`, `lugar`, `updat
 INSERT INTO `lugares` (`id_lugar`, `codigo_postal`, `createdat`, `lugar`, `updatedat`) VALUES (8, '1878', '2021-06-02 12:52:44.000000', 'Quilmes', '2021-06-02 12:52:48.000000');
 INSERT INTO `lugares` (`id_lugar`, `codigo_postal`, `createdat`, `lugar`, `updatedat`) VALUES (9, '1900', '2021-06-02 12:53:04.000000', 'La Plata', '2021-06-02 12:53:07.000000');
 INSERT INTO `lugares` (`id_lugar`, `codigo_postal`, `createdat`, `lugar`, `updatedat`) VALUES (10, '1714', '2021-06-02 12:53:31.000000', 'Ituzaingo', '2021-06-03 12:53:32.000000');
+
+INSERT INTO `personas` (`id_persona`, `apellido`, `createdat`, `dni`, `nombre`, `updatedat`) VALUES (1, 'Ramirez', '2021-06-04 18:19:53.000000', 10000000, 'Juan', '2021-06-03 18:19:59.000000');
+INSERT INTO `personas` (`id_persona`, `apellido`, `createdat`, `dni`, `nombre`, `updatedat`) VALUES (2, 'Perez', '2021-06-04 18:20:09.000000', 1000000, 'Natalia', '2021-06-04 18:20:16.000000');
+INSERT INTO `personas` (`id_persona`, `apellido`, `createdat`, `dni`, `nombre`, `updatedat`) VALUES (3, 'Sanchez', '2021-06-04 18:20:33.000000', 99999999, 'Julian', '2021-06-04 18:20:42.000000');
+INSERT INTO `personas` (`id_persona`, `apellido`, `createdat`, `dni`, `nombre`, `updatedat`) VALUES (4, 'Montalvo', '2021-06-04 18:20:53.000000', 10101010, 'Monica', '2021-06-04 18:21:14.000000');
+INSERT INTO `personas` (`id_persona`, `apellido`, `createdat`, `dni`, `nombre`, `updatedat`) VALUES (5, 'Nogueira', '2021-06-04 18:21:26.000000', 11111111, 'Ricardo', '2021-06-04 18:21:14.000000');
+
+INSERT INTO `rodados` (`id_rodado`, `createdat`, `dominio`, `updatedat`, `vehiculo`) VALUES (1, '2021-06-04 18:22:26.000000', 'AB123AB', '2021-06-04 18:22:30.000000', 'Automovil');
+INSERT INTO `rodados` (`id_rodado`, `createdat`, `dominio`, `updatedat`, `vehiculo`) VALUES (2, '2021-06-04 18:22:50.000000', 'AB000AB', '2021-06-04 18:22:54.000000', 'Camion');
+INSERT INTO `rodados` (`id_rodado`, `createdat`, `dominio`, `updatedat`, `vehiculo`) VALUES (3, '2021-06-04 18:23:04.000000', 'ABC123', '2021-06-04 18:23:10.000000', 'Moto');
