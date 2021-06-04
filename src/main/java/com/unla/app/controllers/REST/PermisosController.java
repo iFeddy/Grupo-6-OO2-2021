@@ -1,4 +1,4 @@
-package com.unla.app.controllers;
+package com.unla.app.controllers.REST;
 
 import java.util.Optional;
 
@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @RestController
 @RequestMapping("/")
-public class PermisosRestController {
+public class PermisosController {
     @RequestMapping(value = "/permisos/create", method = RequestMethod.POST)
     public String store(@RequestParam(required = true) Optional<Personas> persona,
             @RequestParam(required = false) Optional<Rodados> rodado, @RequestParam("salida") Optional<Lugares> salida,
