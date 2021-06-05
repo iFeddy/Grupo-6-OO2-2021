@@ -10,6 +10,8 @@ import javax.validation.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.istack.NotNull;
 
 public class PermisoModel {
@@ -80,7 +82,6 @@ public class PermisoModel {
 		this.fechaString = fechaString;
 	}
 
-
 	@Override
 	public boolean equals(Object o) {
 		if (o == this)
@@ -97,12 +98,17 @@ public class PermisoModel {
 		return Objects.hash(idPermiso, persona, fecha, desdeHasta, fechaString);
 	}
 
-
 	@Override
 	public String toString() {
 		return "{" + " idPermiso='" + getIdPermiso() + "'" + ", persona='" + getPersona() + "'" + ", fecha='"
 				+ getFecha() + "'" + ", desdeHasta='" + getDesdeHasta() + "'" + ", fechaString='" + getFechaString()
 				+ "'" + "}";
+	}
+
+	public String toJson(PermisoModel permiso) throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonString = mapper.writeValueAsString(permiso);
+		return jsonString;
 	}
 
 }

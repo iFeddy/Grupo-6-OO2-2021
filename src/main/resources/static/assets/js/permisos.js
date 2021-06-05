@@ -77,7 +77,10 @@ $(function () {
                 tipoRodadoText = $(this).next('label').text();
             }
         });
+        console.log(tipoRodado);
         if (tipoRodado != 2) {
+
+            $("#lugar-tab").removeClass("disabled");
             //Abrimos el tercer  tab
             $("#lugar-tab").trigger("click");
 
@@ -121,6 +124,8 @@ $(function () {
                 toastr.success('Rodado cargado Exitosamente', 'Carga Correcta');
                 //Guardamos el rodado en la variable global
                 rodado = data;
+
+                $("#lugar-tab").removeClass("disabled");
                 //Abrimos el tercer tab
                 $("#lugar-tab").trigger("click");
 
@@ -160,6 +165,7 @@ $(function () {
 
                 toastr.success('Lugares de Salida y Destino cargados Exitosamente', 'Carga Correcta');
 
+                $("#motivo-tab").removeClass("disabled");
                 //Abrimos el tercer tab
                 $("#motivo-tab").trigger("click");
             } else {
@@ -227,6 +233,8 @@ $(function () {
 
             toastr.success('Motivo cargado Exitosamente', 'Carga Correcta');
             motivo_desc = $("#motivo-permiso-descripcion").val();
+
+            $("#fecha-tab").removeClass("disabled");
             $("#fecha-tab").trigger("click");
 
         } else {
@@ -250,6 +258,7 @@ $(function () {
 
         toastr.success('Motivos cargados Exitosamente', 'Carga Correcta');
 
+        $("#fecha-tab").removeClass("disabled");
         //Abrimos ultimo tab
         $("#fecha-tab").trigger("click");
 

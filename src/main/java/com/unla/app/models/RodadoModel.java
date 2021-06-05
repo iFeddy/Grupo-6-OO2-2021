@@ -58,7 +58,7 @@ public class RodadoModel {
 	}
 
 	@Override
-	public String toString() {
+	public String toString() {		
 		return "{" +
 			" idRodado='" + getIdRodado() + "'" +
 			", dominio='" + getDominio() + "'" +
