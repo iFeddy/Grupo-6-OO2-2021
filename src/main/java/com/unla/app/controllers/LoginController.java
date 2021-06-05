@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.security.MessageDigest;
+
 //Session
 import javax.servlet.http.HttpSession;
+import javax.xml.bind.DatatypeConverter;
 
 @Controller
 @RequestMapping("/")
@@ -29,7 +32,7 @@ public class LoginController {
 		ModelAndView view = new ModelAndView(RouteHelper.LOGIN);
 		Users user = (Users) session.getAttribute("USER");		
 		if (user != null) {
-			return new ModelAndView("redirect:admin/dashboard");
+			return new ModelAndView("redirect:/");
 		}
 		view.addObject("title", "Iniciar Sesión - " + ConfigHelper.appName);
 		return view;
@@ -40,13 +43,26 @@ public class LoginController {
 			HttpSession session, RedirectAttributes flash) {
 		Users user = null;
 		user = usuarioService.findOneByEmail(email);
+		
+		String passwordHash;
+		try{
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(password.getBytes());
+			byte[] digest = md.digest();
+			passwordHash = DatatypeConverter
+			.printHexBinary(digest).toUpperCase();
+		}catch(Exception e){
+			flash.addFlashAttribute("message", e.getMessage());
+			return "redirect:login";
+		}
+
 		// Si el usuario no existe
 		if (user == null) {
 			flash.addFlashAttribute("message", "El usuario no se encuentra registrado.");
 			return "redirect:login";
 		}
 		// Si la contraseña es incorrecta
-		if (!password.equals(user.getPassword())) {
+		if (!passwordHash.equals(user.getPassword())) {
 			flash.addFlashAttribute("message", "Contraseña Incorrecta.");
 			return "redirect:login";
 		}

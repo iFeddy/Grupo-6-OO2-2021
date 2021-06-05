@@ -48,11 +48,14 @@
 										placeholder="***********">
 								</div>
 
-								<div class="alert alert-danger" th:if="${message != null}"><span th:text="${message}"></span></div>
+								<div class="alert alert-danger" th:if="${message != null}"><span
+										th:text="${message}"></span></div>
 
 								<input type="submit" name="login" id="login" class="btn btn-block login-btn mb-4"
 									value="Conectarse">
-
+									
+								<hr>
+								
 								<a th:href="@{/}">
 									<input name="login" id="login" class="btn btn-block login-btn mb-4" type="button"
 										value="Volver al Inicio">
