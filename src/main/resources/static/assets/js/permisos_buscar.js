@@ -37,15 +37,15 @@ $(function () {
                 }).done(function (result) {
                     $("#buscarListadoLinks").html("");
                     $("#buscarPermisosLoading").fadeOut();
-                    if(result.length == 0){
+                    if (result.length == 0) {
                         $("#buscarListadoLinks").html("<center><small class='text-muted'>No Se Encontraron Resultados</small></center>");
-                    }else{
-                        result.forEach(element => {                        
+                    } else {
+                        result.forEach(element => {
                             let permiso = jQuery.parseJSON(element);
                             console.log(permiso);
                             $("#buscarListadoLinks").append(permisosLinks(permiso.idPermiso, permiso.persona.nombre, permiso.persona.apellido, permiso.persona.dni, permiso.rodado, permiso.fecha));
-                        }); 
-                    } 
+                        });
+                    }
                 });
             } else {
                 $("#buscarError").fadeIn();
@@ -88,14 +88,14 @@ $(function () {
             "</b> - <b>" + dni + "</b> - " + tipo_permiso + " - Fecha: <b>" + timeConverter(fecha) + "</b> <div class='text-muted float-right'>Ver Permiso</div></a>";
     }
 
-    function timeConverter(UNIX_timestamp){
+    function timeConverter(UNIX_timestamp) {
         var a = new Date(UNIX_timestamp);
-        var months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+        var months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
         var year = a.getFullYear();
         var month = a.getMonth();
         var date = a.getDate();
         var time = date + '/' + month + '/' + year;
         return time;
-      }
+    }
 
 });

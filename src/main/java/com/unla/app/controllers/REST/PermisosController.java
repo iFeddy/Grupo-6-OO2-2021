@@ -1,14 +1,10 @@
 package com.unla.app.controllers.REST;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.unla.app.entities.Lugares;
-import com.unla.app.entities.Personas;
-import com.unla.app.entities.Rodados;
 import com.unla.app.helpers.ResponseHelper;
 import com.unla.app.models.PermisoDiarioModel;
 import com.unla.app.models.PermisoModel;
@@ -21,8 +17,6 @@ import com.unla.app.services.implementation.RodadoServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,14 +29,7 @@ public class PermisosController {
     @Autowired
 	@Qualifier("permisosService")
 	private PermisosServices permisoService;
-    
-    @Autowired
-	private RodadoServices rodadoService;
-
-	@Autowired
-	private LugaresServices lugarService;
-
-    
+        
     @RequestMapping(value = "/permisos/create", method = RequestMethod.POST)
     public ResponseHelper store(@RequestBody PermisoDiarioModel permisoModel,
     BindingResult bindingResult) {
@@ -76,4 +63,6 @@ public class PermisosController {
 		}
         return newList;       
     }
+
+    
 }
