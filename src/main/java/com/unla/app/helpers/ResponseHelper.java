@@ -1,15 +1,15 @@
-package com.unla.app.models;
+package com.unla.app.helpers;
 
 import java.util.Objects;
 
-public class RESTErrorModel {
+public class ResponseHelper {
     private int status;
     private String statusText;
 
-    public RESTErrorModel() {
+    public ResponseHelper() {
     }
 
-    public RESTErrorModel(int status, String statusText) {
+    public ResponseHelper(int status, String statusText) {
         this.status = status;
         this.statusText = statusText;
     }
@@ -30,12 +30,12 @@ public class RESTErrorModel {
         this.statusText = statusText;
     }
 
-    public RESTErrorModel status(int status) {
+    public ResponseHelper status(int status) {
         setStatus(status);
         return this;
     }
 
-    public RESTErrorModel statusText(String statusText) {
+    public ResponseHelper statusText(String statusText) {
         setStatusText(statusText);
         return this;
     }
@@ -44,10 +44,10 @@ public class RESTErrorModel {
     public boolean equals(Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof RESTErrorModel)) {
+        if (!(o instanceof ResponseHelper)) {
             return false;
         }
-        RESTErrorModel rESTErrorModel = (RESTErrorModel) o;
+        ResponseHelper rESTErrorModel = (ResponseHelper) o;
         return status == rESTErrorModel.status && Objects.equals(statusText, rESTErrorModel.statusText);
     }
 

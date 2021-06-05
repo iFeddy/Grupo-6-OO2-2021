@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -78,6 +79,24 @@ public class PermisoModel {
 	public void setFechaString(String fechaString) {
 		this.fechaString = fechaString;
 	}
+
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == this)
+			return true;
+		if (!(o instanceof PermisoModel)) {
+			return false;
+		}
+		PermisoModel permisoModel = (PermisoModel) o;
+		return idPermiso == permisoModel.idPermiso && Objects.equals(persona, permisoModel.persona) && Objects.equals(fecha, permisoModel.fecha) && Objects.equals(desdeHasta, permisoModel.desdeHasta) && Objects.equals(fechaString, permisoModel.fechaString);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(idPermiso, persona, fecha, desdeHasta, fechaString);
+	}
+
 
 	@Override
 	public String toString() {
