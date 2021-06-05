@@ -44,6 +44,23 @@ Para ver las Sessiones en los metodos donde se necesite, hay que agregarle (Http
 ### Session de Usuario
 Key: [USER] - Clase User
 
+## Permisos por DNI de prueba
+#
+### Natalia Perez DNI 1000000
+### Juan Ramirez DNI 10000000
+### Julian Sanchez DNI 99999999
+### Monica Montalvo DNI 10101010
+### Ricardo Nogueira DNI 11111111
+#
+
+#
+## Sessiones
+Para ver las Sessiones en los metodos donde se necesite, hay que agregarle (HttpSession session) y el metodo para traer la info de la sesion es session.getAttribute("KEY");
+
+### Session de Usuario
+Key: [USER] - Clase User
+
+
 #
 
 ## Helpers
