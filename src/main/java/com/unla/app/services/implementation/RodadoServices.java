@@ -1,4 +1,4 @@
-package com.unla.app.services;
+package com.unla.app.services.implementation;
 
 import java.util.List;
 
@@ -10,9 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.unla.app.entities.Rodados;
 import com.unla.app.repositories.IRodadoRepository;
+import com.unla.app.services.IRodadoService;
 
 @Service("rodadoService")
-public class RodadoServicesImpl implements IRodadoService  {
+public class RodadoServices implements IRodadoService  {
 	
 	@Autowired
 	@Qualifier("rodadoRepository")

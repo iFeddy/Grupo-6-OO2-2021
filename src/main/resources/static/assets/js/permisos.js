@@ -2,6 +2,7 @@ $(function () {
     //Objeto Persona
     let persona;
     let rodado;
+    let tipoRodado;
     let lugar_salida;
     let lugar_destino;
 
@@ -49,7 +50,7 @@ $(function () {
                 //Ocultamos la info general
                 $("#info-general").fadeOut();
                 //Actualizamos la info de persona y la mostramos
-                $("#info-name").text(persona.nombre);
+                $("#info-name").text(persona.nombre + " " + persona.apellido);
                 $("#info-dni").text(persona.dni);
                 $("#info-persona").removeClass("d-none");
             }
@@ -68,7 +69,7 @@ $(function () {
     //Form 2
     $("#form-2-rodado-1").on("submit", (function (event) {
         event.preventDefault();
-        let tipoRodado = 0;
+        tipoRodado = 0;
         let tipoRodadoText = "";
         $("input[name='rodadoRadios[]']").each(function () {
             if ($(this).prop("checked") == true) {
@@ -149,17 +150,21 @@ $(function () {
         let lugarDestinoText = $("#lugar-destino option:selected").text();
 
         if ($("#lugar-salida").val() != undefined && $("#lugar-destino").val() != undefined) {
-            lugar_salida = $("#lugar-salida").val();
-            lugar_destino = $("#lugar-destino").val();
+            if ($("#lugar-salida").val() != $("#lugar-destino").val()) {
+                lugar_salida = $("#lugar-salida").val();
+                lugar_destino = $("#lugar-destino").val();
 
-            $("#info-lugar-salida").text(lugarSalidaText);
-            $("#info-lugar-destino").text(lugarDestinoText);
-            $("#info-lugar").removeClass("d-none");
+                $("#info-lugar-salida").text(lugarSalidaText);
+                $("#info-lugar-destino").text(lugarDestinoText);
+                $("#info-lugar").removeClass("d-none");
 
-            toastr.success('Lugares de Salida y Destino cargados Exitosamente', 'Carga Correcta');
+                toastr.success('Lugares de Salida y Destino cargados Exitosamente', 'Carga Correcta');
 
-            //Abrimos el tercer tab
-            $("#motivo-tab").trigger("click");
+                //Abrimos el tercer tab
+                $("#motivo-tab").trigger("click");
+            } else {
+                toastr.error('No es necesario sacar permiso dentro de la misma jurisdicción', 'Error');
+            }
 
         } else {
             toastr.error('Por favor Completa todos los datos', 'Datos Incompletos');
@@ -184,8 +189,8 @@ $(function () {
             $("#info-motivo-permiso").text(permisoMotivoText);
             $("#info-motivo").removeClass("d-none");
 
-            $("#motivo-1").fadeOut();
             if ($("#motivo-permiso").val() == "1") {
+                $("#motivo-1").fadeOut();
                 permiso_tipo = 1;
                 setTimeout(() => {
                     $("#motivo-2").fadeIn();
@@ -193,12 +198,16 @@ $(function () {
             }
 
             if ($("#motivo-permiso").val() == "2") {
-                permiso_tipo = 2;
-                setTimeout(() => {
-                    $("#motivo-3").fadeIn();
-                }, 500);
+                if (tipoRodado == 2) {
+                    $("#motivo-1").fadeOut();
+                    permiso_tipo = 2;
+                    setTimeout(() => {
+                        $("#motivo-3").fadeIn();
+                    }, 500);
+                } else {
+                    toastr.error('Permiso disponible solamente con Vehículo y/o Moto', 'Error');
+                }
             }
-
         } else {
             toastr.error('Por favor Completa todos los datos', 'Datos Incompletos');
         }
@@ -256,36 +265,48 @@ $(function () {
         $("#form-6-spinner").removeClass("d-none");
 
         permiso_fecha = $("#permiso-fecha").val();
-        console.log(persona);
-        console.log(rodado);
-        console.log(lugar_salida);
-        console.log(lugar_destino);
-
-        console.log(permiso_tipo);
-        console.log(permiso_fecha);
-
-        console.log(motivo_desc);
-        console.log(motivo_vacaciones);
-        console.log(motivo_dias);
-
 
         var $form = $(this),
             url = $form.attr("action");
 
         //Envia Petición a Servidor
-        $.post(url, {
-            persona: persona,
-            rodado: rodado,
-            lugar_salida: lugar_salida,
-            lugar_destino: lugar_destino,
-            permiso_tipo: permiso_tipo,
-            permiso_fecha: permiso_fecha,
-            motivo_desc: motivo_desc,
-            motivo_vacaciones: motivo_vacaciones,
-            motivo_dias: motivo_dias
-        }).done(function (data) {
+        var permiso = new Object();
+
+        permiso.idPermiso = 0;
+        permiso.persona = persona;
+        permiso.fecha = permiso_fecha;
+        permiso.desdeHasta = new Array(
+            jQuery.parseJSON(lugar_salida),
+            jQuery.parseJSON(lugar_destino)
+        );
+
+        if (permiso_tipo == 1) {
+            permiso.motivo = motivo_desc;
+        } else if (permiso_tipo == 2) {
+            permiso.cantDias = motivo_dias;
+            permiso.vacaciones = motivo_vacaciones;
+            permiso.rodado = rodado;
+            url = url + "/temporario";
+        }
+
+        console.log(permiso);
+
+        var solicitud = $.ajax({
+            url: url,
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(permiso),
+        });
+
+        solicitud.done(function (data) {
             //Si termina con status 200
-            console.log(data);
+            if (data.status == 200) {
+                toastr.success('El Permiso se cargo correctamente. Redireccionando...', 'Carga Correcta');
+                setTimeout(() => {
+                    window.location.href = '/permisos/show/' + data.statusText;
+                }, 1000);
+            }
         }).fail(function (error) {
             //Si existe algun error
             console.log(error);
@@ -295,7 +316,7 @@ $(function () {
             $("#form-6-continue").removeClass("d-none");
             $("#form-6-spinner").addClass("d-none");
         });
-     
+
     }));
 
 

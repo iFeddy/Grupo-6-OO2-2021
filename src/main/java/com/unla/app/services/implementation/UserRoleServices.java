@@ -1,4 +1,4 @@
-package com.unla.app.services;
+package com.unla.app.services.implementation;
 
 import java.util.List;
 
@@ -11,9 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.unla.app.entities.UsersRole;
 import com.unla.app.repositories.IUserRoleRepository;
+import com.unla.app.services.IUserRoleService;
 
 @Service("userRoleService")
-public class UserRoleServicesImpl implements IUserRoleService {
+public class UserRoleServices implements IUserRoleService {
 
 	
 	@Autowired

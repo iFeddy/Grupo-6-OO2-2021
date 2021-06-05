@@ -9,6 +9,8 @@ import com.unla.app.entities.Personas;
 @Repository("personaRepository")
 public interface IPersonaRepository extends PagingAndSortingRepository<Personas, Long>{
 
-    Optional<Personas> findByDni(Long dni);
+    Personas findById(long idPersona);
+
+    Optional<Personas> findByDni(int dni);
 	    
 }

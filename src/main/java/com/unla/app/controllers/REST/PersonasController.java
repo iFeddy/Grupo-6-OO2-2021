@@ -1,4 +1,4 @@
-package com.unla.app.controllers;
+package com.unla.app.controllers.REST;
 
 import javax.validation.Valid;
 
