@@ -280,10 +280,9 @@ $(function () {
 
         //Envia Petición a Servidor
         var permiso = new Object();
-
         permiso.idPermiso = 0;
         permiso.persona = persona;
-        permiso.fecha = permiso_fecha;
+        permiso.fecha = new Date(permiso_fecha.replace(/-/g, '\/')); 
         permiso.desdeHasta = new Array(
             jQuery.parseJSON(lugar_salida),
             jQuery.parseJSON(lugar_destino)

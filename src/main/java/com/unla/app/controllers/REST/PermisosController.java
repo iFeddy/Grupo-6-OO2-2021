@@ -48,7 +48,8 @@ public class PermisosController {
     BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {			
 			return new ResponseHelper(400, bindingResult.toString());
-		}
+		}        
+        System.out.println(permisoModel);
         PermisoModel pm = permisoService.insertOrUpdate(permisoModel);
         return new ResponseHelper(200, "" + pm.getIdPermiso());
     }
