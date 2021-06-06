@@ -27,6 +27,21 @@ Contraseña: oo2tpc
 
 La carga de datos iniciales esta en modo automatico en el archivo [src/main/resources/data.sql](src/main/resources/data.sql)
 
+#
+## NGROK
+
+Para configurar NGROK y probar los codigos QR desde los telefonos, hay que correr el proyecto de JAVA SPRING y despues en otra consola ejecutar en la raiz del proyecto:
+
+```
+.\ngrok.exe http 8080
+```
+Se va a abrir un tunel online desde una url a nuestra pc. 
+
+![UML](ngrok.png)
+
+Entrar con el link https que nos da NGROK en el navegador para poder entrar desde cualquier dispositivo.
+
+#
 ## Usuarios Predeterminados Para el Administrador
 #
 ### Usuario (Acceso Restringido)
@@ -117,31 +132,3 @@ Si llegamos a necesitar Tablas podemos usar DataTables.js que funciona con jQuer
 - Para iconos: https://fontawesome.com/
 - Para Bootstrap: https://getbootstrap.com/docs/4.4/getting-started/introduction/
 - Para jQuery: https://api.jquery.com/
-
-
-## Primera Entrega
-
-Roles
-1 Usuario (Listo)
-2 Admin (Listo)
-3 Auditoria (Listo)
-
-ABM Usuarios (Listo)
-ABM Roles (Listo)
-
-Descarga de PDF para Auditor (Listo)
-
-Queda pendiente Ocultar Iconos según el Rol
-Encriptar Password
-
-## Segunda Entrega
-(Front) Pagina de Registro de usuario
-(Front) Pedir Permiso sin estar registrado (nro dni)
-(Front) Alta de Rodados
-(Front) Traer Permiso por Persona
-(Admin) Traer Permiso por Rodado
-(Admin) Traer Permisos Activos entre Fecha y Fecha
-(Admin) Traer permisos Activos entre Fecha y Fecha que salgan / lleguen a un lugar determinado
-
-## Tercera Entrega
-Código QR para que muestre la info del permiso (Listo)
