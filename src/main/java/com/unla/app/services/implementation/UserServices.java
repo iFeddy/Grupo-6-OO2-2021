@@ -15,7 +15,6 @@ import com.unla.app.services.IUserService;
 
 @Service("userService")
 public class UserServices implements IUserService {
-
 	
 	@Autowired
 	@Qualifier("userRepository")

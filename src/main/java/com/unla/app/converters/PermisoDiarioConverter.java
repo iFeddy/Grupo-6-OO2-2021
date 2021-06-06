@@ -16,27 +16,31 @@ import com.unla.app.models.PermisoDiarioModel;
 
 @Component("permisoDiarioConverter")
 public class PermisoDiarioConverter {
-	
+
 	@Autowired
 	private LugarConverter lugarConverter;
-	
+
 	@Autowired
 	private PersonaConverter personaConverter;
-	
+
 	public PermisosDiario modelToEntity(PermisoDiarioModel permisoModel) {
-		Set<Lugares> lugares=new LinkedHashSet<Lugares>();
-		for(LugarModel lugarModel : permisoModel.getDesdeHasta()) {
+		Set<Lugares> lugares = new LinkedHashSet<Lugares>();
+
+		for (LugarModel lugarModel : permisoModel.getDesdeHasta()) {
 			lugares.add(lugarConverter.modelToEntity(lugarModel));
 		}
-		return new PermisosDiario(permisoModel.getIdPermiso(),personaConverter.modelToEntity(permisoModel.getPersona()), permisoModel.getFecha().toLocalDate(), lugares, permisoModel.getMotivo());
+		return new PermisosDiario(permisoModel.getIdPermiso(),
+				personaConverter.modelToEntity(permisoModel.getPersona()), permisoModel.getFecha().toLocalDate(),
+				lugares, permisoModel.getMotivo());
 	}
-	
+
 	public PermisoDiarioModel entityToModel(PermisosDiario permiso) {
-		List<LugarModel> lugares=new ArrayList<LugarModel>();
-		for(Lugares lugar : permiso.getDesdeHasta()) {
+		List<LugarModel> lugares = new ArrayList<LugarModel>();
+		for (Lugares lugar : permiso.getDesdeHasta()) {
 			lugares.add(lugarConverter.entityToModel(lugar));
 		}
-		return new PermisoDiarioModel(permiso.getIdPermiso(), personaConverter.entityToModel(permiso.getPersona()),Date.valueOf(permiso.getFecha()), lugares, permiso.getMotivo());
+		return new PermisoDiarioModel(permiso.getIdPermiso(), personaConverter.entityToModel(permiso.getPersona()),
+				Date.valueOf(permiso.getFecha()), lugares, permiso.getMotivo());
 	}
 
 }

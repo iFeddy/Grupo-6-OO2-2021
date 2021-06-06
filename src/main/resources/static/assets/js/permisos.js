@@ -312,7 +312,7 @@ $(function () {
             if (data.status == 200) {
                 toastr.success('El Permiso se cargo correctamente. Redireccionando...', 'Carga Correcta');
                 setTimeout(() => {
-                    window.location.href = '/permisos/show/' + data.statusText;
+                    window.location.href = '/permisos/' + data.statusText;
                 }, 1000);
             }
         }).fail(function (error) {

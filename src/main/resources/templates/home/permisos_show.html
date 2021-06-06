@@ -61,9 +61,8 @@
 
     <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
         <div class="container">
-            <div class="d-flex flex-row-reverse"
-                style="margin-top: 5rem; padding-right:3rem;">
-                <a href="#" data-toggle="modal" data-target="#exampleModalCenter"><img title="Descargar Código QR" width="72"
+            <div class="d-flex flex-row-reverse" style="margin-top: 5rem; padding-right:3rem;">
+                <a href="#" data-toggle="modal" data-target="#qrModal"><img title="Mostrar Código QR" width="72"
                         src="/assets/images/qr.png"></a>
             </div>
             <div class="padding py-5">
@@ -182,18 +181,26 @@
         </div>
     </main>
 
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="qrModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Descargar QR</h5>
+                    <h6 class="modal-title" id="exampleModalLongTitle">Código QR</h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    cargar la imagen del qr aca
+                    <center>
+                        <div class="spinner-border text-primary my-2" id="qr-loading" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <span id="qr-code" style="display:none;" th:text=(${qrcode})></span>
+                        <div id="modal-qr" style="display:none;">                            
+                        </div>
+                    </center>  
+                                      
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -211,8 +218,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js"></script>
     <script>
         $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
+            $("#qrModal").on('shown.bs.modal', function () {
+                let code = $("#qr-code").text();
+                let url = "/api/qr/" + code + "/300/300";                
+                $.get(url).done(function (data) {
+                        $("#qr-loading").fadeOut();
+                        setTimeout(() => {                            
+                            $("#modal-qr").html("<img src='data:image/png;base64," + data + "'>");
+                            $("#modal-qr").fadeIn();
+                        }, 500);                        
+                });
+            });   
+            $("#qrModal").on('hide.bs.modal', function () {
+                setTimeout(() => {
+                    $("#modal-qr").html("");
+                    $("#qr-loading").show();
+                    $("#modal-qr").hide();
+                }, 500);
+            });              
+        });
     </script>
     <style>
         .btn-granate {
