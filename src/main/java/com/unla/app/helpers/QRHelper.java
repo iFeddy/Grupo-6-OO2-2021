@@ -28,6 +28,7 @@ public class QRHelper {
         ByteArrayOutputStream pngOutputStream = new ByteArrayOutputStream();
         MatrixToImageWriter.writeToStream(bitMatrix, "PNG", pngOutputStream);
         byte[] pngData = pngOutputStream.toByteArray();
+        
         return pngData;
     }
 }

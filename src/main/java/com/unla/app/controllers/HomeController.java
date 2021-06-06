@@ -69,8 +69,9 @@ public class HomeController {
         }
         view.addObject("title", "Permiso Nº " + qr.getPermisoId() +  " - " + ConfigHelper.appName);
         view.addObject("appName", ConfigHelper.appName);
+        view.addObject("qrcode", qr.getCode());
        
-        PermisoModel permisoModel = permisoService.findById(Math.toIntExact(qr.getPermisoId()));    
+        PermisoModel permisoModel = permisoService.findById(Math.toIntExact(qr.getPermisoId())); 
         view.addObject("permiso", permisoModel);
         return view;
     }
