@@ -3,16 +3,14 @@ package com.unla.app.controllers.REST;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.unla.app.helpers.ResponseHelper;
 import com.unla.app.models.PermisoDiarioModel;
 import com.unla.app.models.PermisoModel;
 import com.unla.app.models.PermisoPeriodoModel;
 import com.unla.app.models.PersonaModel;
-import com.unla.app.services.implementation.LugaresServices;
+
 import com.unla.app.services.implementation.PermisosServices;
-import com.unla.app.services.implementation.RodadoServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -35,7 +33,8 @@ public class PermisosController {
     BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {			
 			return new ResponseHelper(400, bindingResult.toString());
-		}
+		}        
+        System.out.println(permisoModel);
         PermisoModel pm = permisoService.insertOrUpdate(permisoModel);
         return new ResponseHelper(200, "" + pm.getIdPermiso());
     }

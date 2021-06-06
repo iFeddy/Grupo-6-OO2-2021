@@ -8,11 +8,15 @@ import com.unla.app.entities.Lugares;
 import com.unla.app.entities.Users;
 import com.unla.app.helpers.ConfigHelper;
 import com.unla.app.helpers.RouteHelper;
+import com.unla.app.models.PermisoModel;
 import com.unla.app.services.ILugarService;
+import com.unla.app.services.implementation.PermisosServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,6 +26,10 @@ public class HomeController {
 
     @Autowired
     private ILugarService lugarService;
+    
+    @Autowired
+	@Qualifier("permisosService")
+	private PermisosServices permisoService;
     
     @GetMapping({"/", "index" , "home"})
     public ModelAndView index(HttpSession session) {
@@ -45,5 +53,17 @@ public class HomeController {
         view.addObject("lugares", lugares);
         return view;
     }   
+
+    @RequestMapping(path="permisos/show/{id}")
+    public ModelAndView permiso_view(@PathVariable("id") int id) {
+
+        ModelAndView view = new ModelAndView(RouteHelper.PERMISOS_SHOW);
+        view.addObject("title", "Permiso Nº " + id +  " - " + ConfigHelper.appName);
+        view.addObject("appName", ConfigHelper.appName);
+       
+        PermisoModel permisoModel = permisoService.findById(id);    
+        view.addObject("permiso", permisoModel);
+        return view;
+    }
 
 }

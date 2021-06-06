@@ -43,7 +43,7 @@ $(function () {
                         result.forEach(element => {
                             let permiso = jQuery.parseJSON(element);
                             console.log(permiso);
-                            $("#buscarListadoLinks").append(permisosLinks(permiso.idPermiso, permiso.persona.nombre, permiso.persona.apellido, permiso.persona.dni, permiso.rodado, permiso.fecha));
+                            $("#buscarListadoLinks").append(permisosLinks(permiso.idPermiso, permiso.persona.nombre, permiso.persona.apellido, permiso.rodado, permiso.fecha, permiso.cantDias));
                         });
                     }
                 });
@@ -78,24 +78,36 @@ $(function () {
         $("#buscarListado").fadeOut();
     });
 
-    function permisosLinks(id, nombre, apellido, dni, rodado, fecha) {
+    function permisosLinks(id, nombre, apellido, rodado, fecha, cantDias) {
         let tipo_permiso = "Permiso Especial";
         if (rodado != null && rodado != undefined) {
             tipo_permiso = "Permiso Temporario";
         }
         return "<a href='/permisos/show/" + id +
-            "' class='list-group-item list-group-item-action'><b>" + nombre + " " + apellido +
-            "</b> - <b>" + dni + "</b> - " + tipo_permiso + " - Fecha: <b>" + timeConverter(fecha) + "</b> <div class='text-muted float-right'>Ver Permiso</div></a>";
+            "' class='list-group-item list-group-item-action'><i class='fas fa-key'></i> <b>" + nombre + " " + apellido +
+            "</b> - Fecha: <b>" + timeConverter(fecha) + "</b> <span class='badge badge-primary'>"+ tipo_permiso +"</span>  "+ estaActivo(fecha, cantDias) +"<div class='text-muted float-right'>Ver Permiso</div></a>";
     }
 
     function timeConverter(UNIX_timestamp) {
         var a = new Date(UNIX_timestamp);
         var months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
         var year = a.getFullYear();
-        var month = a.getMonth();
+        var month = a.getMonth() + 1;
         var date = a.getDate();
         var time = date + '/' + month + '/' + year;
         return time;
     }
+<<<<<<< HEAD
+=======
+
+    function estaActivo(fecha, cantDias) {
+        let currentDate = parseInt(Date.now().toLocaleString("es-ES", {timeZone: "America/Argentina/Buenos_Aires"}).split('.').join(""));
+        if(fecha >= currentDate){
+            return "<span class='badge badge-success'>Activo</span>";
+        }else{
+            return "<span class='badge badge-danger'>Vencido</span>"
+        }
+    }
+>>>>>>> 07615ca34b46755f1bd0151a11c761d877e04eea
 
 });

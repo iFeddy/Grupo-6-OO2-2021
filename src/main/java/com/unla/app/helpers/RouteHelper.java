@@ -5,6 +5,7 @@ public class RouteHelper {
 	public final static String INDEX = "home/index";
 	public final static String LOGIN = "home/login";
 	public final static String PERMISOS = "home/permisos";
+	public final static String PERMISOS_SHOW = "home/permisos_show";
 
 	// errores
 	public final static String ERROR = "errors/error";
