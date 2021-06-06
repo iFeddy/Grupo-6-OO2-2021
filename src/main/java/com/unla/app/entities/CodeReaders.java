@@ -27,6 +27,9 @@ public class CodeReaders {
 	@Column(name = "code", nullable = false)
 	private String code;
 		
+    @Column(name = "permisoId", nullable = false)
+	private Long permisoId;
+
 	@Column(name = "createdat")
 	@CreationTimestamp
 	private LocalDateTime createAt;
@@ -37,11 +40,19 @@ public class CodeReaders {
 	
 	public CodeReaders(){}
 
-	public CodeReaders(long idQr, String code) {
+	public CodeReaders(long idQr, String code, long permisoId) {
 		super();
 		this.idQr = idQr;
-		this.code = code;		
+		this.code = code;
+        this.permisoId = permisoId;		
 	}
+
+    public CodeReaders(String code, long permisoId) {
+		super();
+		this.code = code;	
+        this.permisoId = permisoId;	
+	}
+
 
     public long getIdQr() {
         return this.idQr;
@@ -59,6 +70,14 @@ public class CodeReaders {
         this.code = code;
     }
 
+    public Long getPermisoId() {
+        return this.permisoId;
+    }
+
+    public void setPermisoId(Long permisoId) {
+        this.permisoId = permisoId;
+    }
+
     public LocalDateTime getCreateAt() {
         return this.createAt;
     }
@@ -74,5 +93,17 @@ public class CodeReaders {
     public void setUpdateAt(LocalDateTime updateAt) {
         this.updateAt = updateAt;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " idQr='" + getIdQr() + "'" +
+            ", code='" + getCode() + "'" +
+            ", permisoId='" + getPermisoId() + "'" +
+            ", createAt='" + getCreateAt() + "'" +
+            ", updateAt='" + getUpdateAt() + "'" +
+            "}";
+    }
+  
 
 }
