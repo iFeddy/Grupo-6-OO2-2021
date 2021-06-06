@@ -17,7 +17,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
@@ -61,15 +60,6 @@ public abstract class Permisos {
 	@UpdateTimestamp
 	private LocalDateTime updateAt;
 	
-	@JoinTable(
-			name = "permisoxqr",
-			joinColumns = @JoinColumn(name="FK_permiso", nullable = false),
-			inverseJoinColumns = @JoinColumn(name="FK_qr", nullable = false)
-	)
-	@OneToMany(fetch = FetchType.LAZY)	
-	@OrderBy("createAt")
-	protected Set<CodeReaders> codigoPermiso;
-
 	public Permisos() {
 		
 	}
@@ -128,14 +118,6 @@ public abstract class Permisos {
 
 	public void setUpdateAt(LocalDateTime updateAt) {
 		this.updateAt = updateAt;
-	}
-
-	public Set<CodeReaders> getCodigoPermiso() {
-		return codigoPermiso;
-	}
-
-	public void setCodigoPermiso(Set<CodeReaders> codigoPermiso) {
-		this.codigoPermiso = codigoPermiso;
 	}
 
 	@Override

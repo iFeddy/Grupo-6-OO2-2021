@@ -43,7 +43,7 @@ $(function () {
                         result.forEach(element => {
                             let permiso = jQuery.parseJSON(element);
                             console.log(permiso);
-                            $("#buscarListadoLinks").append(permisosLinks(permiso.idPermiso, permiso.persona.nombre, permiso.persona.apellido, permiso.rodado, permiso.fecha, permiso.cantDias));
+                            $("#buscarListadoLinks").append(permisosLinks(permiso.codigoPermiso.code, permiso.persona.nombre, permiso.persona.apellido, permiso.rodado, permiso.fecha, permiso.cantDias));
                         });
                     }
                 });
