@@ -9,6 +9,7 @@ import com.unla.app.entities.Users;
 import com.unla.app.helpers.ConfigHelper;
 import com.unla.app.helpers.RouteHelper;
 import com.unla.app.models.PermisoModel;
+import com.unla.app.services.ICodeReaderService;
 import com.unla.app.services.ILugarService;
 import com.unla.app.services.implementation.PermisosServices;
 
@@ -27,6 +28,9 @@ public class HomeController {
     @Autowired
     private ILugarService lugarService;
     
+    @Autowired
+    private ICodeReaderService qrService;
+
     @Autowired
 	@Qualifier("permisosService")
 	private PermisosServices permisoService;
@@ -54,15 +58,15 @@ public class HomeController {
         return view;
     }   
 
-    @RequestMapping(path="permisos/show/{id}")
-    public ModelAndView permiso_view(@PathVariable("id") int id) {
-
+    @RequestMapping(path="permisos/{code}")
+    public ModelAndView permiso_view(@PathVariable("code") String code) {
         ModelAndView view = new ModelAndView(RouteHelper.PERMISOS_SHOW);
-        view.addObject("title", "Permiso Nº " + id +  " - " + ConfigHelper.appName);
-        view.addObject("appName", ConfigHelper.appName);
+
+        //view.addObject("title", "Permiso Nº " + id +  " - " + ConfigHelper.appName);
+        //view.addObject("appName", ConfigHelper.appName);
        
-        PermisoModel permisoModel = permisoService.findById(id);    
-        view.addObject("permiso", permisoModel);
+        //PermisoModel permisoModel = permisoService.findById(id);    
+        //view.addObject("permiso", permisoModel);
         return view;
     }
 

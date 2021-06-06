@@ -83,7 +83,7 @@ $(function () {
         if (rodado != null && rodado != undefined) {
             tipo_permiso = "Permiso Temporario";
         }
-        return "<a href='/permisos/show/" + id +
+        return "<a href='/permisos/" + id +
             "' class='list-group-item list-group-item-action'><i class='fas fa-key'></i> <b>" + nombre + " " + apellido +
             "</b> - Fecha: <b>" + timeConverter(fecha) + "</b> <span class='badge badge-primary'>"+ tipo_permiso +"</span>  "+ estaActivo(fecha, cantDias) +"<div class='text-muted float-right'>Ver Permiso</div></a>";
     }
