@@ -97,8 +97,6 @@ $(function () {
         var time = date + '/' + month + '/' + year;
         return time;
     }
-<<<<<<< HEAD
-=======
 
     function estaActivo(fecha, cantDias) {
         let currentDate = parseInt(Date.now().toLocaleString("es-ES", {timeZone: "America/Argentina/Buenos_Aires"}).split('.').join(""));
@@ -108,6 +106,5 @@ $(function () {
             return "<span class='badge badge-danger'>Vencido</span>"
         }
     }
->>>>>>> 07615ca34b46755f1bd0151a11c761d877e04eea
 
 });
