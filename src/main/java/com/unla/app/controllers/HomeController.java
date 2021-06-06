@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.unla.app.entities.CodeReaders;
 import com.unla.app.entities.Lugares;
 import com.unla.app.entities.Users;
 import com.unla.app.helpers.ConfigHelper;
@@ -61,12 +62,16 @@ public class HomeController {
     @RequestMapping(path="permisos/{code}")
     public ModelAndView permiso_view(@PathVariable("code") String code) {
         ModelAndView view = new ModelAndView(RouteHelper.PERMISOS_SHOW);
-
-        //view.addObject("title", "Permiso Nº " + id +  " - " + ConfigHelper.appName);
-        //view.addObject("appName", ConfigHelper.appName);
+        CodeReaders qr = qrService.findOneByCode(code);
+        if(qr == null){
+            //Si el codigo no existe vuelve al home
+            return new ModelAndView("redirect:/");
+        }
+        view.addObject("title", "Permiso Nº " + qr.getPermisoId() +  " - " + ConfigHelper.appName);
+        view.addObject("appName", ConfigHelper.appName);
        
-        //PermisoModel permisoModel = permisoService.findById(id);    
-        //view.addObject("permiso", permisoModel);
+        PermisoModel permisoModel = permisoService.findById(Math.toIntExact(qr.getPermisoId()));    
+        view.addObject("permiso", permisoModel);
         return view;
     }
 
