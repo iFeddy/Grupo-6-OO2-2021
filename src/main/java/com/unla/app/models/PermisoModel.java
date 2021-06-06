@@ -30,6 +30,8 @@ public class PermisoModel {
 	@NotEmpty
 	private String fechaString;
 
+	protected CodeReadersModel codigoPermiso = new CodeReadersModel();
+
 	public PermisoModel() {
 		fechaString = Date.valueOf(LocalDate.now()).toString();
 	}
@@ -82,6 +84,15 @@ public class PermisoModel {
 		this.fechaString = fechaString;
 	}
 
+
+	public CodeReadersModel getCodigoPermiso() {
+		return this.codigoPermiso;
+	}
+
+	public void setCodigoPermiso(CodeReadersModel codigoPermiso) {
+		this.codigoPermiso = codigoPermiso;
+	}
+	
 	@Override
 	public boolean equals(Object o) {
 		if (o == this)

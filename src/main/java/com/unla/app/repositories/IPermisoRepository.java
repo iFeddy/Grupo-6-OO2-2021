@@ -37,13 +37,13 @@ public interface IPermisoRepository extends JpaRepository<Permisos, Integer> {
 			+ "WHERE r.dominio=(:dominio)",nativeQuery=true)
 	public abstract List<PermisosPeriodo> findByDominio(@Param("dominio") String dominio);
 	
-	@Query(value="SELECT * FROM Permisodiario pd"
+	@Query(value="SELECT * FROM Permisosdiario pd"
 	        +" INNER JOIN Permisos p ON p.id_permiso=pd.id_permiso"
 	        +" INNER JOIN Personas pe ON pe.id_persona=p.id_persona"
 			+" WHERE pe.dni=(:dni)",nativeQuery=true)
 	public abstract List<PermisosDiario> findByPersonaDiario(int dni);
 	
-	@Query(value="SELECT * FROM Permisoperiodo pp"
+	@Query(value="SELECT * FROM Permisosperiodo pp"
 	        +" INNER JOIN Permisos p ON p.id_permiso=pp.id_permiso"
 	        +" INNER JOIN Personas pe ON pe.id_persona=p.id_persona"
 			+" WHERE pe.dni=(:dni)",nativeQuery=true)
