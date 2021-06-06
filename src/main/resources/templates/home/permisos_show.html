@@ -61,11 +61,11 @@
 
     <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
         <div class="container">
-            <div class="d-flex flex-row-reverse" style="margin-top: 5rem; padding-right:3rem;">
-                <a href="#" data-toggle="modal" data-target="#qrModal"><img title="Mostrar Código QR" width="72"
+            <div class="d-flex flex-row-reverse" style="margin-top: 3rem; padding-right:3rem;">
+                <a th:if="${param.qr == null}" href="#" data-toggle="modal" data-target="#qrModal"><img title="Mostrar Código QR" width="72"
                         src="/assets/images/qr.png"></a>
             </div>
-            <div class="padding py-5">
+            <div class="py-5">
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-12">
                         <div class="card user-card-full">
