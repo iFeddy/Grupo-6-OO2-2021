@@ -33,7 +33,7 @@ La carga de datos iniciales esta en modo automatico en el archivo [src/main/reso
 Para configurar NGROK y probar los codigos QR desde los telefonos, hay que correr el proyecto de JAVA SPRING y despues en otra consola ejecutar en la raiz del proyecto:
 
 ```
-.\ngrok.exe http 8080
+./ngrok http 8080
 ```
 Se va a abrir un tunel online desde una url a nuestra pc. 
 
