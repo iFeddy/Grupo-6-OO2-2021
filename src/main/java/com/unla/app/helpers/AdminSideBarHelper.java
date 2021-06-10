@@ -16,7 +16,7 @@ public class AdminSideBarHelper {
             new AdminSideBar(1, "/admin/dashboard", "fas fa-table", "Panel de Administración"),
             new AdminSideBar(2, "/admin/users", "fas fa-user", "Usuarios"),
             new AdminSideBar(3, "/admin/roles", "fas fa-users", "Roles"),
-            new AdminSideBar(4, "/admin/permisos", "fas fa-key", "Permisos") //terminar de implementar controller de permisos//
+            new AdminSideBar(4, "/admin/permits", "fas fa-key", "Permisos") //terminar de implementar controller de permisos//
          
             
         };           

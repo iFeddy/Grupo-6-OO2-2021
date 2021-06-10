@@ -2,10 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
-	<meta charset="UTF-8" />
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title th:text="${title}"></title>
+	
+	<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;400;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/assets/css/bootstrap.css">
+	<link rel="stylesheet" href="/assets/css/login.css">
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 	<link href="/assets/css/admin.min.css" rel="stylesheet">
+	
+
 </head>
 
 <body style="background-color: #edf1f5;">
@@ -72,57 +81,44 @@
 			</div>
 
 			<div class="container-fluid">
-				<!-- CONTENIDO DEL ADMIN ACA 
-                Contenido de pageName = <span th:text="${pageName}"></span>-->
+				<!-- CONTENIDO DEL ADMIN ACA -->
+				
 				<div class="row">
 					<div class="col-sm-12">
-						<div class="white-box">
-							<div class="d-flex justify-content-between">
-								<h4 class="card.title">
-								<a class="btn btn-primary my-2" th:href="@{roles/create}"><i class="fas fa-user-plus mx-1"></i> Nuevo Rol</a>
-								</h4>
-								<h4>
-								<a class="px-4 text-warning btn" th:href="@{/admin/roles/(format=pdf)}" title =" Export PDF" target="_blanck">
-								<img class="img-responsive " th:src="@{/assets/images/pdf-negro.png}">
-								</a>
-								</h4>	
-						</div>
-							<div class="table-responsive">
-								<div class="alert alert-success" th:if="${success!=null}" th:text="${success}"></div>
-								<div class="alert alert-danger" th:if="${error!=null}" th:text="${error}"></div>
-								<div class="alert alert-warning" th:if="${warning!=null}" th:text="${warning}"></div>
-								<div class="alert alert-info" th:if="${info!=null}" th:text="${info}"></div>
-								<table class="table table-hover">
-									<thead>
-										<tr>
-											<th class="border-top-0">Nombre</th>										
-											<th class="border-top-0">Editar</th>
-											<th class="border-top-0">Eliminar</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr th:each="usersrole: ${usersRole}">
-											<td style="width: 70%" th:text="${usersrole.name}"></td>
-											<td>
-												<a class="btn btn-primary" th:href="@{roles/edit/} + ${usersrole.id}">
-													<i class="fas fa-pencil-alt mx-1"></i> Editar
-												</a>
-											</td>
-											<td>
-												<a class="btn btn-danger text-light"
-													th:onclick="eliminarRole([[${usersrole.id}]])">
-													<i class="far fa-trash-alt mx-1"></i> Eliminar
-												</a>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-								<nav th:replace="paginator-nav :: paginator"></nav>
+						<a class="text-dark text-decoration-none" href="/permisos">
+							<div class="wrap">
+								<div class="ico-wrap">
+									<span class="mbr-iconfont fa-route fas"></span>
+								</div>
+								<div class="text-wrap vcenter">
+									<h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">Solicitar un
+										Permiso</h2>
+									<p class="mbr-fonts-style text1 mbr-text display-6">Solicitá un permiso para viajar,
+										seleccionado
+										fechas, destino y rodado
+									</p>
+								</div>
 							</div>
-						</div>
+						</a>
+					</div>
+					<div class="col-sm-12">
+						<a class="text-dark text-decoration-none" href="#" data-toggle="modal"
+							data-target="#buscarModal">
+							<div class="wrap">
+								<div class="ico-wrap">
+									<span class="mbr-iconfont fab fa-searchengin"></span>
+								</div>
+								<div class="text-wrap vcenter">
+									<h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">Buscar Permisos
+									</h2>
+									<p class="mbr-fonts-style text1 mbr-text display-6">Buscar el estado de tu Permiso
+										con tu número de documento (DNI)
+									</p>
+								</div>
+							</div>
+						</a>
 					</div>
 				</div>
-
 			</div>
 
 		</div>
