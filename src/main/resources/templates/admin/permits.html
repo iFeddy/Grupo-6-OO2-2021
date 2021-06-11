@@ -83,44 +83,72 @@
 			<div class="container-fluid">
 				<!-- CONTENIDO DEL ADMIN ACA -->
 				
-				<div class="row">
-					<div class="col-sm-12">
-						<a class="text-dark text-decoration-none" href="/permisos">
+		<div class="container mb-5">
+				<div class="row mbr-justify-content-center">
+									<div class="col-lg-6 mbr-col-md-10">
+						<a class="text-dark text-decoration-none" th:href="@{permits/persona}">
 							<div class="wrap">
 								<div class="ico-wrap">
-									<span class="mbr-iconfont fa-route fas"></span>
+									<span class="mbr-iconfont fas fa-users"></span>
 								</div>
 								<div class="text-wrap vcenter">
-									<h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">Solicitar un
-										Permiso</h2>
-									<p class="mbr-fonts-style text1 mbr-text display-6">Solicitá un permiso para viajar,
-										seleccionado
-										fechas, destino y rodado
-									</p>
-								</div>
-							</div>
-						</a>
-					</div>
-					<div class="col-sm-12">
-						<a class="text-dark text-decoration-none" href="#" data-toggle="modal"
-							data-target="#buscarModal">
-							<div class="wrap">
-								<div class="ico-wrap">
-									<span class="mbr-iconfont fab fa-searchengin"></span>
-								</div>
-								<div class="text-wrap vcenter">
-									<h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">Buscar Permisos
-									</h2>
-									<p class="mbr-fonts-style text1 mbr-text display-6">Buscar el estado de tu Permiso
+									<h2>Por Persona</h2>
+									<p>Buscar el estado de tu Permiso
 										con tu número de documento (DNI)
 									</p>
 								</div>
 							</div>
 						</a>
 					</div>
-				</div>
-			</div>
+				
+					<div class="col-lg-6 mbr-col-md-10">
+						<a class="text-dark text-decoration-none" th:href="@{permits/rodados}">
+							<div class="wrap">
+								<div class="ico-wrap">
+									<span class="mbr-iconfont fas fa-car"></span>
+								</div>
+								<div class="text-wrap vcenter">
+									<h2>Por Rodado</h2>
+									<p >Busca el estado de tu Permiso con el dominio del vehículo (PATENTE) 
+									</p>
+								</div>
+							</div>
+						</a>
+					</div>
+					
+					<div class="col-lg-6 mbr-col-md-10">
+						<a class="text-dark text-decoration-none" href="#">
+							<div class="wrap">
+								<div class="ico-wrap">
+									<span class="mbr-iconfont far fa-calendar-alt"></span>
+								</div>
+								<div class="text-wrap vcenter">
+									<h2>Entre Fechas</h2>
+									<p >Buscar Permiso activos entre fechas , desde y hasta (FECHAS)                   
+									</p>
+								</div>
+							</div>
+						</a>
+					</div>
+					
+					<div class="col-lg-6 mbr-col-md-10">
+						<a class="text-dark text-decoration-none" href="#">
+							<div class="wrap">
+								<div class="ico-wrap">
+									<span class="mbr-iconfont far fa-calendar-alt"></span>
+								</div>
+								<div class="text-wrap vcenter">
+									<h2>Entre Fechas y Lugar</h2>
+									<p >Buscar Permiso activos entre fechas y Lugar de salisa y llegada (FECHAS)                   
+									</p>
+								</div>
+							</div>
+						</a>
+					</div>
 
+					
+				</div>
+		</div>
 		</div>
 	</div>
 

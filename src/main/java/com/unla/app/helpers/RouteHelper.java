@@ -18,6 +18,10 @@ public class RouteHelper {
 	public final static String DASHBOARD_ROLES = "admin/roles";
 	public final static String DASHBOARD_PERMITS = "admin/permits";
 	
+	public final static String DASHBOARD_PERMITS_RODADOS = "admin/permisos_rodados";
+	public final static String DASHBOARD_PERMITS_PERSONS = "admin/permisos_personas";
+	
+	
 	public final static String DASHBOARD_NEW_USERS = "admin/users_add";
 	public final static String DASHBOARD_EDIT_USERS = "admin/users_edit";
 

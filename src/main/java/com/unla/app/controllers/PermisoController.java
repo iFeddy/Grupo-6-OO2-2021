@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.unla.app.entities.Personas;
+import com.unla.app.entities.Rodados;
 import com.unla.app.entities.Users;
 import com.unla.app.entities.UsersRole;
 import com.unla.app.helpers.AdminSideBarHelper;
@@ -24,13 +26,13 @@ public class PermisoController {
 	@Autowired
 	private IUserRoleService userRoleService;
 	
-	@GetMapping({ "/admin/permits", "permisos", "permisos" })
+	@GetMapping({ "/admin/permits", "permits", "permits" })
 	public ModelAndView permisos(@RequestParam(name = "page", defaultValue = "0") int page, Model model,
 			HttpSession session) {
 		ModelAndView view = new ModelAndView(RouteHelper.DASHBOARD_PERMITS);
 		AdminSideBarHelper sideBar = new AdminSideBarHelper();
 
-		String pageName = "Permisos";
+		String pageName = "Buscar Permisos";
 		view.addObject("title", pageName + " - " + ConfigHelper.appName);
 		view.addObject("pageName", pageName);
 		Users user = (Users) session.getAttribute("USER");
@@ -48,5 +50,59 @@ public class PermisoController {
 		return mHelper.AuthMiddleware(mHelper.RoleMiddleware(view, 25, roles));
 	}
 
+	
+	
+	@GetMapping({ "/admin/permits/rodados", "rodados", "permisos.rodados" })
+	public ModelAndView permisosRodados(@RequestParam(name = "page", defaultValue = "0") int page, Model model,
+			HttpSession session) {
+		ModelAndView view = new ModelAndView(RouteHelper.DASHBOARD_PERMITS_RODADOS);
+		AdminSideBarHelper sideBar = new AdminSideBarHelper();
+
+		String pageName = "Permisos por Rodados";
+		view.addObject("title", pageName + " - " + ConfigHelper.appName);
+		view.addObject("pageName", pageName);
+		Users user = (Users) session.getAttribute("USER");
+		if (user != null) {
+			view.addObject("userName", user.getFirstName() + " " + user.getLastName());
+		}
+		view.addObject("appName", ConfigHelper.appName);
+
+		view.addObject("sideBarLink", 4); // ID del link para que quede en azul (activo) en el menu izquierdo
+		view.addObject("sideBar", sideBar.lst_adminSideBar);
+		
+		Rodados rodados = new Rodados();
+		model.addAttribute("rodados", rodados);
+
+		List<UsersRole> roles = userRoleService.findAll();
+		MiddlewareHelper mHelper = new MiddlewareHelper(session);
+		return mHelper.AuthMiddleware(mHelper.RoleMiddleware(view, 25, roles));
+	}
+	
+	
+	@GetMapping({ "/admin/permits/persona", "persona", "permisos.persona" })
+	public ModelAndView permisosPersona(@RequestParam(name = "page", defaultValue = "0") int page, Model model,
+			HttpSession session) {
+		ModelAndView view = new ModelAndView(RouteHelper.DASHBOARD_PERMITS_PERSONS);
+		AdminSideBarHelper sideBar = new AdminSideBarHelper();
+
+		String pageName = "Permisos por Rersona";
+		view.addObject("title", pageName + " - " + ConfigHelper.appName);
+		view.addObject("pageName", pageName);
+		Users user = (Users) session.getAttribute("USER");
+		if (user != null) {
+			view.addObject("userName", user.getFirstName() + " " + user.getLastName());
+		}
+		view.addObject("appName", ConfigHelper.appName);
+
+		view.addObject("sideBarLink", 4); // ID del link para que quede en azul (activo) en el menu izquierdo
+		view.addObject("sideBar", sideBar.lst_adminSideBar);
+		
+		Personas personas = new Personas();
+		model.addAttribute("personas", personas);
+
+		List<UsersRole> roles = userRoleService.findAll();
+		MiddlewareHelper mHelper = new MiddlewareHelper(session);
+		return mHelper.AuthMiddleware(mHelper.RoleMiddleware(view, 25, roles));
+	}
 
 }
