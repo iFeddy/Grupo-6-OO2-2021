@@ -5,6 +5,9 @@
 	<meta charset="utf-8" />
 	<title th:text="${title}"></title>
 	<link href="/assets/css/admin.min.css" rel="stylesheet">
+	 <link href="/assets/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="/assets/css/permisos.css" rel="stylesheet" >
+   
 </head>
 
 <body style="background-color: #edf1f5;">
@@ -83,37 +86,35 @@
 							<div class="alert alert-danger" th:if="${error!=null}" th:text="${error}"></div>
 							<div class="alert alert-warning" th:if="${warning!=null}" th:text="${warning}"></div>
 							<div class="alert alert-info" th:if="${info!=null}" th:text="${info}"></div>
+							
+							<form th:action="@{/admin/permits/fechas}" method="post">
+							<div class="form-group row">
+								<label class="col-sm-2 col-form-label"><i class="far fa-calendar-alt mr-2"> </i>&nbsp;&nbsp;Fecha de inicio</label>
+                                <div class="col-md-3">                                    
+                                    <div class="input-group date">
+                                     <input type="text" id="permiso-fecha" class="form-control" required><span class="input-group-addon"></span>
+                                    </div>
+                                </div>
+                                
+                                <label class="col-sm-2 col-form-label"><i class="far fa-calendar-alt mr-2"> </i>&nbsp;&nbsp;Fecha de Fin</label>
+                                <div class="col-md-3">                                    
+                                    <div class="input-group date">
+                                     <input type="text" id="permiso-fecha" class="form-control" required><span class="input-group-addon"></span>
+                                    </div>
+                                </div>
+							</div>
+							
+							<div class="form-group row">
+									<label class="col-sm-2 col-form-label">Destino</label>
+									<div class="col-sm-3">
+										<select class="form-select" aria-label="Default select example" >
+											<option ></option>
+										</select> 
 
-							<form th:action="@{/admin/permits/rodados}" method="post">
-								<div class="form-group row">
-									<label class="col-sm-2 col-form-label">Dominio</label>
-									<div class="col-sm-6">										
-										<input required type="text" class="form-control"  /> 
 									</div>
 								</div>
-								
-								<div class="form-group row">
-									<label class="col-sm-2 col-form-label">Nivel de Administrador</label>
-									<div class="col-sm-6">
-										 <input class="form-control" list="datalistOptions" id="rodadoDataList"
-                                            placeholder="Tipo de Vehículos..." name="vehiculo" required>
-                                        <datalist id="datalistOptions">
-                                            <option value="Motocicleta">
-                                            <option value="Motocarro">
-                                            <option value="Automóvil de tres ruedas">
-                                            <option value="Autobús">
-                                            <option value="Trolebús">
-                                            <option value="Automóvil" selected>
-                                            <option value="Camión">
-                                            <option value="Autobús">
-                                            <option value="Furgón">
-                                            <option value="Tractor">
-                                            <option value="Motocultor">
-                                        </datalist>
-									</div>
-								</div>
-
-								<div class="form-group row">
+                               
+                                <div class="form-group row">
 									<div class="col-sm-6">										
 										<a class="btn btn-outline-secondary mx-2" th:href="@{/admin/permits}">Cancelar</a>
 										<button type="submit" class="btn btn-primary">
@@ -122,25 +123,29 @@
 									</div>
 								</div>								
 							</form>
+						</div>	
 						</div>
 					</div>
 				</div>	
 			</div>
 					
          </div>          
-        </div>
-
-        
+  
         <script src="/assets/js/jquery.js"></script>
         <script src="/assets/js/popper.js"></script>
         <script src="/assets/js/bootstrap.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js"></script>
-
-        <script src="/assets/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
-
         <script src="/assets/js/waves.js"></script>
         <script src="/assets/js/sidebarmenu.js"></script>
         <script src="/assets/js/custom.js"></script>
+        <script src="/assets/js/permisos.js"></script>
+        
+    	<script src="/assets/js/bootstrap-datepicker.js"></script>
+    	<script src="/assets/locales/bootstrap-datepicker.es.min.js"></script>
+
+    	
+    	<script src="/assets/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+   		<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js"></script>
 </body>
 
 </html>

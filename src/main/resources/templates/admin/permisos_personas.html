@@ -84,34 +84,25 @@
 							<div class="alert alert-warning" th:if="${warning!=null}" th:text="${warning}"></div>
 							<div class="alert alert-info" th:if="${info!=null}" th:text="${info}"></div>
 
-							<form th:action="@{/admin/permits/personas}" th:object="${personas}" method="post">
+							<form th:action="@{/admin/permits/personas}"  method="post">
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label">Nombre</label>
 									<div class="col-sm-6">										
-										<input required type="text" class="form-control" th:field="*{nombre}"
-											th:errorclass="'form-control alert-danger'" /> <small
-											class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}"
-											th:errors="*{nombre}"></small>
+										<input required type="text" class="form-control" /> 
 									</div>
 								</div>
 								
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label">Apellido</label>
 									<div class="col-sm-6">										
-										<input required type="text" class="form-control" th:field="*{apellido}"
-											th:errorclass="'form-control alert-danger'" /> <small
-											class="form-text text-danger" th:if="${#fields.hasErrors('apellido')}"
-											th:errors="*{apellido}"></small>
+										<input required type="text" class="form-control"  />
 									</div>
 								</div>
 								
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label">DNI</label>
 									<div class="col-sm-6">										
-										<input required type="text" class="form-control" th:field="*{dni}"
-											th:errorclass="'form-control alert-danger'" /> <small
-											class="form-text text-danger" th:if="${#fields.hasErrors('dni')}"
-											th:errors="*{dni}"></small>
+										<input required type="text" class="form-control"  /> 
 									</div>
 								</div>
 

@@ -20,6 +20,8 @@ public class RouteHelper {
 	
 	public final static String DASHBOARD_PERMITS_RODADOS = "admin/permisos_rodados";
 	public final static String DASHBOARD_PERMITS_PERSONS = "admin/permisos_personas";
+	public final static String DASHBOARD_PERMITS_DATES = "admin/permisos_fechas";
+	public final static String DASHBOARD_PERMITS_DATES_PLACE = "admin/permisos_fechas_lugar";
 	
 	
 	public final static String DASHBOARD_NEW_USERS = "admin/users_add";
