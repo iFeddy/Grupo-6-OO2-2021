@@ -350,18 +350,12 @@ public class PermisoController {
 		view.addObject("sideBarLink", 4); // ID del link para que quede en azul (activo) en el menu izquierdo
 		view.addObject("sideBar", sideBar.lst_adminSideBar);
 
-		/*List<Lugares> lugares = lugarService.findAll();
-		view.addObject("lugares", lugares);*/
-
 		List<UsersRole> roles = userRoleService.findAll();
 		MiddlewareHelper mHelper = new MiddlewareHelper(session);
 
 		// Buscamos los permisos diarios
 		List<PermisoDiarioModel> permisosDiario = permisoService.findByFechaBetween(desde, hasta);
 		List<PermisoPeriodoModel> permisosPeriodo = permisoService.findByFecha(desde, hasta);
-		
-		// Buscamos si el lugar existe
-		//LugarModel lm = lugarService.findOne(lugar);
 
 		// Cantidad de resultados despues de filtrar
 		int totalResultados = permisosPeriodo.size()+permisosDiario.size();
@@ -379,8 +373,53 @@ public class PermisoController {
 		return mHelper.AuthMiddleware(mHelper.RoleMiddleware(view, 25, roles));
 	}
 	
+	@PostMapping("/admin/permits/persona")
+	public ModelAndView permisosPorRodados(@RequestParam("dni") int dni, Model model, HttpSession session,
+			RedirectAttributes flash) {
+
+		ModelAndView view = new ModelAndView(RouteHelper.DASHBOARD_PERMITS_PERSONS); // se puede poner en una vista
+																						// separada
+		AdminSideBarHelper sideBar = new AdminSideBarHelper();
+
+		String pageName = "Permisos por Rodados";
+		view.addObject("title", pageName + " - " + ConfigHelper.appName);
+		view.addObject("pageName", pageName);
+		Users user = (Users) session.getAttribute("USER");
+		if (user != null) {
+			view.addObject("userName", user.getFirstName() + " " + user.getLastName());
+		}
+		view.addObject("appName", ConfigHelper.appName);
+
+		view.addObject("sideBarLink", 4); // ID del link para que quede en azul (activo) en el menu izquierdo
+		view.addObject("sideBar", sideBar.lst_adminSideBar);
+
+		List<UsersRole> roles = userRoleService.findAll();
+		MiddlewareHelper mHelper = new MiddlewareHelper(session);
+
+		Personas pp = personaService.findOneByDNI(dni);
+		PersonaModel personaModel = personaConverter.entityToModel(pp);
+
+		List<PermisoPeriodoModel> permisoperiodo = null;
+		List<PermisoDiarioModel> permisodiario = null;
+		permisoperiodo = permisoService.findByPersonaPeriodo(personaModel);
+		permisodiario = permisoService.findByPersonaDiario(personaModel);
+
+		//model.addAttribute("permisoperiodo", permisoperiodo);
+		//model.addAttribute("permidodiario", permisodiario);
+		int totalResultados = permisoperiodo.size()+permisodiario.size();
+		
+		// Si el dominio no tiene permisos
+		if (pp == null) {
+			view.addObject("error", "La persona no se ecnuentra registrada.");
+			return mHelper.AuthMiddleware(mHelper.RoleMiddleware(view, 25, roles));
+		}
+
+		//Guardamos en dos objetos separados los resultados
+				view.addObject("permisosperiodo", permisoperiodo);
+				view.addObject("permisosdiarios", permisodiario);
+				//Mostramos el mensaje de que todo esta correcto
+				view.addObject("success", "Se encontraron " + totalResultados + " permisos desde la Perosna " + pp.getNombre() + " -  " + pp.getApellido() + "");
+				return mHelper.AuthMiddleware(mHelper.RoleMiddleware(view, 25, roles));
 	
-	
-	
-	
+	}	
 }

@@ -88,21 +88,21 @@
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label">Nombre</label>
 									<div class="col-sm-6">										
-										<input required type="text" class="form-control" /> 
+										<input required type="text" name="nombre"  class="form-control" /> 
 									</div>
 								</div>
 								
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label">Apellido</label>
 									<div class="col-sm-6">										
-										<input required type="text" class="form-control"  />
+										<input required type="text" name="apellido" class="form-control"  />
 									</div>
 								</div>
 								
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label">DNI</label>
 									<div class="col-sm-6">										
-										<input required type="text" class="form-control"  /> 
+										<input required type="text" name="dni" class="form-control"  /> 
 									</div>
 								</div>
 
@@ -115,25 +115,98 @@
 									</div>
 								</div>								
 							</form>
+							
+								<div class="box" th:if="${permisosdiarios != null}">
+								<h3>Permisos Especiales</h3>
+								<div class="table-responsive">
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th class="border-top-0">Nombre y Apellido</th>
+												<th class="border-top-0">DNI</th>
+												<th class="border-top-0">Fecha</th>
+												<th class="border-top-0">Salida</th>
+												<th class="border-top-0">Destino</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="permiso: ${permisosdiarios}">
+												<td
+													th:text="${permiso.getPersona().getNombre() + ' ' + permiso.getPersona().getApellido()}">
+												</td>
+												<td th:text="${permiso.getPersona().getDni()}"></td>
+												<td th:text="${permiso.getFecha()}"></td>
+												<td th:text="${permiso.getDesdeHasta()[0].getLugar()}"></td>
+												<td th:text="${permiso.getDesdeHasta()[1].getLugar()}"></td>
+											</tr>
+											<tr th:if=${permisosdiarios.empty}><td class="text-center" colspan="5">No se Encontraron Resultados</td></tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+
+							<div class="box" th:if="${permisosperiodo != null}">
+								<h3>Permisos Temporarios</h3>
+								<div class="table-responsive">
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th class="border-top-0">Nombre y Apellido</th>
+												<th class="border-top-0">DNI</th>
+												<th class="border-top-0">Fecha</th>
+												<th class="border-top-0">Salida</th>
+												<th class="border-top-0">Destino</th>
+												<th class="border-top-0">Dominio</th>
+												<th class="border-top-0">Vehiculo</th>
+												<th class="border-top-0">Vacaciones</th>
+												<th class="border-top-0">Cantidad de Días</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="permiso: ${permisosperiodo}">
+												<td
+												th:text="${permiso.getPersona().getNombre() + ' ' + permiso.getPersona().getApellido()}">
+											</td>
+											<td th:text="${permiso.getPersona().getDni()}"></td>
+											<td th:text="${permiso.getFecha()}"></td>
+											<td th:text="${permiso.getDesdeHasta()[0].getLugar()}"></td>
+											<td th:text="${permiso.getDesdeHasta()[1].getLugar()}"></td>
+												<td th:text="${permiso.getRodado().getDominio()}"></td>
+												<td th:text="${permiso.getRodado().getVehiculo()}"></td>
+												<td>
+													<span th:if="${permiso.vacaciones}"><b>Si</b></span>
+													<span th:if="${!permiso.vacaciones}"><b>No</b></span>
+												</td>
+												<td th:text="${permiso.cantDias}"></td>
+											</tr>
+											<tr th:if=${permisosperiodo.empty}><td class="text-center" colspan="5">No se Encontraron Resultados</td></tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>	
+				</div>
 			</div>
-					
-         </div>          
-        </div>
+		</div>
 
-        
-        <script src="/assets/js/jquery.js"></script>
-        <script src="/assets/js/popper.js"></script>
-        <script src="/assets/js/bootstrap.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js"></script>
+	</div>
 
-        <script src="/assets/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+	<script src="/assets/js/jquery.js"></script>
+	<script src="/assets/js/popper.js"></script>
+	<script src="/assets/js/bootstrap.js"></script>
+	<script src="/assets/js/waves.js"></script>
+	<script src="/assets/js/sidebarmenu.js"></script>
+	<script src="/assets/js/custom.js"></script>
+	<script src="/assets/js/permisos.js"></script>
 
-        <script src="/assets/js/waves.js"></script>
-        <script src="/assets/js/sidebarmenu.js"></script>
-        <script src="/assets/js/custom.js"></script>
+	<script src="/assets/js/bootstrap-datepicker.js"></script>
+	<script src="/assets/locales/bootstrap-datepicker.es.min.js"></script>
+
+
+	<script src="/assets/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js"></script>
 </body>
 
 </html>
