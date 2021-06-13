@@ -62,7 +62,7 @@ public class PermisosController {
     }
 
     @RequestMapping(value = "/permisos/userlist", method = RequestMethod.POST)
-    public @ResponseBody List<String> trear_permisos(@RequestBody PersonaModel persona,
+    public @ResponseBody List<String> traer_permisos(@RequestBody PersonaModel persona,
     BindingResult bindingResult) throws JsonProcessingException {
         
         List<String> newList = new ArrayList<String>();
