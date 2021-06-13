@@ -101,11 +101,18 @@
 										</button>
 									</div>
 								</div>
-
+							</form>
+							<div class="box" th:if="${permisoperiodo != null}">
+								<h3>Permisos Por Rodados</h3>
 								<div class="table-responsive">
 									<table class="table table-hover">
 										<thead>
 											<tr>
+												<th class="border-top-0">Nombre y Apellido</th>
+												<th class="border-top-0">DNI</th>
+												<th class="border-top-0">Fecha</th>
+												<th class="border-top-0">Salida</th>
+												<th class="border-top-0">Destino</th>
 												<th class="border-top-0">Dominio</th>
 												<th class="border-top-0">Vehiculo</th>
 												<th class="border-top-0">Vacaciones</th>
@@ -114,6 +121,12 @@
 										</thead>
 										<tbody>
 											<tr th:each="permiso: ${permisoperiodo}">
+											<td
+												th:text="${permiso.getPersona().getNombre() + ' ' + permiso.getPersona().getApellido()}">
+												<td th:text="${permiso.getPersona().getDni()}"></td>
+												<td th:text="${permiso.getFecha()}"></td>
+												<td th:text="${permiso.getDesdeHasta()[0].getLugar()}"></td>
+												<td th:text="${permiso.getDesdeHasta()[1].getLugar()}"></td>
 												<td th:text="${permiso.getRodado().getDominio()}"></td>
 												<td th:text="${permiso.getRodado().getVehiculo()}"></td>
 												<td>
@@ -122,10 +135,11 @@
 												</td>
 												<td th:text="${permiso.cantDias}"></td>
 											</tr>
+											<tr th:if=${permisoperiodo.empty}><td class="text-center" colspan="5">No se Encontraron Resultados</td></tr>
 										</tbody>
 									</table>
 								</div>
-							</form>
+							</div>														
 						</div>
 					</div>
 				</div>
