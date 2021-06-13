@@ -16,7 +16,7 @@ public interface IPermisoService {
 	public List<PermisoDiarioModel> findByFechaBetween(LocalDate inicio, LocalDate fin);
 	public List<PermisoPeriodoModel> findByFecha(LocalDate inicio, LocalDate fin);
 	
-	public List<PermisoPeriodoModel> findByDominio(RodadoModel rodadoModel);
+	public List<PermisoPeriodoModel> findByDominio(RodadoModel rodadoModel); 
 	public List<PermisoPeriodoModel> findByPersonaPeriodo(PersonaModel persona);
 	public List<PermisoDiarioModel> findByPersonaDiario(PersonaModel persona);
 	

@@ -3,22 +3,63 @@ package com.unla.app.controllers;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.unla.app.converters.PersonaConverter;
+import com.unla.app.converters.RodadoConverter;
+import com.unla.app.entities.Personas;
+import com.unla.app.entities.Rodados;
 import com.unla.app.entities.Users;
 import com.unla.app.entities.UsersRole;
 import com.unla.app.helpers.AdminSideBarHelper;
 import com.unla.app.helpers.ConfigHelper;
 import com.unla.app.helpers.MiddlewareHelper;
 import com.unla.app.helpers.RouteHelper;
+import com.unla.app.models.PermisoDiarioModel;
+import com.unla.app.models.PermisoPeriodoModel;
+import com.unla.app.models.PersonaModel;
+import com.unla.app.models.RodadoModel;
+import com.unla.app.services.IPermisoService;
+import com.unla.app.services.IPersonaService;
+import com.unla.app.services.IRodadoService;
 import com.unla.app.services.IUserRoleService;
+import com.unla.app.services.IUserService;
+import com.unla.app.util.PageRender;
+
+
+
 
 @Controller
 public class PermisoController {
+	
+	@Autowired
+	@Qualifier("rodadoConverter")
+	private RodadoConverter rodadoConverter;
+	
+	@Autowired
+	@Qualifier("personaConverter")
+	private PersonaConverter personaConverter;
+	
+	
+	@Autowired
+	private IPersonaService personaService;
+	
+	@Autowired
+	private IRodadoService rodadoService;
+	
+	@Autowired
+	private IPermisoService permisoService;
 	
 	@Autowired
 	private IUserRoleService userRoleService;
@@ -47,7 +88,6 @@ public class PermisoController {
 		return mHelper.AuthMiddleware(mHelper.RoleMiddleware(view, 25, roles));
 	}
 
-	
 	
 	@GetMapping({ "/admin/permits/rodados", "rodados", "permisos.rodados" })
 	public ModelAndView permisosRodados(Model model, HttpSession session) {
@@ -149,5 +189,50 @@ public class PermisoController {
 		MiddlewareHelper mHelper = new MiddlewareHelper(session);
 		return mHelper.AuthMiddleware(mHelper.RoleMiddleware(view, 25, roles));
 	}
+	
+	
+	@PostMapping("/admin/permits/rodados")
+	public String permisosPorRodados(@RequestParam("dominio") String   dominio,
+									  Model model,HttpSession session, RedirectAttributes flash) {
+		Rodados rm= rodadoService.findOneByDominio(dominio); 
+		RodadoModel rodadoModel = rodadoConverter.entityToModel(rm);
+		
+		List<PermisoPeriodoModel> permisoperiodo = null;  
+		permisoperiodo = permisoService.findByDominio(rodadoModel); 
+		model.addAttribute("permisoperiodo", permisoperiodo);
+
+		// Si el dominio no existe
+		if (permisoperiodo == null) {
+			flash.addFlashAttribute("message", "El dominio no se encuentra registrado en un Permiso.");
+			return "redirect:/admin/permits/rodados";
+		}
+
+		return "/admin/permits";
+	}
+	
+	@PostMapping("/admin/permits/personas")
+	public String permisosPorPersona(@RequestParam("dni") int dni,
+									  Model model,HttpSession session, RedirectAttributes flash) {
+		Personas pp = personaService.findOneByDNI(dni); 
+		PersonaModel personaModel = personaConverter.entityToModel(pp);
+		
+		List<PermisoPeriodoModel> permisoperiodo = null;  
+		List<PermisoDiarioModel> permisodiario = null;
+		permisoperiodo = permisoService.findByPersonaPeriodo(personaModel); 
+		permisodiario = permisoService.findByPersonaDiario(personaModel);
+		
+		model.addAttribute("permisoperiodo", permisoperiodo);
+		model.addAttribute("permidodiario", permisodiario);
+
+		// Si el dominio no existe
+		if (permisoperiodo == null) {
+			flash.addFlashAttribute("message", "La persona no cuenta con un Permiso registrado.");
+			return "redirect:/admin/permits/rodados";
+		}
+
+		return "/admin/permits";
+	}
+	
+	
 	
 }
