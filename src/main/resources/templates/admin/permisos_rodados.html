@@ -87,60 +87,63 @@
 							<form th:action="@{/admin/permits/rodados}" method="post">
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label">Dominio</label>
-									<div class="col-sm-6">										
-										<input required type="text" class="form-control"  /> 
-									</div>
-								</div>
-								
-								<div class="form-group row">
-									<label class="col-sm-2 col-form-label">Nivel de Administrador</label>
 									<div class="col-sm-6">
-										 <input class="form-control" list="datalistOptions" id="rodadoDataList"
-                                            placeholder="Tipo de Vehículos..." name="vehiculo" required>
-                                        <datalist id="datalistOptions">
-                                            <option value="Motocicleta">
-                                            <option value="Motocarro">
-                                            <option value="Automóvil de tres ruedas">
-                                            <option value="Autobús">
-                                            <option value="Trolebús">
-                                            <option value="Automóvil" selected>
-                                            <option value="Camión">
-                                            <option value="Autobús">
-                                            <option value="Furgón">
-                                            <option value="Tractor">
-                                            <option value="Motocultor">
-                                        </datalist>
+										<input required type="text" name="dominio" class="form-control" />
 									</div>
 								</div>
 
 								<div class="form-group row">
-									<div class="col-sm-6">										
-										<a class="btn btn-outline-secondary mx-2" th:href="@{/admin/permits}">Cancelar</a>
+									<div class="col-sm-6">
+										<a class="btn btn-outline-secondary mx-2"
+											th:href="@{/admin/permits}">Cancelar</a>
 										<button type="submit" class="btn btn-primary">
 											<i class="fas fa-check mx-1"></i> Buscar Permiso
-										</button> 
+										</button>
 									</div>
-								</div>								
+								</div>
+
+								<div class="table-responsive">
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th class="border-top-0">Dominio</th>
+												<th class="border-top-0">Vehiculo</th>
+												<th class="border-top-0">Vacaciones</th>
+												<th class="border-top-0">Cantidad de Días</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="permiso: ${permisoperiodo}">
+												<td th:text="${permiso.getRodado().getDominio()}"></td>
+												<td th:text="${permiso.getRodado().getVehiculo()}"></td>
+												<td>
+													<span th:if="${permiso.vacaciones}"><b>Si</b></span>
+													<span th:if="${!permiso.vacaciones}"><b>No</b></span>
+												</td>
+												<td th:text="${permiso.cantDias}"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
 							</form>
 						</div>
 					</div>
-				</div>	
+				</div>
 			</div>
-					
-         </div>          
-        </div>
+		</div>
+	</div>
 
-        
-        <script src="/assets/js/jquery.js"></script>
-        <script src="/assets/js/popper.js"></script>
-        <script src="/assets/js/bootstrap.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js"></script>
 
-        <script src="/assets/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+	<script src="/assets/js/jquery.js"></script>
+	<script src="/assets/js/popper.js"></script>
+	<script src="/assets/js/bootstrap.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js"></script>
 
-        <script src="/assets/js/waves.js"></script>
-        <script src="/assets/js/sidebarmenu.js"></script>
-        <script src="/assets/js/custom.js"></script>
+	<script src="/assets/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+
+	<script src="/assets/js/waves.js"></script>
+	<script src="/assets/js/sidebarmenu.js"></script>
+	<script src="/assets/js/custom.js"></script>
 </body>
 
 </html>
