@@ -30,6 +30,12 @@ public class LugaresServices implements ILugarService {
 	
 	@Override
 	@Transactional(readOnly = true)
+	public LugarModel findOne(Long id) {
+		return lugarConverter.entityToModel(iLugarRepository.findById(id).orElse(null));
+	}
+
+	@Override
+	@Transactional(readOnly = true)
 	public List<Lugares> findAll() {
 		return (List<Lugares>) iLugarRepository.findAll();
 	}
