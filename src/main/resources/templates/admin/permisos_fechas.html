@@ -5,9 +5,9 @@
 	<meta charset="utf-8" />
 	<title th:text="${title}"></title>
 	<link href="/assets/css/admin.min.css" rel="stylesheet">
-	 <link href="/assets/css/bootstrap-datepicker.css" rel="stylesheet" />
-    <link href="/assets/css/permisos.css" rel="stylesheet" >
-   
+	<link href="/assets/css/bootstrap-datepicker.css" rel="stylesheet" />
+	<link href="/assets/css/permisos.css" rel="stylesheet">
+
 </head>
 
 <body style="background-color: #edf1f5;">
@@ -86,56 +86,130 @@
 							<div class="alert alert-danger" th:if="${error!=null}" th:text="${error}"></div>
 							<div class="alert alert-warning" th:if="${warning!=null}" th:text="${warning}"></div>
 							<div class="alert alert-info" th:if="${info!=null}" th:text="${info}"></div>
+
 							<form th:action="@{/admin/permits/fechas}" method="post">
-							
-							<div class="form-group row">
-								<label class="col-sm-2 col-form-label"><i class="far fa-calendar-alt mr-2"> </i>&nbsp;&nbsp;Fecha de inicio</label>
-                                <div class="col-md-3">                                    
-                                    <div class="input-group date">
-                                     <input type="text" id="permiso-fecha" class="form-control" required><span class="input-group-addon"></span>
-                                    </div>
-                                </div>
-                                
-                                <label class="col-sm-2 col-form-label"><i class="far fa-calendar-alt mr-2"> </i>&nbsp;&nbsp;Fecha de Fin</label>
-                                <div class="col-md-3">                                    
-                                    <div class="input-group date">
-                                     <input type="text" id="permiso-fecha" class="form-control" required><span class="input-group-addon"></span>
-                                    </div>
-                                </div>
-							</div>
-                               
-                                <div class="form-group row">
-									<div class="col-sm-6">										
-										<a class="btn btn-outline-secondary mx-2" th:href="@{/admin/permits}">Cancelar</a>
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-label"><i class="far fa-calendar-alt mr-2">
+										</i>&nbsp;&nbsp;Fecha de inicio</label>
+									<div class="col-md-3">
+										<div class="input-group date">
+											<input type="text" id="permiso-fecha" class="form-control" name="desde"
+												required><span class="input-group-addon"></span>
+										</div>
+									</div>
+
+									<label class="col-sm-2 col-form-label"><i class="far fa-calendar-alt mr-2">
+										</i>&nbsp;&nbsp;Fecha de Fin</label>
+									<div class="col-md-3">
+										<div class="input-group date">
+											<input type="text" id="permiso-fecha" class="form-control" name="hasta"
+												required><span class="input-group-addon"></span>
+										</div>
+									</div>
+								</div>
+								
+								<div class="form-group row">
+									<div class="col-sm-6">
+										<a class="btn btn-outline-secondary mx-2"
+											th:href="@{/admin/permits}">Cancelar</a>
 										<button type="submit" class="btn btn-primary">
 											<i class="fas fa-check mx-1"></i> Buscar Permiso
-										</button> 
+										</button>
 									</div>
-								</div>								
+								</div>
 							</form>
-						</div>	
+
+							<div class="box" th:if="${permisosdiarios != null}">
+								<h3>Permisos Especiales</h3>
+								<div class="table-responsive">
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th class="border-top-0">Nombre y Apellido</th>
+												<th class="border-top-0">DNI</th>
+												<th class="border-top-0">Fecha</th>
+												<th class="border-top-0">Salida</th>
+												<th class="border-top-0">Destino</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="permiso: ${permisosdiarios}">
+												<td
+													th:text="${permiso.getPersona().getNombre() + ' ' + permiso.getPersona().getApellido()}">
+												</td>
+												<td th:text="${permiso.getPersona().getDni()}"></td>
+												<td th:text="${permiso.getFecha()}"></td>
+												<td th:text="${permiso.getDesdeHasta()[0].getLugar()}"></td>
+												<td th:text="${permiso.getDesdeHasta()[1].getLugar()}"></td>
+											</tr>
+											<tr th:if=${permisosdiarios.empty}><td class="text-center" colspan="5">No se Encontraron Resultados</td></tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+
+							<div class="box" th:if="${permisosperiodo != null}">
+								<h3>Permisos Temporarios</h3>
+								<div class="table-responsive">
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th class="border-top-0">Nombre y Apellido</th>
+												<th class="border-top-0">DNI</th>
+												<th class="border-top-0">Fecha</th>
+												<th class="border-top-0">Salida</th>
+												<th class="border-top-0">Destino</th>
+												<th class="border-top-0">Dominio</th>
+												<th class="border-top-0">Vehiculo</th>
+												<th class="border-top-0">Vacaciones</th>
+												<th class="border-top-0">Cantidad de Días</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="permiso: ${permisosperiodo}">
+												<td
+												th:text="${permiso.getPersona().getNombre() + ' ' + permiso.getPersona().getApellido()}">
+											</td>
+											<td th:text="${permiso.getPersona().getDni()}"></td>
+											<td th:text="${permiso.getFecha()}"></td>
+											<td th:text="${permiso.getDesdeHasta()[0].getLugar()}"></td>
+											<td th:text="${permiso.getDesdeHasta()[1].getLugar()}"></td>
+												<td th:text="${permiso.getRodado().getDominio()}"></td>
+												<td th:text="${permiso.getRodado().getVehiculo()}"></td>
+												<td>
+													<span th:if="${permiso.vacaciones}"><b>Si</b></span>
+													<span th:if="${!permiso.vacaciones}"><b>No</b></span>
+												</td>
+												<td th:text="${permiso.cantDias}"></td>
+											</tr>
+											<tr th:if=${permisosperiodo.empty}><td class="text-center" colspan="5">No se Encontraron Resultados</td></tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>	
+				</div>
 			</div>
-					
-         </div>          
-  
-        <script src="/assets/js/jquery.js"></script>
-        <script src="/assets/js/popper.js"></script>
-        <script src="/assets/js/bootstrap.js"></script>
-        <script src="/assets/js/waves.js"></script>
-        <script src="/assets/js/sidebarmenu.js"></script>
-        <script src="/assets/js/custom.js"></script>
-        <script src="/assets/js/permisos.js"></script>
-        
-    	<script src="/assets/js/bootstrap-datepicker.js"></script>
-    	<script src="/assets/locales/bootstrap-datepicker.es.min.js"></script>
+		</div>
 
-    	
-    	<script src="/assets/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
-    	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-   		<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js"></script>
+	</div>
+
+	<script src="/assets/js/jquery.js"></script>
+	<script src="/assets/js/popper.js"></script>
+	<script src="/assets/js/bootstrap.js"></script>
+	<script src="/assets/js/waves.js"></script>
+	<script src="/assets/js/sidebarmenu.js"></script>
+	<script src="/assets/js/custom.js"></script>
+	<script src="/assets/js/permisos.js"></script>
+
+	<script src="/assets/js/bootstrap-datepicker.js"></script>
+	<script src="/assets/locales/bootstrap-datepicker.es.min.js"></script>
+
+
+	<script src="/assets/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js"></script>
 </body>
 
 </html>

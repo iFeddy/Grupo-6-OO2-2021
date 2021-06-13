@@ -328,4 +328,59 @@ public class PermisoController {
 		return mHelper.AuthMiddleware(mHelper.RoleMiddleware(view, 25, roles));
 	}
 
+	@PostMapping("/admin/permits/fechas")
+	public ModelAndView permisosPorFecha(
+			@RequestParam("desde") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate desde,
+			@RequestParam("hasta") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate hasta,
+			Model model, HttpSession session, RedirectAttributes flash) {
+
+		ModelAndView view = new ModelAndView(RouteHelper.DASHBOARD_PERMITS_DATES); // se puede poner en una vista
+																							// separada
+		AdminSideBarHelper sideBar = new AdminSideBarHelper();
+
+		String pageName = "Permisos por Fechas";
+		view.addObject("title", pageName + " - " + ConfigHelper.appName);
+		view.addObject("pageName", pageName);
+		Users user = (Users) session.getAttribute("USER");
+		if (user != null) {
+			view.addObject("userName", user.getFirstName() + " " + user.getLastName());
+		}
+		view.addObject("appName", ConfigHelper.appName);
+
+		view.addObject("sideBarLink", 4); // ID del link para que quede en azul (activo) en el menu izquierdo
+		view.addObject("sideBar", sideBar.lst_adminSideBar);
+
+		/*List<Lugares> lugares = lugarService.findAll();
+		view.addObject("lugares", lugares);*/
+
+		List<UsersRole> roles = userRoleService.findAll();
+		MiddlewareHelper mHelper = new MiddlewareHelper(session);
+
+		// Buscamos los permisos diarios
+		List<PermisoDiarioModel> permisosDiario = permisoService.findByFechaBetween(desde, hasta);
+		List<PermisoPeriodoModel> permisosPeriodo = permisoService.findByFecha(desde, hasta);
+		
+		// Buscamos si el lugar existe
+		//LugarModel lm = lugarService.findOne(lugar);
+
+		// Cantidad de resultados despues de filtrar
+		int totalResultados = permisosPeriodo.size()+permisosDiario.size();
+
+		//Si no hay resultados muestra el mensaje
+		if(totalResultados == 0){
+			view.addObject("error", "No se encontraron permisos para las fechas ingresadas");
+			return mHelper.AuthMiddleware(mHelper.RoleMiddleware(view, 25, roles));
+		}
+		//Guardamos en dos objetos separados los resultados
+		view.addObject("permisosperiodo", permisosPeriodo);
+		view.addObject("permisosdiarios", permisosDiario);
+		//Mostramos el mensaje de que todo esta correcto
+		view.addObject("success", "Se encontraron " + totalResultados + " permisos desde el " + desde + " hasta el " + hasta + "");
+		return mHelper.AuthMiddleware(mHelper.RoleMiddleware(view, 25, roles));
+	}
+	
+	
+	
+	
+	
 }
