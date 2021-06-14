@@ -282,48 +282,48 @@ public class PermisoController {
 		List<UsersRole> roles = userRoleService.findAll();
 		MiddlewareHelper mHelper = new MiddlewareHelper(session);
 
-		// Buscamos los permisos diarios
+		
 		List<PermisoDiarioModel> permisosDiario = permisoService.findByFechaBetween(desde, hasta);
 		List<PermisoPeriodoModel> permisosPeriodo = permisoService.findByFecha(desde, hasta);
 		
-		// Buscamos si el lugar existe
+		
 		LugarModel lm = lugarService.findOne(lugar);
 
-		// Cantidad de resultados despues de filtrar
+	
 		int totalResultados = 0;
 
-		// Loop de Permisos Diarios
+		
 		List<PermisoDiarioModel> permisosDiariosFinal = new ArrayList<PermisoDiarioModel>();
 		for (PermisoDiarioModel permisoDiarioModel : permisosDiario) {
 			List<LugarModel> lstLugares = permisoDiarioModel.getDesdeHasta();
-			//Si el Destino es igual al lugar que se consulta
+			
 			if(lstLugares.get(1).getIdLugar() == lugar){
-				//Lo agregamos al listado final
+				
 				permisosDiariosFinal.add(permisoDiarioModel);
 				totalResultados++;
 			}
 		}
 
-		//Loop de permisos periodo
+	
 		List<PermisoPeriodoModel> permisosPeriodoFinal = new ArrayList<PermisoPeriodoModel>();
 		for (PermisoPeriodoModel permisoPeriodoModel : permisosPeriodo) {
 			List<LugarModel> lstLugares = permisoPeriodoModel.getDesdeHasta();
-			//Si el Destino es igual al lugar que se consulta
+			
 			if(lstLugares.get(1).getIdLugar() == lugar){
-				//Lo agregamos al listado final
+				
 				permisosPeriodoFinal.add(permisoPeriodoModel);
 				totalResultados++;
 			}
 		}
-		//Si no hay resultados muestra el mensaje
+		
 		if(totalResultados == 0){
 			view.addObject("error", "No se encontraron permisos para los datos ingresados");
 			return mHelper.AuthMiddleware(mHelper.RoleMiddleware(view, 25, roles));
 		}
-		//Guardamos en dos objetos separados los resultados
+		
 		view.addObject("permisosperiodo", permisosPeriodoFinal);
 		view.addObject("permisosdiarios", permisosDiariosFinal);
-		//Mostramos el mensaje de que todo esta correcto
+		
 		view.addObject("success", "Se encontraron " + totalResultados + " permisos desde el " + desde + " hasta el " + hasta + " en " + lm.getLugar());
 		return mHelper.AuthMiddleware(mHelper.RoleMiddleware(view, 25, roles));
 	}
@@ -415,11 +415,11 @@ public class PermisoController {
 		}
 
 		//Guardamos en dos objetos separados los resultados
-				view.addObject("permisosperiodo", permisoperiodo);
-				view.addObject("permisosdiarios", permisodiario);
-				//Mostramos el mensaje de que todo esta correcto
-				view.addObject("success", "Se encontraron " + totalResultados + " permisos desde la Perosna " + pp.getNombre() + " -  " + pp.getApellido() + "");
-				return mHelper.AuthMiddleware(mHelper.RoleMiddleware(view, 25, roles));
+		view.addObject("permisosperiodo", permisoperiodo);
+		view.addObject("permisosdiarios", permisodiario);
+		//Mostramos el mensaje de que todo esta correcto
+		view.addObject("success", "Se encontraron " + totalResultados + " permisos desde la Perosna " + pp.getNombre() + " -  " + pp.getApellido() + "");
+		return mHelper.AuthMiddleware(mHelper.RoleMiddleware(view, 25, roles));		
 	
 	}	
 }
